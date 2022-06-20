@@ -1,5 +1,5 @@
 # Web Clinical Trial System
-CTS(Clinical Trail System) aim convenient and effective Machine Learning Clinical Trial Management.
+CTS(Clinical Trail System) aim convenient and effective Machine Learning Clinical Trial and Testbed Management.
 
 > This project is not implemented yet.
 # Feature
@@ -77,9 +77,10 @@ Docker prevent provisioning and reduce repetitive configuration each host. By us
  
  For that, We use SoC(Separation of Concern) design structure and multi module project. Simply, all code files for same feature need to store in same project of module. So we can migrate to MSA relatively easily.
 
- In client, we will use Flux design pattern with React & Redux.
- In server, we will use Controller-Service-Repository design pattern.
+ In client, we will use Flux design pattern with React & Redux. Because we suffer from deep props... In server, we will use Controller-Service-Repository design pattern.
 
+# Author
+1. [Jaeseong Lee](https://github.com/BEOKS), lee01042000@gmail.com
 # Developer
 1. Jaeseong Lee, lee01042000@gmail.com
 2. Dohee Kim, doheedev@gmail.com
