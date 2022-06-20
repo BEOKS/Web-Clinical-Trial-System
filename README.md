@@ -1,8 +1,10 @@
 # Cloud-Based-CRF
-의료 인공지능 임상시험 진행/관리를 지원하는 플랫폼
+Machine Learning Clinical Trial Management Platform
+
+> This project is not complish yet.
 # Feature
-1. Overview
-2. Autehtication and Choose Rule(PI/REVIEWER)
+1. [Overview](./docs/overview.md)
+2. [Autehtication and Choose Rule(PI/REVIEWER)](./docs/Authentication_and_Choose_Rule.md)
 3. Project Management For PI
    1. Reveiwer Management
       1. Check User Tutorial Participation
@@ -34,17 +36,17 @@
 
 *CRUD : Create, Read, Update, Delete
 # Usage
-> 가이드북 참고 예정
+> We will prepare guide book later.
 # Prerequirement
-1. [Docker](https://docs.docker.com/get-docker/) 20.10.10 버전 이상 설치
-2. [NodeJS](https://nodejs.org/ko/download/) v18.2.0 이상 설치
-3. [Open JDK](https://openjdk.org/install/) 18 이상 설치
+1. Install [Docker](https://docs.docker.com/get-docker/)>=20.10.10
+2. Install [NodeJS](https://nodejs.org/ko/download/)>=v18.2.0
+3. Insatll [Open JDK](https://openjdk.org/install/)>=17.0.1
 
 # Build & Run
-설치 및 실행은 3가지 옵션으로 통해서 가능하다.
-1. local : 개인이 개발할 때 사용
-2. dev : 배포전 배포와 같은 환경에서 테스트 할 때 사용
-3. prod : 실제 서비스를 운영하기 위해 사용
+If you run build script, it will build client and server project at the same time, and create docker image with builded project information. Build and Run script has 3 option for develop and production.
+1. **local** : For personal develop environment, If you want devlop new feature or fix bugs etc, you have to use this option
+2. **dev** : For merge,test in real environmen, if you pull request to dev branch and approved, Github Action automatically test with dev option
+3. **prod** : For personal develop environment, this option is for publising real environment, it will close docker port(like database) except client and server connection
 ## 1. On Mac
 ```
 sudo bash ./build.sh {prod|dev|local}
@@ -55,6 +57,8 @@ sudo bash .run.sh
 bash ./build.sh {prod|dev|local}
 sudo bash .run.sh
 ```
+## Production
+If you run build script, it will automatically create docker image for production. After that, you can move docker image to anyware for you want and run ```run.sh```script.
 # Used Framework & Language
 <img src="https://img.shields.io/badge/Docker-2496ED?&logo=Docker&logoColor=white">
 <img src="https://img.shields.io/badge/OpenJDK-2496ED?&logo=OpenJDK&logoColor=white">
@@ -71,4 +75,4 @@ sudo bash .run.sh
 
 # Developer
 1. Jaeseong Lee, lee01042000@gmail.com
-2. Dohee Kim, 
+2. Dohee Kim, doheedev@gmail.com
