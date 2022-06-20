@@ -1,19 +1,19 @@
 # Cloud-Based-CRF
 Machine Learning Clinical Trial Management Platform
 
-> This project is not complish yet.
+> This project is not implement yet.
 # Feature
 1. [Overview](./docs/overview.md)
 2. [Autehtication and Choose Rule(PI/REVIEWER)](./docs/Authentication_and_Choose_Rule.md)
 3. Project Management For PI
-   1. Reveiwer Management
+   1. Reviewer Management
       1. Check User Tutorial Participation
       2. *C.R.U.D Reviewer
    2. Session Management 
       1. Session Create & Configuration
          1. Set Session Schedule
          2. Session Start/Stop
-         3. Open/Close Session Data Groud Truth
+         3. Open/Close Session Data Ground Truth
          4. Check Participation Information in Session
       2. Session Monitoring
          1. Check User Evaluation Time
@@ -27,9 +27,9 @@ Machine Learning Clinical Trial Management Platform
       1. Guide
       2. Review with Sample Data(3.3.4)
    2. Review Clinical Data and AI Result
-      1. Evaludate with Original Clinical Image
+      1. Evaluate with Original Clinical Image
       2. Store Evaluation Time
-      3. Evaludate with ML Result
+      3. Evaluate with ML Result
       4. Check Ground Truth After Session Review
       5. Check Quota
       6. Pause/Restart Review
@@ -43,10 +43,10 @@ Machine Learning Clinical Trial Management Platform
 3. Insatll [Open JDK](https://openjdk.org/install/)>=17.0.1
 
 # Build & Run
-If you run build script, it will build client and server project at the same time, and create docker image with builded project information. Build and Run script has 3 option for develop and production.
+If you run build script, it will build client and server project at the same time, and create docker image with build information. Build and Run script has 3 option for develop and production.
 1. **local** : For personal develop environment, If you want devlop new feature or fix bugs etc, you have to use this option
-2. **dev** : For merge,test in real environmen, if you pull request to dev branch and approved, Github Action automatically test with dev option
-3. **prod** : For personal develop environment, this option is for publising real environment, it will close docker port(like database) except client and server connection
+2. **dev** : For merge, test in real environment, if you pull request to dev branch and approved, Github Action automatically test with dev option
+3. **prod** : For personal develop environment, this option is for publish in real environment, it will close docker port(like database) except client and server connection
 ## 1. On Mac
 ```
 sudo bash ./build.sh {prod|dev|local}
