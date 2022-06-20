@@ -39,8 +39,8 @@ CTS(Clinical Trail System) aim convenient and effective Machine Learning Clinica
 > We will prepare guide book later.
 # Requirement
 1. Install [Docker](https://docs.docker.com/get-docker/)>=20.10.10
-2. Install [NodeJS](https://nodejs.org/ko/download/)>=v18.2.0
-3. Insatll [Open JDK](https://openjdk.org/install/)>=17.0.1
+2. Install [NodeJS](https://nodejs.org/ko/download/)>=v16.15.1
+3. Insatll [Open JDK](https://openjdk.org/install/)>=11.0.11
 
 # Build & Run
 If you run build script, it will build client and server project at the same time, and create docker image with build information. Build and Run script has 3 option for develop and production.
