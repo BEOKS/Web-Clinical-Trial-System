@@ -4,7 +4,7 @@ CTS(Clinical Trail System) aim convenient and effective Machine Learning Clinica
 > This project is not implemented yet.
 # Feature
 1. [Overview](./docs/overview.md)
-2. [Authentication and Choose Rule(PI/REVIEWER)](./docs/Authentication_and_Choose_Rule.md)
+2. [Authentication and Role selection(PI/REVIEWER)](./docs/Authentication_and_Choose_Rule.md)
 3. Project Management For PI
    1. Reviewer Management
       1. Check User Tutorial Participation
