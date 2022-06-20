@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "jest --watchAll  "
+    "test": "jest --watchAll  ",
+    "ctest":"jest --coverage"
   },
   "dependencies": {
     "jest-environment-jsdom": "^28.1.0",
