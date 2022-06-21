@@ -19,7 +19,8 @@
     "cross-env": "^7.0.3",
     "jest-environment-jsdom": "^28.1.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "@testing-library/react": "^13.3.0",
