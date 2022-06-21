@@ -72,7 +72,9 @@ Docker prevent provisioning and reduce repetitive configuration each host. By us
 
  As java running by JVM which guarantee stable software running environment like Auto Optimization and GC, We select java for server system. We use Spring Framework For effective and safe develop in Java development environment. And we target 100% test coverage, so use JUnit5 and JaCoCo.
 
- # Architecture
+
+# Architecture
+ 
  Basically, We use Monolithic Architecture, because we now aim Fast Implement-Fast Feedback cycle. MSA(Microservice Architecture) is good for scale out, independent development and maintenance. But, it require many management like monitoring, configuration for each MSA component and Troubleshooting etc. If we make feature stable and need to handle scaling out per feature or features are look like grow up, We will migrate to MSA.
  
  For that, We use SoC(Separation of Concern) design structure and multi module project. Simply, all code files for same feature need to store in same project of module. So we can migrate to MSA relatively easily.
