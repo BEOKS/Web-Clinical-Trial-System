@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1655766878157" clover="3.2.0">
-  <project timestamp="1655766878157" name="All files">
+<coverage generated="1655794811566" clover="3.2.0">
+  <project timestamp="1655794811566" name="All files">
     <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3" elements="10" coveredelements="10" complexity="0" loc="7" ncloc="7" packages="1" files="1" classes="1"/>
     <file name="App.tsx" path="/Users/ijaeseong/Web-Clinical-Trial-System/client/clinical-trial-system/src/App.tsx">
       <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
-      <line num="6" count="2" type="stmt"/>
-      <line num="8" count="2" type="stmt"/>
-      <line num="14" count="1" type="stmt"/>
+      <line num="6" count="11" type="stmt"/>
+      <line num="8" count="11" type="stmt"/>
+      <line num="14" count="10" type="stmt"/>
       <line num="45" count="1" type="stmt"/>
     </file>
   </project>
