@@ -33,6 +33,7 @@ const StyledAppBar = styled(MuiAppBar, {
 const AppBar = () => {
     const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
+    const displayMenuButton = useSelector((state: RootState) => state.DrawerReducer.displayMenuButton);
 
     const handleDrawerOpen = () => {
         dispatch(DrawerAction.openDrawer());
@@ -46,7 +47,7 @@ const AppBar = () => {
                     aria-label="open drawer"
                     onClick={handleDrawerOpen}
                     edge="start"
-                    sx={{mr: 2, ...(drawerOpen && {display: 'none'})}}
+                    sx={{mr: 2, ...((drawerOpen || !displayMenuButton) && {display: 'none'})}}
                 >
                     <MenuIcon/>
                 </IconButton>

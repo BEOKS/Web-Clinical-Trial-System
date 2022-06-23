@@ -3,8 +3,17 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import {Main} from "../Main/Main";
 import DrawerHeader from "../Drawer/DrawerHeader";
 import * as React from "react";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {DrawerAction} from "../Drawer/DrawerReducer";
 
 const RoleSelection = () => {
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(DrawerAction.dontDisplayMenuButton());
+    });
+
     return (
         <Main>
             <Container maxWidth="md">
