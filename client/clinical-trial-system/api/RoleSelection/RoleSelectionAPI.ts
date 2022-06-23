@@ -7,7 +7,7 @@ export default function selectRoleRequest(role : Role,
     onFail : (erorr : any)=>void,
     userDummyRequest : boolean=true,
     ROLE_URL='api/roleSelection',
-    ){ßß
+    ){
 
     if(userDummyRequest){
         onSuccess({
