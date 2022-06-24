@@ -6,11 +6,12 @@ import * as React from "react";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {DrawerAction} from "../Drawer/DrawerReducer";
+import "./RoleSelection.css";
 
 const RoleSelection = () => {
     const dispatch = useDispatch();
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(DrawerAction.dontDisplayMenuButton());
     });
 
@@ -19,18 +20,13 @@ const RoleSelection = () => {
             <Container maxWidth="md">
                 <DrawerHeader/>
                 <Paper variant="outlined" sx={{p: 5, my: 3}}>
-                    <Stack spacing={2} sx={{display: 'flex', alignItems: 'center'}}>
-                        <Typography variant="h4">Select User Type</Typography>
-                        <Stack direction="row" spacing={4}>
+                    <Stack sx={{display: 'flex', alignItems: 'center'}}>
+                        <Typography variant="h4" color="text.primary" mb={1}>Select User Type</Typography>
+                        <div className="bar" />
+                        <Stack direction="row" spacing={4} mt={4}>
                             <Button data-testid={'pi-button'} variant="contained" sx={{width: '300px', p: 5}}>
                                 <Stack alignItems="center" spacing={3}>
                                     <AccountBoxIcon sx={{fontSize: 200}}/>
-                                    <Typography data-testid={'pi-description'}>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has
-                                        been
-                                        the industry's standard dummy text ever since the 1500s
-                                    </Typography>
                                     <Typography variant="h4">
                                         PI
                                     </Typography>
@@ -39,12 +35,6 @@ const RoleSelection = () => {
                             <Button data-testid={'reviewer-button'} variant="contained" sx={{width: '300px', p: 5}}>
                                 <Stack alignItems="center" spacing={3}>
                                     <AccountBoxIcon sx={{fontSize: 200}}/>
-                                    <Typography data-testid={'reviewer-description'}>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has
-                                        been
-                                        the industry's standard dummy text ever since the 1500s
-                                    </Typography>
                                     <Typography variant="h4">
                                         Reviewer
                                     </Typography>
