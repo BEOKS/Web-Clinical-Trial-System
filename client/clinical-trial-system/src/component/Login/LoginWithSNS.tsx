@@ -2,6 +2,7 @@ import {Box, Button, Stack, Typography, styled, Divider} from "@mui/material";
 import NaverLogo from '../../assets/naverLogo.svg';
 import KakaoLogo from '../../assets/kakaoLogo.svg';
 import GoogleLogo from '../../assets/googleLogo.svg';
+import {redirectToAuthPage} from "../../Utils/Auth/Auth";
 
 const Root = styled('div')(({theme}) => ({
     width: '100%',
@@ -12,6 +13,10 @@ const Root = styled('div')(({theme}) => ({
 }));
 
 export default function LoginWithSNS() {
+    const handleClickGoogleButton = () => {
+        redirectToAuthPage();
+    };
+
     return (
         <Box mt={8}>
             <Root>
@@ -34,7 +39,7 @@ export default function LoginWithSNS() {
                         Login with Kakao
                     </Box>
                 </Button>
-                <Button variant="contained" size="large" color="google">
+                <Button variant="contained" size="large" color="google" onClick={handleClickGoogleButton}>
                     <img src={GoogleLogo} alt="google" width="30px"/>
                     <Box width="100%">
                         Login with Google
