@@ -1,45 +1,33 @@
 import { Stack, Typography, TextField, Button, Link, Box } from '@mui/material';
-import axios from "axios";
-import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../store";
+import {LoginAction} from "./LoginReducer";
+import {DrawerAction} from "../Drawer/DrawerReducer";
 
 export default function LoginWithEmail() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [isEmail, setIsEmail] = useState(true);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const email = useSelector((state: RootState) => state.LoginReducer.email);
+    const password = useSelector((state: RootState) => state.LoginReducer.password);
+    const emailValidation = useSelector((state: RootState) => state.LoginReducer.emailValidation);
 
     // 이메일 유효성 검사
     const checkEmail = (email:string) => {
         const emailRegex =
             /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
         const result = emailRegex.test(email);
-        setIsEmail(result);
+        dispatch(LoginAction.setEmailValidation(result));
         return result;
     };
 
     const handleEmailLogin = () => {
-        // const url = '/api/login';
-        // const data = {
-        //     email: email,
-        //     password: password
-        // };
-        //
-        // if (checkEmail(email)) {
-        //     axios.post(url, data)
-        //         .then(response => {
-        //             // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-        //             axios.defaults.headers.common['Authorization'] = response.data.token;
-        //             window.localStorage.setItem('token', response.data.token);
-        //             console.log(response);
-        //             // alert('Success in login!');
-        //             navigate('/');
-        //         })
-        //         .catch(error => {
-        //             console.log(error);
-        //         });
-        // }
+        if (checkEmail(email)) {
+            dispatch(DrawerAction.displayMenuButton());
+            navigate('/');
+        }
     };
 
     return (
@@ -55,10 +43,10 @@ export default function LoginWithEmail() {
                     autoComplete="off"
                     type="email"
                     size="small"
-                    onChange={e => { setEmail(e.target.value) }}
+                    onChange={e => { dispatch(LoginAction.setEmail(e.target.value)) }}
                     value={email}
-                    error={(!isEmail && true)}
-                    helperText={(!isEmail && "Not a valid email format.")}
+                    error={(!emailValidation && true)}
+                    helperText={(!emailValidation && "Not a valid email format.")}
                 />
                 <TextField
                     id="password"
@@ -67,7 +55,7 @@ export default function LoginWithEmail() {
                     autoComplete="off"
                     type="password"
                     size="small"
-                    onChange={e => { setPassword(e.target.value) }}
+                    onChange={e => { dispatch(LoginAction.setPassword(e.target.value))}}
                     value={password}
                 />
                 <Button variant="contained" size="large" onClick={() => handleEmailLogin()}>

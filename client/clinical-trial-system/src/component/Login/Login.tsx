@@ -1,7 +1,6 @@
 import {Container, Box} from "@mui/material";
 import LoginWithEmail from "./LoginWithEmail";
 import LoginWithSNS from "./LoginWithSNS";
-import axios from 'axios';
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {DrawerAction} from "../Drawer/DrawerReducer";
