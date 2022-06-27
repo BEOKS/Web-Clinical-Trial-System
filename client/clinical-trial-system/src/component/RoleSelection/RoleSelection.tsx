@@ -19,12 +19,12 @@ const RoleSelection = () => {
 
     const handleClickPIButton = () => {
         dispatch(DrawerAction.displayMenuButton());
-        navigate("/");
+        navigate("/pi");
     };
 
     const handleClickReviwerButton = () => {
         dispatch(DrawerAction.displayMenuButton());
-        navigate("/");
+        navigate("/reviewer");
     };
 
     return (
