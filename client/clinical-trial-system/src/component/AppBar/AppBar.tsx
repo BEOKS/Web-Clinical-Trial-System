@@ -52,7 +52,7 @@ const AppBar = () => {
                     <MenuIcon/>
                 </IconButton>
                 <Typography variant="h6" noWrap component="div">
-                    Persistent drawer
+                    Clinical Trial System
                 </Typography>
             </Toolbar>
         </StyledAppBar>

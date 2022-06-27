@@ -32,12 +32,16 @@ function App() {
                         <AppBar/>
                         <Drawer/>
                         <Routes>
-                            {loginStatus === UserState.NOT_LOGIN &&
-                                <Route path="/login" element={<Login/>}></Route>}
-                            {loginStatus === UserState.NEW_USER &&
-                                <Route path="/select-role" element={<RoleSelection/>}></Route>}
-                            {loginStatus === UserState.EXISTING_USER &&
-                                <Route path="/" element={<Page/>}></Route>}
+                            {/*{loginStatus === UserState.NOT_LOGIN &&*/}
+                            {/*    <Route path="/login" element={<Login/>}></Route>}*/}
+                            {/*{loginStatus === UserState.NEW_USER &&*/}
+                            {/*    <Route path="/select-role" element={<RoleSelection/>}></Route>}*/}
+                            {/*{loginStatus === UserState.EXISTING_USER &&*/}
+                            {/*    <Route path="/" element={<Page/>}></Route>}*/}
+
+                            <Route path="/login" element={<Login/>}></Route>
+                            <Route path="/" element={<Page/>}></Route>
+                            <Route path="/select-role" element={<RoleSelection/>}></Route>
                             {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는 경우 처리 */}
                             <Route path="" element={<Login/>}></Route>
                         </Routes>

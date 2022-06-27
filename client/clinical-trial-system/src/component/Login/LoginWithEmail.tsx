@@ -26,7 +26,7 @@ export default function LoginWithEmail() {
     const handleEmailLogin = () => {
         if (checkEmail(email)) {
             dispatch(DrawerAction.displayMenuButton());
-            navigate('/');
+            navigate('/select-role');
         }
     };
 
