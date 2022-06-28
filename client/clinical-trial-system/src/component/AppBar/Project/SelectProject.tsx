@@ -9,13 +9,15 @@ import {RootState} from "../../../store";
 const SelectProject = () => {
     const dispatch = useDispatch();
     const currentProject = useSelector((state: RootState) => state.ProjectReducer.currentProject);
+    const displaySelectProject = useSelector((state: RootState) => state.ProjectReducer.displaySelectProject);
 
     const handleChange = (event: SelectChangeEvent) => {
         dispatch(ProjectAction.setCurrentProject(event.target.value as string));
     };
 
     return (
-        <FormControl sx={{minWidth: 150}} size="small" color="secondary">
+        <FormControl sx={{minWidth: 150, ...((!displaySelectProject) && {display: 'none'})}} size="small"
+                     color="secondary">
             <Select
                 value={currentProject}
                 onChange={handleChange}
