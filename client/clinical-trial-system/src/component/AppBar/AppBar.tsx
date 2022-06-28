@@ -3,11 +3,12 @@ import {styled} from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import {drawerWidth} from "../Drawer/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
-import {IconButton, Typography, Toolbar} from "@mui/material";
+import {IconButton, Toolbar} from "@mui/material";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {DrawerAction} from "../Drawer/DrawerReducer";
+import SelectProject from "./Project/SelectProject";
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean
@@ -51,9 +52,7 @@ const AppBar = () => {
                 >
                     <MenuIcon/>
                 </IconButton>
-                <Typography variant="h6" noWrap component="div">
-                    Clinical Trial System
-                </Typography>
+                <SelectProject />
             </Toolbar>
         </StyledAppBar>
     );
