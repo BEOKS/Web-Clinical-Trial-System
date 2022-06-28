@@ -7,12 +7,14 @@ import {DrawerAction} from "../Drawer/DrawerReducer";
 import DrawerHeader from "../Drawer/DrawerHeader";
 import * as React from "react";
 import {Main} from "../Main/Main";
+import {ProjectAction} from "../AppBar/Project/ProjectReducer";
 
 export default function Login() {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(DrawerAction.dontDisplayMenuButton());
+        dispatch(ProjectAction.doNotDisplaySelectProject());
     });
 
     return (
