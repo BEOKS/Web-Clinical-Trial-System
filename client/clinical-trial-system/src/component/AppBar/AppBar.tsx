@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {DrawerAction} from "../Drawer/DrawerReducer";
 import SelectProject from "./Project/SelectProject";
+import AddProjectButton from "./Project/AddProjectButton";
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean
@@ -53,6 +54,7 @@ const AppBar = () => {
                     <MenuIcon/>
                 </IconButton>
                 <SelectProject />
+                <AddProjectButton />
             </Toolbar>
         </StyledAppBar>
     );
