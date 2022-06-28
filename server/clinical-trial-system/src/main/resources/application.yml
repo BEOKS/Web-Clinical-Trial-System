@@ -1,3 +1,11 @@
 spring:
   profiles:
     include: oauth
+  jpa:
+    database: mysql
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://root:0000@mysql:3306
+#    username: root
+#    password: 0000
+    driver-class-name: com.mysql.cj.jdbc.Driver
