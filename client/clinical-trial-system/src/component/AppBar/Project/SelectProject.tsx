@@ -2,21 +2,25 @@ import * as React from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
+import {useDispatch, useSelector} from "react-redux";
+import {ProjectAction} from "./ProjectReducer";
+import {RootState} from "../../../store";
 
 const SelectProject = () => {
-    const [age, setAge] = React.useState('');
+    const dispatch = useDispatch();
+    const currentProject = useSelector((state: RootState) => state.ProjectReducer.currentProject);
 
     const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value as string);
+        dispatch(ProjectAction.setCurrentProject(event.target.value as string));
     };
 
     return (
         <FormControl sx={{minWidth: 150}} size="small" color="secondary">
             <Select
-                value={age}
+                value={currentProject}
                 onChange={handleChange}
                 displayEmpty
-                inputProps={{'aria-label': 'Without label'}}
+                inputProps={{'aria-label': 'project-select-label'}}
                 sx={{backgroundColor: '#fff'}}
             >
                 <MenuItem value="">
