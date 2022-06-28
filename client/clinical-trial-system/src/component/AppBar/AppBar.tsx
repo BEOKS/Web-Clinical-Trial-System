@@ -10,6 +10,7 @@ import {RootState} from "../../store";
 import {DrawerAction} from "../Drawer/DrawerReducer";
 import SelectProject from "./Project/SelectProject";
 import AddProjectButton from "./Project/AddProjectButton";
+import AddProjectDialog from "./Project/AddProjectDialog";
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean
@@ -55,6 +56,7 @@ const AppBar = () => {
                 </IconButton>
                 <SelectProject />
                 <AddProjectButton />
+                <AddProjectDialog/>
             </Toolbar>
         </StyledAppBar>
     );
