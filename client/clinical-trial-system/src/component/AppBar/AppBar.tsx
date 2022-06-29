@@ -3,7 +3,7 @@ import {styled} from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import {drawerWidth} from "../Drawer/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
-import {IconButton, Toolbar} from "@mui/material";
+import {Box, IconButton, Toolbar} from "@mui/material";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
@@ -11,6 +11,7 @@ import {DrawerAction} from "../Drawer/DrawerReducer";
 import SelectProject from "./Project/SelectProject";
 import AddProjectButton from "./Project/AddProjectButton";
 import AddProjectDialog from "./Project/AddProjectDialog";
+import beamworksLogoWhite from "../../assets/beamwoksLogoWhite.png";
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean
@@ -54,9 +55,13 @@ const AppBar = () => {
                 >
                     <MenuIcon/>
                 </IconButton>
-                <SelectProject />
-                <AddProjectButton />
+                <SelectProject/>
+                <AddProjectButton/>
                 <AddProjectDialog/>
+                <Box flexGrow={2}/>
+                <Box>
+                    <img src={beamworksLogoWhite} height={35} alt="beamworks logo"/>
+                </Box>
             </Toolbar>
         </StyledAppBar>
     );
