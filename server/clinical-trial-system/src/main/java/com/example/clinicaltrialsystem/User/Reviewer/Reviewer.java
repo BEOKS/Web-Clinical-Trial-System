@@ -1,7 +1,6 @@
 package com.example.clinicaltrialsystem.User.Reviewer;
 
-import com.example.clinicaltrialsystem.User.User.User;
-import lombok.AllArgsConstructor;
+import com.example.clinicaltrialsystem.User.User.UserProfile;
 
 import javax.persistence.*;
 
@@ -27,10 +26,12 @@ enum ExperienceYear{
     }
 }
 @Entity
-public class Reviewer extends User{
+public class Reviewer {
     @Id
     protected String radiologistID;
     protected RadiologistSpecialty radiologistSpecialty;
     protected boolean isBreastFellowshipTrained;
     protected ExperienceYear experienceYear;
+    @OneToOne
+    protected UserProfile userProfile;
 }
