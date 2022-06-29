@@ -1,6 +1,9 @@
 import {render} from "@testing-library/react";
-import {InitLoadingPage} from "./component/InitLoadingPage/InitLoadingPage";
+import {isUserLogin,isUserDataExist,redirectToAuthPage} from "./Utils/Auth/Auth";
+import {UserState} from "./Utils/Auth/Auth";
 import App from "./App";
+
+jest.mock('./Utils/Auth/Auth',() => jest.fn())
 
 test('From Beginning, Loading page must be loaded',()=>{
     render(<App/>)
@@ -8,8 +11,17 @@ test('From Beginning, Loading page must be loaded',()=>{
 
 })
 test('when not login, you need to redirect login page',()=>{
-    //TODO checkLogin return NOT_LOGIN
-    //TODO redirect to login page
+    // checkLogin return NOT_LOGIN
+    // @ts-ignore
+    isUserLogin=jest.fn(()=>false)
+    let isRedirect: boolean=false;
+
+    //check redirect
+    // @ts-ignore
+    redirectToAuthPage=jest.fn(()=>{isRedirect=true})
+    render(<App/>)
+    expect(isRedirect).toBe(true)
+
 })
 test('when login success and new user, move to role selection page',()=>{
     //TODO checkLogin return NEW_USER

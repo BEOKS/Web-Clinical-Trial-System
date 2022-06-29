@@ -7,16 +7,20 @@ import MailIcon from '@mui/icons-material/Mail';
 import {Drawer as PersistentDrawer} from '@mui/material';
 import {List, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
 import DrawerHeader from "./DrawerHeader";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../store";
+import {DrawerAction} from "./DrawerReducer";
 
 export const drawerWidth = 240;
 
-interface DrawerProps {
-    open?: boolean;
-    handleDrawerClose?: () => void;
-}
-
-const Drawer: React.FC<DrawerProps> = ({open, handleDrawerClose}) => {
+const Drawer = () => {
+    const dispatch = useDispatch();
     const theme = useTheme();
+    const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
+
+    const handleDrawerClose = () => {
+        dispatch(DrawerAction.closeDrawer());
+    };
 
     return (
         <PersistentDrawer
@@ -30,7 +34,7 @@ const Drawer: React.FC<DrawerProps> = ({open, handleDrawerClose}) => {
             }}
             variant="persistent"
             anchor="left"
-            open={open}
+            open={drawerOpen}
         >
             <DrawerHeader>
                 <IconButton onClick={handleDrawerClose}>

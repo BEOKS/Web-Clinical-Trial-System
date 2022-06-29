@@ -42,20 +42,34 @@ CTS(Clinical Trail System) aim convenient and effective Machine Learning Clinica
 2. Install [NodeJS](https://nodejs.org/ko/download/)>=v16.15.1
 3. Insatll [Open JDK](https://openjdk.org/install/)>=11.0.11
 
+## Browser Version
+- Chrome >=87
+- Firefox >=78
+- Safari >=13
+- Edge >=88
+
+# Install
+1. Clone this project
+2. Configuration OAuth2 authentication with Google. In spring resources, You can check [oauth-sample](server/clinical-trial-system/src/main/resources/application-oauth.sample.yml) file. Create application-oauth.yml in same directory that contain client-id and client-secret. For issue your google OAuth 2.0 credentials, please check [here](https://developers.google.com/identity/protocols/oauth2/openid-connect)
+
 # Build & Run
 If you run build script, it will build client and server project at the same time, and create docker image with build information. Build and Run script has 3 option for develop and production.
 1. **local** : For personal develop environment, If you want develop new feature or fix bugs etc., you have to use this option.
 2. **dev** : For merge, test in real environment, if you pull request to dev branch and approved, GitHub Action automatically test with dev option.
 3. **prod** : For real service environment, this option is for publish in real environment, it will close docker port(like database) except client and server connection for user.
+
+> :warning: **For Developer**: "If you just want to run and develop with your PC. Then, only local option will be support. Becuase in remote repository, dev and prod configuration is not exist."
+
+Before build, you need to run Docker Daemon.
 ## 1. On Mac
 ```
 sudo bash ./build.sh {prod|dev|local}
-sudo bash .run.sh
+sudo bash .run.sh {prod|dev|local}
 ```
 ## 2. On Windows
 ```
 bash ./build.sh {prod|dev|local}
-sudo bash .run.sh
+sudo bash .run.sh {prod|dev|local}
 ```
 ## Production
 If you run build script, it will automatically create docker image for production. After that, you can move docker image to anyware for you want and run ```run.sh```script.

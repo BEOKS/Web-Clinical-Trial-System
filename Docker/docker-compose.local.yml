@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  client-with-proxy:
+    image: cts/client-with-proxy:0.1
+    build:
+      context: ../client
+      dockerfile: ./Dockerfile
+    container_name: proxy
+    ports:
+      - 80:80
+    depends_on:
+      - middleware
+      - mysql
+    networks:
+      innerNetwork:
+        aliases:
+          - nginx
+  middleware:
+    image: cts/middleware:0.1
+    build: 
+      context: ../server
+      args:
+        - local
+      dockerfile: ./Dockerfile
+    container_name: middleware
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+    networks:
+      innerNetwork:
+        aliases:
+          - middleware
+  mysql:
+    image: mysql:8.0-oracle 
+    container_name: mysql
+    restart : always
+    command: --default-authentication-plugin=mysql_native_password
+    environment: # TODO change DB configuration with docker secret
+      - MYSQL_ROOT_PASSWORD=0000
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+      - 33060:33060
+    networks:
+      innerNetwork:
+        aliases:
+          - mysql
+networks:
+  innerNetwork: 
+
+
+
