@@ -1,3 +1,10 @@
+# check argument
+if [ $# -ne 1 ]
+  then
+    echo "Invalid arguement supplied, Please insert [local,dev or prod] for build option"
+    echo "For detail about options, please check README.md"
+    exit -1
+fi
 # 1. build front resource bundle
 cd ./client/clinical-trial-system
 yarn install
