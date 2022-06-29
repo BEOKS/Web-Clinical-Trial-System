@@ -64,12 +64,12 @@ Before build, you need to run Docker Daemon.
 ## 1. On Mac
 ```
 sudo bash ./build.sh {prod|dev|local}
-sudo bash .run.sh
+sudo bash .run.sh {prod|dev|local}
 ```
 ## 2. On Windows
 ```
 bash ./build.sh {prod|dev|local}
-sudo bash .run.sh
+sudo bash .run.sh {prod|dev|local}
 ```
 ## Production
 If you run build script, it will automatically create docker image for production. After that, you can move docker image to anyware for you want and run ```run.sh```script.
