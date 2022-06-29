@@ -1,4 +1,4 @@
-if [ $# -ne 0 ]
+if [ $# -ne 1 ]
   then
     echo "Invalid arguemnt supplied, Please insert [local,dev or prod] for run option"
     echo "For detail about options, please check README.md"

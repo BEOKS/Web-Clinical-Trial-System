@@ -58,7 +58,7 @@ If you run build script, it will build client and server project at the same tim
 2. **dev** : For merge, test in real environment, if you pull request to dev branch and approved, GitHub Action automatically test with dev option.
 3. **prod** : For real service environment, this option is for publish in real environment, it will close docker port(like database) except client and server connection for user.
 
-> :warning: **For Developer**: If you just want to run and develop with your PC then, only local option will be support. Becuase in remote repository, dev and prod configuration is not exist.
+> :warning: **For Developer**: "If you just want to run and develop with your PC. Then, only local option will be support. Becuase in remote repository, dev and prod configuration is not exist."
 
 Before build, you need to run Docker Daemon.
 ## 1. On Mac
