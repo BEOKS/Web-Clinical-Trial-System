@@ -1,16 +1,19 @@
 import * as React from "react";
-import DrawerHeader from "./component/Drawer/DrawerHeader";
-import {Main} from "./component/Main/Main";
+import DrawerHeader from "../Drawer/DrawerHeader";
 import {Typography} from "@mui/material";
+import {Main} from "./Main";
 import {useSelector} from "react-redux";
-import {RootState} from "./store";
+import {RootState} from "../../store";
 
-const Page = () => {
+const ReviewerPage = () => {
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
 
     return (
         <Main open={drawerOpen}>
             <DrawerHeader/>
+            <Typography paragraph variant="h4">
+                This is reviewer page.
+            </Typography>
             <Typography paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
@@ -25,21 +28,8 @@ const Page = () => {
                 consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
                 sapien faucibus et molestie ac.
             </Typography>
-            <Typography paragraph>
-                Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-                eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-                neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-                tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-                sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-                tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-                gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-                et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-                tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                posuere sollicitudin aliquam ultrices sagittis orci a.
-            </Typography>
         </Main>
     );
 };
 
-export default Page;
+export default ReviewerPage;

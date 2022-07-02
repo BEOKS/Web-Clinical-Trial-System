@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:local": "tsc && vite build",
+    "build:dev": "tsc && vite build",
+    "build:prod": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest --watchAll  ",
     "ctest": "jest --coverage"
@@ -17,6 +20,7 @@
     "@mui/material": "^5.8.4",
     "axios": "^0.27.2",
     "cross-env": "^7.0.3",
+    "http-proxy-middleware": "^2.0.6",
     "jest-environment-jsdom": "^28.1.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

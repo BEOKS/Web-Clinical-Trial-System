@@ -28,10 +28,10 @@ declare module '@mui/material/Button' {
 const theme = createTheme({
     palette: {
         primary: {
-            light: '#ffcccb',
-            main: '#ef9a9a',
-            dark: '#ba6b6c',
-            contrastText: 'rgba(54,0,0,0.94)',
+            light: '#629749',
+            main: '#33691e',
+            dark: '#003d00',
+            contrastText: '#fff',
         },
         secondary: {
             light: '#ffff8b',
