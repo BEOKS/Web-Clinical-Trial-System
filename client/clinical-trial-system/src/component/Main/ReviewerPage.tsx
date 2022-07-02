@@ -2,11 +2,20 @@ import * as React from "react";
 import DrawerHeader from "../Drawer/DrawerHeader";
 import {Typography} from "@mui/material";
 import {Main} from "./Main";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
+import {useEffect} from "react";
+import {DrawerAction} from "../Drawer/DrawerReducer";
+import {ProjectAction} from "../AppBar/Project/ProjectReducer";
 
 const ReviewerPage = () => {
+    const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
+
+    useEffect(() => {
+        dispatch(DrawerAction.displayMenuButton());
+        dispatch(ProjectAction.displaySelectProject());
+    });
 
     return (
         <Main open={drawerOpen}>
