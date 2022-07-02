@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:local": "tsc && vite build",
+    "build:dev": "tsc && vite build",
+    "build:prod": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest --watchAll  ",
     "ctest": "jest --coverage"
