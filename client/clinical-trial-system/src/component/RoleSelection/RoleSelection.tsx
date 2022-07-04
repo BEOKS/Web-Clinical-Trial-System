@@ -8,6 +8,7 @@ import {useDispatch} from "react-redux";
 import {DrawerAction} from "../Drawer/DrawerReducer";
 import "./RoleSelection.css";
 import {useNavigate} from "react-router-dom";
+import {ProjectAction} from "../AppBar/Project/ProjectReducer";
 
 const RoleSelection = () => {
     const dispatch = useDispatch();
@@ -15,15 +16,14 @@ const RoleSelection = () => {
 
     useEffect(() => {
         dispatch(DrawerAction.dontDisplayMenuButton());
+        dispatch(ProjectAction.doNotDisplaySelectProject());
     });
 
     const handleClickPIButton = () => {
-        dispatch(DrawerAction.displayMenuButton());
         navigate("/pi");
     };
 
     const handleClickReviwerButton = () => {
-        dispatch(DrawerAction.displayMenuButton());
         navigate("/reviewer");
     };
 
@@ -31,7 +31,7 @@ const RoleSelection = () => {
         <Main>
             <Container maxWidth="md">
                 <DrawerHeader/>
-                <Paper variant="outlined" sx={{p: 5, my: 3, backgroundColor: '#e7f5e1'}}>
+                <Paper variant="outlined" sx={{p: 5, my: 3, backgroundColor: 'secondary.main'}}>
                     <Stack sx={{display: 'flex', alignItems: 'center'}}>
                         <Typography variant="h4" color="text.primary" mb={1}>Select User Type</Typography>
                         <div className="bar"/>
