@@ -11,6 +11,7 @@ import {DrawerAction} from "../Drawer/DrawerReducer";
 import SelectProject from "./Project/SelectProject";
 import AddProjectButton from "./Project/AddProjectButton";
 import AddProjectDialog from "./Project/AddProjectDialog";
+// @ts-ignore
 import beamworksLogoWhite from "../../assets/beamwoksLogoWhite.png";
 
 interface AppBarProps extends MuiAppBarProps {
