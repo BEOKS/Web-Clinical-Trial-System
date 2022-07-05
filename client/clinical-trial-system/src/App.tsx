@@ -11,7 +11,7 @@ import Login from "./component/Login/Login";
 import {UserState, checkLoginState} from "./Utils/Auth/Auth";
 import {useState} from "react";
 import LoadingPage from "./component/Login/Loading";
-import ReviewerPage from "./component/Main/ReviewerPage";
+import ReviewerPage from "./component/Review/ReviewerPage";
 
 const INIT_LOGIN_STATUS = 9999;
 
