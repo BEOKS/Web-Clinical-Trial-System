@@ -7,8 +7,10 @@ import {RootState} from "../../store";
 import {useEffect} from "react";
 import {DrawerAction} from "../Drawer/DrawerReducer";
 import {ProjectAction} from "../AppBar/Project/ProjectReducer";
+import StartReviewDialog from "./StartReviewDialog";
+import {ReviewerAction} from "./ReviewerReducer";
 
-const ReviewerPage = () => {
+const StartReviewPage = () => {
     const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
 
@@ -16,6 +18,11 @@ const ReviewerPage = () => {
         dispatch(DrawerAction.dontDisplayMenuButton());
         dispatch(ProjectAction.displaySelectProject());
     });
+
+    const handleClickStartReview = () => {
+        // TODO request reviewer count
+        dispatch(ReviewerAction.openStartReviewDialog());
+    };
 
     return (
         <Main open={drawerOpen}>
@@ -47,12 +54,14 @@ const ReviewerPage = () => {
                     book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of
                     Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
                 </Alert>
-                <Box sx={{display: 'flex', justifyContent: 'center', mt: 8}}>
-                    <Button variant="contained" sx={{px: 10, py: 2}}>Start Review</Button>
+                <Box sx={{display: 'flex', justifyContent: 'center', mt: 6}}>
+                    <Button variant="contained" sx={{px: 10, py: 2}}
+                            onClick={handleClickStartReview}>Start Review</Button>
                 </Box>
             </Container>
+            <StartReviewDialog/>
         </Main>
     );
 };
 
-export default ReviewerPage;
+export default StartReviewPage;
