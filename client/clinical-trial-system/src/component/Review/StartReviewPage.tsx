@@ -20,7 +20,6 @@ const StartReviewPage = () => {
     });
 
     const handleClickStartReview = () => {
-        // TODO request reviewer count
         dispatch(ReviewerAction.openStartReviewDialog());
     };
 

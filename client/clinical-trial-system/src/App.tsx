@@ -43,7 +43,7 @@ function App() {
 
                             <Route path="/login" element={<Login/>}></Route>
                             <Route path="/pi" element={<PIPage/>}></Route>
-                            <Route path="/reviewer" element={<StartReviewPage/>}></Route>
+                            <Route path="/start-review" element={<StartReviewPage/>}></Route>
                             <Route path="/ultrasonic-review" element={<UltrasonicReviewPage/>}></Route>
                             <Route path="/select-role" element={<RoleSelection/>}></Route>
                             {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는 경우 처리 */}

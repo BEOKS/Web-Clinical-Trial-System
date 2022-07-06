@@ -24,7 +24,7 @@ public class ReviewerController {
     @Test
     public void createNewReviewer() throws Exception {
         when(reviewerService.createNewReviewer()).thenReturn(123);
-        mockMvc.perform(post("/reviewer"))
+        mockMvc.perform(post("/api/reviewer"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.reviewerId").value(123));
     }
