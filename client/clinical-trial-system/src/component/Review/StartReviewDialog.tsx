@@ -12,7 +12,7 @@ const StartReviewDialog = () => {
     const reviewerCount = useSelector((state: RootState) => state.ReviewerReducer.reviewerCount);
 
     const handleClickOKButton = () =>{
-        navigate('/review');
+        navigate('/ultrasonic-review');
         handleClose();
     };
 
