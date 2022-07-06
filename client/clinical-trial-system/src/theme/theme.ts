@@ -34,9 +34,7 @@ const theme = createTheme({
             contrastText: '#fff',
         },
         secondary: {
-            light: '#ffff8b',
-            main: '#ffee58',
-            dark: '#c9bc1f',
+            main: '#e7f5e1',
             contrastText: '#000',
         },
         naver: {
