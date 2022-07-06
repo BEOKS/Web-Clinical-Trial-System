@@ -1,5 +1,6 @@
 package com.example.clinicaltrialsystem.User.PI;
 
+
 import com.example.clinicaltrialsystem.User.User.UserProfile;
 
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ public class PI {
     protected UserProfile userProfile;
     @Id
     private Long id;
+
 
     public void setId(Long id) {
         this.id = id;
