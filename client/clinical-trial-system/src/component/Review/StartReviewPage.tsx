@@ -9,6 +9,7 @@ import {DrawerAction} from "../Drawer/DrawerReducer";
 import {ProjectAction} from "../AppBar/Project/ProjectReducer";
 import StartReviewDialog from "./StartReviewDialog";
 import {ReviewerAction} from "./ReviewerReducer";
+import axios from "axios";
 
 const StartReviewPage = () => {
     const dispatch = useDispatch();
@@ -20,7 +21,13 @@ const StartReviewPage = () => {
     });
 
     const handleClickStartReview = () => {
-        // TODO request reviewer count
+        const url = 'api/reviewer';
+        axios.post(url)
+            .then(response=>{
+                console.log(response);
+            }).catch(error=>{
+                console.log(error);
+        });
         dispatch(ReviewerAction.openStartReviewDialog());
     };
 

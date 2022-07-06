@@ -24,7 +24,7 @@ const RoleSelection = () => {
     };
 
     const handleClickReviwerButton = () => {
-        navigate("/reviewer");
+        navigate("/start-review");
     };
 
     return (
