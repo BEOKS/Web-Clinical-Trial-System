@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 @Controller
-@RequestMapping("reviewer")
+@RequestMapping("/api/reviewer")
 @Api(
         tags = "Control Reviewer Information",
         description = "리뷰어 정보 생성/조회/삭제/수정 API"
