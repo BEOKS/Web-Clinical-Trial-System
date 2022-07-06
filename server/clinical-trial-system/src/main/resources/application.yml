@@ -4,8 +4,11 @@ spring:
   jpa:
     database: mysql
     show-sql: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
   datasource:
-    url: jdbc:mysql://root:0000@localhost:3306
+    url: jdbc:mysql://root:0000@localhost:3306/BEAM-CTS?createDatabaseIfNotExist=true
 #    username: root
 #    password: 0000
     driver-class-name: com.mysql.cj.jdbc.Driver

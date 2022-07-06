@@ -1,40 +1,43 @@
 package com.example.clinicaltrialsystem.User.Reviewer;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 @Controller
 @RequestMapping("reviewer")
 @Api(
         tags = "Control Reviewer Information",
-        description = "리뷰어 정보 생성/조회/ß삭제/수정 API"
+        description = "리뷰어 정보 생성/조회/삭제/수정 API"
 )
 public class ReviewerController {
+    final
+    ReviewerService reviewerService;
+
+    public ReviewerController(ReviewerService reviewerService) {
+        this.reviewerService = reviewerService;
+    }
+
     @PostMapping("")
-    @ApiResponse(code=200,message = "새로운 리뷰어가 정상적으로 생성된 경우 리뷰어 아이디를 반환합니다.",response = String.class)
-    public ResponseEntity<String> createNewReviewer(){
-        return new ResponseEntity<String>(HttpStatus.ACCEPTED);
+    @ApiOperation(value = "새로운 Reviewer 생성")
+    @ApiResponses(value = {
+            @ApiResponse(code=200
+                    ,message = "이 API 를 호출하면 새로운 Reviewer 가 서버에 생성되며, 생성된 Reviewer 의 ID를 응답으로 받을 수 있습니다."
+                    ,response = CreateReviewerResponseDto.class),
+            @ApiResponse(code=500
+                    ,message = "API 호출처리를 서버에서 실패한 경우 입니다. 메모리 부족, 데이터베이스 오류 등 다양한 오류가 존재 할 수 있으며" +
+                    "발생한 오류 내용을 반환합니다."
+                    ,response = String.class)
+    })
+    public ResponseEntity<CreateReviewerResponseDto> createNewReviewer(){
+        int newReviewerId= reviewerService.createNewReviewer();
+        return ResponseEntity.ok(new CreateReviewerResponseDto(newReviewerId));
     }
 
-    @GetMapping("")
-    @ApiResponse(code=200,message = "생성된 모든 리뷰어 정보를 가져옵니다.",response = Reviewer.class)
-    public Reviewer getReviewerList(){
-        return null;
-    }
-
-    @PutMapping("/{reviewerID}")
-    @ApiResponse(code=200,message = "리뷰어 정보를 업데이트 합니다.",response = Reviewer.class)
-    public Reviewer updateReviewer(@PathVariable String reviewerID,@RequestBody Reviewer reviewer){
-        return null;
-    }
-
-    @DeleteMapping("/{reviewerID}")
-    @ApiResponse(code=200,message = "리뷰어 정보를 삭제합니다. 이 때 리뷰어와 연관된 다른 데이터 또한 삭제됩니다.",response = boolean.class)
-    public boolean deleteReviewer(@PathVariable String reviewerID){
-        return false;
-    }
 }
