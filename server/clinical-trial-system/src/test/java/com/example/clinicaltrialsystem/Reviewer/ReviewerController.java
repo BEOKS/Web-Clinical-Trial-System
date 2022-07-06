@@ -23,19 +23,4 @@ public class ReviewerController {
         mockMvc.perform(post("/reviewer/"))
                 .andExpect(status().isOk());
     }
-    @Test
-    public void getReviewerList() throws Exception {
-        mockMvc.perform(get("/reviewer/"))
-                .andExpect(status().isOk());
-    }
-    @Test
-    public void updateReviewer() throws Exception {
-        mockMvc.perform(put("/reviewer/1"))
-                .andExpect(status().isOk());
-    }
-    @Test
-    public void deleteReviewer() throws Exception {
-        mockMvc.perform(delete("/reviewer/1"))
-                .andExpect(status().isOk());
-    }
 }
