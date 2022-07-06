@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
@@ -18,9 +20,12 @@ public class ReviewerController {
     ReviewerService reviewerService;
     @Autowired
     MockMvc mockMvc;
+
     @Test
     public void createNewReviewer() throws Exception {
-        mockMvc.perform(post("/reviewer/"))
-                .andExpect(status().isOk());
+        when(reviewerService.createNewReviewer()).thenReturn(123);
+        mockMvc.perform(post("/reviewer"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.reviewerId").value(123));
     }
 }

@@ -3,6 +3,7 @@ package com.example.clinicaltrialsystem.User.Reviewer;
 import com.example.clinicaltrialsystem.User.User.UserProfile;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -27,16 +28,30 @@ enum ExperienceYear{
 
     }
 }
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
-@ApiModel("Reviewer")
 public class Reviewer {
     @Id
-    @ApiModelProperty(name = "Unique radiologistID", position = 1, example = "7aaee0e2-6884-4fd7-ba63-21d76723dce2")
-    protected String radiologistID;
-    @ApiModelProperty(name = "radiology specialty", position = 1, example = "Breast Radiology")
-    protected RadiologistSpecialty radiologistSpecialty;
-    protected boolean isBreastFellowshipTrained;
-    protected ExperienceYear experienceYear;
-    @OneToOne
-    protected UserProfile userProfile;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+//    @ApiModelProperty(name = "Unique radiologistID", position = 1, example = "7aaee0e2-6884-4fd7-ba63-21d76723dce2")
+//    protected String radiologistID;
+//    @ApiModelProperty(name = "radiology specialty", position = 1, example = "Breast Radiology")
+//    protected RadiologistSpecialty radiologistSpecialty;
+//    protected boolean isBreastFellowshipTrained;
+//    protected ExperienceYear experienceYear;
+//    @OneToOne
+//    protected UserProfile userProfile;
 }

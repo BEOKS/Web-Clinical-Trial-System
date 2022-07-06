@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,12 @@ import org.springframework.web.bind.annotation.*;
         description = "리뷰어 정보 생성/조회/삭제/수정 API"
 )
 public class ReviewerController {
+    final
+    ReviewerService reviewerService;
+
+    public ReviewerController(ReviewerService reviewerService) {
+        this.reviewerService = reviewerService;
+    }
 
     @PostMapping("")
     @ApiOperation(value = "새로운 Reviewer 생성")
@@ -29,7 +36,8 @@ public class ReviewerController {
                     ,response = String.class)
     })
     public ResponseEntity<CreateReviewerResponseDto> createNewReviewer(){
-        return ResponseEntity.ok(new CreateReviewerResponseDto(1));
+        int newReviewerId= reviewerService.createNewReviewer();
+        return ResponseEntity.ok(new CreateReviewerResponseDto(newReviewerId));
     }
 
 }
