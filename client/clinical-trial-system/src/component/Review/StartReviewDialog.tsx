@@ -4,14 +4,23 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {ReviewerAction} from "./ReviewerReducer";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const StartReviewDialog = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const startReviewDialogOpen = useSelector((state: RootState) => state.ReviewerReducer.startReviewDialogOpen);
-    const reviewerCount = useSelector((state: RootState) => state.ReviewerReducer.reviewerCount);
 
-    const handleClickOKButton = () =>{
+    const handleClickOKButton = () => {
+        const url = 'api/reviewer';
+        axios.post(url)
+            .then(response => {
+                console.log(response);
+                dispatch(ReviewerAction.setReviewerCount(response.data.reviewerId));
+            }).catch(error => {
+            console.log(error);
+        });
+
         navigate('/review');
         handleClose();
     };
@@ -32,8 +41,7 @@ const StartReviewDialog = () => {
             </DialogTitle>
             <DialogContent>
                 <DialogContentText id="start-review-dialog-description">
-                    <strong>Your test number is {reviewerCount}.</strong> Please click the OK button to start the
-                    review.
+                    Please click the OK button to start the review.
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
