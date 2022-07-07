@@ -6,6 +6,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import Slider from "@mui/material/Slider";
 import * as React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {REVIEW_STEP, ReviewerAction} from "../ReviewerReducer";
+import {RootState} from "../../../store";
+import {useNavigate} from "react-router-dom";
 
 const marks = [
     {value: 0, label: '0',},
@@ -17,6 +21,29 @@ const marks = [
 ];
 
 const ReviewInputBox = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const reviewStep = useSelector((state: RootState) => state.ReviewerReducer.reviewStep);
+    const currentImageNumber = useSelector((state: RootState) => state.ReviewerReducer.currentImageNumber);
+    const imageNumberList = useSelector((state: RootState) => state.ReviewerReducer.imageNumberList);
+
+    const checkLastImage = (): boolean => {
+        return imageNumberList.length > 0 && currentImageNumber === imageNumberList[imageNumberList.length - 1];
+    };
+
+    const handleClickVerify = () => {
+        if (reviewStep === REVIEW_STEP.REVIEW) {
+            dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.RESULT));
+        } else if (reviewStep === REVIEW_STEP.RESULT) {
+            if (checkLastImage()) {
+                navigate('/close-session');
+            } else {
+                dispatch(ReviewerAction.setCurrentImageNumber(currentImageNumber + 1));
+                dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.REVIEW));
+            }
+        }
+    };
+
     return (
         <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
             <Stack direction="row" spacing={3}>
@@ -52,7 +79,8 @@ const ReviewInputBox = () => {
                 </Box>
             </Stack>
             <Box sx={{display: 'flex', justifyContent: 'center', mt: 4}}>
-                <Button variant="contained" sx={{px: 6}}>Verify</Button>
+                <Button variant="contained" sx={{px: 6}}
+                        onClick={handleClickVerify}>Verify</Button>
             </Box>
         </Box>
     )

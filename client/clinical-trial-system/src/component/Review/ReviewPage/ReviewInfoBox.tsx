@@ -7,6 +7,7 @@ import {RootState} from "../../../store";
 
 const ReviewInfoBox = () => {
     const reviewerCount = useSelector((state: RootState) => state.ReviewerReducer.reviewerCount);
+    const currentImageNumber = useSelector((state: RootState) => state.ReviewerReducer.currentImageNumber);
 
     return (
         <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
@@ -14,7 +15,7 @@ const ReviewInfoBox = () => {
                 <Stack direction="row" spacing={1}>
                     <Chip label="Image Number" icon={<ImageIcon/>} color="primary"
                           variant="outlined"/>
-                    <Chip label="1" color="info"/>
+                    <Chip label={currentImageNumber} color="info"/>
                 </Stack>
                 <Divider orientation="vertical" flexItem></Divider>
                 <Stack direction="row" spacing={1}>

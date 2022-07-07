@@ -9,10 +9,13 @@ import {DrawerAction} from "../../Drawer/DrawerReducer";
 import {ProjectAction} from "../../AppBar/Project/ProjectReducer";
 import ReviewInputBox from "./ReviewInputBox";
 import ReviewInfoBox from "./ReviewInfoBox";
+import {REVIEW_STEP} from "../ReviewerReducer";
 
 const ReviewPage = () => {
     const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
+    const currentImageNumber = useSelector((state: RootState) => state.ReviewerReducer.currentImageNumber);
+    const reviewStep = useSelector((state: RootState) => state.ReviewerReducer.reviewStep);
 
     useEffect(() => {
         dispatch(DrawerAction.dontDisplayMenuButton());
@@ -29,14 +32,21 @@ const ReviewPage = () => {
                             <ReviewInfoBox/>
                         </Grid>
                         <Grid item container spacing={3}>
-                            <Grid item xs direction="row">
-                                <Skeleton variant="rectangular" height={400}/>
+                            <Grid item xs>
+                                {/*<Skeleton variant="rectangular" height={400}/>*/}
+                                <img src={`/api/review/data/${currentImageNumber}/originalImage`} alt="Original Data"
+                                     width={'100%'}/>
                                 <Box sx={{display: 'flex', justifyContent: 'center', mt: 1}}>
                                     <Chip label="Original Image" sx={{width: '100%'}}/>
                                 </Box>
                             </Grid>
-                            <Grid item xs direction="row">
-                                <Skeleton variant="rectangular" height={400}/>
+                            <Grid item xs>
+                                {reviewStep === REVIEW_STEP.REVIEW ?
+                                    <Skeleton variant="rectangular" height={430}/> :
+                                    <img src={`/api/review/data/${currentImageNumber}/mlResultImage`}
+                                         alt="ML Result Data"
+                                         width={'100%'}/>
+                                }
                                 <Box sx={{display: 'flex', justifyContent: 'center', mt: 1}}>
                                     <Chip label="ML Result Image" sx={{width: '100%'}}/>
                                 </Box>
