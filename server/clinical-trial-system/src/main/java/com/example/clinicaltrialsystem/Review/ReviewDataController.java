@@ -2,15 +2,19 @@ package com.example.clinicaltrialsystem.Review;
 
 import com.example.clinicaltrialsystem.Review.Dto.CreatReviewDataDto;
 import com.example.clinicaltrialsystem.Review.Exception.CannotFindByReviewId;
+import com.example.clinicaltrialsystem.Review.Exception.IllegalDtoRequestException;
 import com.example.clinicaltrialsystem.Review.Exception.InternalServerException;
 import com.example.clinicaltrialsystem.Review.Exception.InvalidDataNumberException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 /**
  * 리뷰에 사용될 메타 데이터, 원본 이미지 그리고 머신러닝 결과 이미지를 처리하기 위한 컨트롤러입니다.
@@ -60,7 +64,7 @@ public class ReviewDataController {
         return ResponseEntity.ok(reviewData);
     }
 
-    @PostMapping("")
+    @PostMapping(value = "",consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     @ApiOperation(value = "새로운 Review 데이터 생성")
     @ApiResponses(value = {
             @ApiResponse(code=200
@@ -72,11 +76,11 @@ public class ReviewDataController {
                     "발생한 오류 내용을 반환합니다."
                     ,response = String.class)
     })
-    public ResponseEntity<?> createNewReviewData(@RequestBody CreatReviewDataDto creatReviewDataDto){
+    public ResponseEntity<?> createNewReviewData(@ModelAttribute CreatReviewDataDto creatReviewDataDto){
         int newReviewDataId=0;
         try {
             newReviewDataId = reviewDataService.saveNewReviewData(creatReviewDataDto);
-        } catch (InternalServerException e) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
         return ResponseEntity.ok(newReviewDataId);
