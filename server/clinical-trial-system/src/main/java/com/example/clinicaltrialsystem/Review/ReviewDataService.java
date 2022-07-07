@@ -31,8 +31,9 @@ public class ReviewDataService {
             throw new IllegalDtoRequestException(reviewData);
         }
         ReviewData reviewData1=reviewDataRepository.save(ReviewData.builder()
-                .MLResultImageBase64(reviewData.getMlResultImage().getOriginalFilename())
-                .originalImageBase64(reviewData.getOriginalImage().getOriginalFilename()).build());
+                .originalImageName(reviewData.getMlResultImage().getOriginalFilename())
+                .mlResultImageName(reviewData.getOriginalImage().getOriginalFilename())
+                .note(reviewData.getNote()).build());
         storageService.saveFile(reviewData.getMlResultImage());
         storageService.saveFile(reviewData.getOriginalImage());
         return reviewData1.getDataId();
