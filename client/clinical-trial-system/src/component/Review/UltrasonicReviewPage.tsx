@@ -1,5 +1,5 @@
 import {Main} from "../Main/Main";
-import {Box, Button, Chip, Container, Grid, Skeleton, Stack, Typography} from "@mui/material";
+import {Box, Button, Chip, Container, Divider, Grid, Skeleton, Stack, Typography} from "@mui/material";
 import DrawerHeader from "../Drawer/DrawerHeader";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -28,73 +28,85 @@ const marks = [
 const UltrasonicReviewPage = () => {
     const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
+    const reviewerCount = useSelector((state: RootState) => state.ReviewerReducer.reviewerCount);
 
     useEffect(() => {
         dispatch(DrawerAction.dontDisplayMenuButton());
-        dispatch(ProjectAction.displaySelectProject());
+        dispatch(ProjectAction.doNotDisplaySelectProject());
     });
 
     return (
         <Main open={drawerOpen}>
-            <Container maxWidth="lg">
+            <Container maxWidth="xl">
                 <DrawerHeader/>
                 <Grid container spacing={3} sx={{my: 2}}>
                     <Grid item container direction="column" xs spacing={3}>
-                        <Grid item container spacing={3}>
-                            <Grid item xs>
-                                <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
+                        <Grid item>
+                            <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
+                                <Stack direction="row" spacing={4}>
                                     <Stack direction="row" spacing={1}>
                                         <Chip label="Image Number" icon={<ImageIcon/>} color="primary"
                                               variant="outlined"/>
-                                        <Chip label="2" color="info"/>
+                                        <Chip label="1" color="info"/>
                                     </Stack>
-                                </Box>
-                            </Grid>
-                            <Grid item xs>
-                                <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
+                                    <Divider orientation="vertical" flexItem></Divider>
                                     <Stack direction="row" spacing={1}>
                                         <Chip label="Reviewer Number" icon={<FaceIcon/>} color="success"
                                               variant="outlined"/>
-                                        <Chip label="2" color="info"/>
+                                        <Chip label={reviewerCount} color="info"/>
                                     </Stack>
+                                </Stack>
+                            </Box>
+                        </Grid>
+                        <Grid item container spacing={3}>
+                            <Grid item xs direction="row">
+                                <Skeleton variant="rectangular" height={400}/>
+                                <Box sx={{display: 'flex', justifyContent: 'center', mt: 1}}>
+                                    <Chip label="Original Ultrasonic Image" sx={{width: '100%'}}/>
+                                </Box>
+                            </Grid>
+                            <Grid item xs direction="row">
+                                <Skeleton variant="rectangular" height={400}/>
+                                <Box sx={{display: 'flex', justifyContent: 'center', mt: 1}}>
+                                    <Chip label="AI Result" sx={{width: '100%'}}/>
                                 </Box>
                             </Grid>
                         </Grid>
-                        <Grid item>
-                            <Skeleton variant="rectangular" height={500}/>
-                        </Grid>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                         <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
-                            <FormControl>
-                                <FormLabel id="bi-rads-label">BI-RADS</FormLabel>
-                                <RadioGroup
-                                    aria-labelledby="bi-rads-label"
-                                    defaultValue="1"
-                                    name="bi-rads-group"
-                                >
-                                    <FormControlLabel value="1" control={<Radio/>} label="1"/>
-                                    <FormControlLabel value="2" control={<Radio/>} label="2"/>
-                                    <FormControlLabel value="3" control={<Radio/>} label="3"/>
-                                    <FormControlLabel value="4a" control={<Radio/>} label="4a"/>
-                                    <FormControlLabel value="4b" control={<Radio/>} label="4b"/>
-                                    <FormControlLabel value="4c" control={<Radio/>} label="4c"/>
-                                    <FormControlLabel value="5" control={<Radio/>} label="5"/>
-                                    <FormControlLabel value="6" control={<Radio/>} label="6"/>
-                                </RadioGroup>
-                            </FormControl>
-                            <Box sx={{mt: 4}}>
-                                <Typography id="pom-slider" gutterBottom color="text.secondary">
-                                    POM
-                                </Typography>
-                                <Slider
-                                    aria-labelledby="pom-slider"
-                                    defaultValue={30}
-                                    step={1}
-                                    valueLabelDisplay="auto"
-                                    marks={marks}
-                                />
-                            </Box>
+                            <Stack direction="row" spacing={3}>
+                                <FormControl>
+                                    <FormLabel id="bi-rads-label">BI-RADS</FormLabel>
+                                    <RadioGroup
+                                        aria-labelledby="bi-rads-label"
+                                        defaultValue="1"
+                                        name="bi-rads-group"
+                                    >
+                                        <FormControlLabel value="1" control={<Radio/>} label="1"/>
+                                        <FormControlLabel value="2" control={<Radio/>} label="2"/>
+                                        <FormControlLabel value="3" control={<Radio/>} label="3"/>
+                                        <FormControlLabel value="4a" control={<Radio/>} label="4a"/>
+                                        <FormControlLabel value="4b" control={<Radio/>} label="4b"/>
+                                        <FormControlLabel value="4c" control={<Radio/>} label="4c"/>
+                                        <FormControlLabel value="5" control={<Radio/>} label="5"/>
+                                    </RadioGroup>
+                                </FormControl>
+                                <Box sx={{height: 270}}>
+                                    <Typography id="pom-slider" gutterBottom color="text.secondary">
+                                        POM
+                                    </Typography>
+                                    <Slider
+                                        aria-labelledby="pom-slider"
+                                        defaultValue={30}
+                                        step={1}
+                                        valueLabelDisplay="auto"
+                                        marks={marks}
+                                        orientation="vertical"
+                                        sx={{mt: 1}}
+                                    />
+                                </Box>
+                            </Stack>
                             <Box sx={{display: 'flex', justifyContent: 'center', mt: 4}}>
                                 <Button variant="contained" sx={{px: 6}}>Verify</Button>
                             </Box>

@@ -16,7 +16,7 @@ const StartReviewPage = () => {
 
     useEffect(() => {
         dispatch(DrawerAction.dontDisplayMenuButton());
-        dispatch(ProjectAction.displaySelectProject());
+        dispatch(ProjectAction.doNotDisplaySelectProject());
     });
 
     const handleClickStartReview = () => {
