@@ -19,7 +19,7 @@ public class ReviewData {
     @ApiModelProperty("아이디(데이터 번호)")
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reviewDataSeq")
-    @SequenceGenerator(initialValue = 0,sequenceName = "reviewDataSeq", allocationSize = 1, name = "reviewDataSeq")
+    @SequenceGenerator(initialValue = 1,sequenceName = "reviewDataSeq", allocationSize = 1, name = "reviewDataSeq")
     private int dataId;
     @ApiModelProperty("원본 이미지 파일명")
     private String originalImageName;
