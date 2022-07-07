@@ -85,4 +85,19 @@ public class ReviewDataController {
         }
         return ResponseEntity.ok(newReviewDataId);
     }
+    @DeleteMapping(value = "")
+    @ApiOperation(value = "모든 Review Data 삭제")
+    @ApiResponses(value = {
+            @ApiResponse(code=200
+                    ,message = "이 API 를 호출하면 모든 Review 데이터가 삭제됩니다."
+                    ,response = String.class),
+            @ApiResponse(code=500
+                    ,message = "API 호출처리를 서버에서 실패한 경우 입니다. 다양한 오류가 존재 할 수 있으며" +
+                    "발생한 오류 내용을 반환합니다."
+                    ,response = String.class)
+    })
+    public ResponseEntity<?> deleteAllReviewData(){
+        reviewDataService.deleteAll();
+        return ResponseEntity.ok("모든 Review 데이터가 초기화되었습니다.");
+    }
 }

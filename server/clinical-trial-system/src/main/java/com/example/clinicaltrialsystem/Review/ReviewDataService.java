@@ -39,4 +39,7 @@ public class ReviewDataService {
     }
 
 
+    public void deleteAll() {
+        reviewDataRepository.truncate();
+    }
 }
