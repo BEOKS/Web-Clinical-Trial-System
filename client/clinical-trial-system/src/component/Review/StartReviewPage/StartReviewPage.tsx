@@ -1,14 +1,14 @@
 import * as React from "react";
-import DrawerHeader from "../Drawer/DrawerHeader";
+import DrawerHeader from "../../Drawer/DrawerHeader";
 import {Alert, AlertTitle, Box, Button, Container, Typography} from "@mui/material";
-import {Main} from "../Main/Main";
+import {Main} from "../../Main/Main";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store";
+import {RootState} from "../../../store";
 import {useEffect} from "react";
-import {DrawerAction} from "../Drawer/DrawerReducer";
-import {ProjectAction} from "../AppBar/Project/ProjectReducer";
+import {DrawerAction} from "../../Drawer/DrawerReducer";
+import {ProjectAction} from "../../AppBar/Project/ProjectReducer";
 import StartReviewDialog from "./StartReviewDialog";
-import {ReviewerAction} from "./ReviewerReducer";
+import {ReviewerAction} from "../ReviewerReducer";
 
 const StartReviewPage = () => {
     const dispatch = useDispatch();

@@ -11,8 +11,8 @@ import Login from "./component/Login/Login";
 import {UserState, checkLoginState} from "./Utils/Auth/Auth";
 import {useState} from "react";
 import LoadingPage from "./component/Login/Loading";
-import StartReviewPage from "./component/Review/StartReviewPage";
-import UltrasonicReviewPage from "./component/Review/UltrasonicReviewPage";
+import StartReviewPage from "./component/Review/StartReviewPage/StartReviewPage";
+import ReviewPage from "./component/Review/ReviewPage/ReviewPage";
 
 const INIT_LOGIN_STATUS = 9999;
 
@@ -44,7 +44,7 @@ function App() {
                             <Route path="/login" element={<Login/>}></Route>
                             <Route path="/pi" element={<PIPage/>}></Route>
                             <Route path="/start-review" element={<StartReviewPage/>}></Route>
-                            <Route path="/ultrasonic-review" element={<UltrasonicReviewPage/>}></Route>
+                            <Route path="/review" element={<ReviewPage/>}></Route>
                             <Route path="/select-role" element={<RoleSelection/>}></Route>
                             {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는 경우 처리 */}
                             <Route path="" element={<Login/>}></Route>

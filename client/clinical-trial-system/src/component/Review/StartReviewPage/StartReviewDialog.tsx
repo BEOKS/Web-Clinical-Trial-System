@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store";
-import {ReviewerAction} from "./ReviewerReducer";
+import {RootState} from "../../../store";
+import {ReviewerAction} from "../ReviewerReducer";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
@@ -12,7 +12,7 @@ const StartReviewDialog = () => {
     const startReviewDialogOpen = useSelector((state: RootState) => state.ReviewerReducer.startReviewDialogOpen);
 
     const handleClickOKButton = () =>{
-        navigate('/ultrasonic-review');
+        navigate('/review');
 
         const url = '/api/reviewer';
         axios.post(url)
