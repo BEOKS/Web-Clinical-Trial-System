@@ -5,8 +5,8 @@ import './index.css'
 import {Provider} from "react-redux";
 import {createStore} from "redux";
 import rootReducer from "./store";
-import {composeWithDevTools} from 'redux-devtools-extension';
-import axios from "axios"; // 리덕스 개발자 도구
+import {composeWithDevTools} from 'redux-devtools-extension'; // 리덕스 개발자 도구
+import axios from "axios";
 
 const store = createStore(rootReducer, composeWithDevTools())
 

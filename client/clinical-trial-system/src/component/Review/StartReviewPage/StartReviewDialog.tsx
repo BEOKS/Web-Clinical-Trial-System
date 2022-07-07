@@ -1,27 +1,24 @@
 import * as React from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store";
-import {ReviewerAction} from "./ReviewerReducer";
+import {RootState} from "../../../store";
+import {ReviewerAction} from "../ReviewerReducer";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
+import {assignReviewerNumber, getImageNumberList} from "../../../api/review";
 
 const StartReviewDialog = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const startReviewDialogOpen = useSelector((state: RootState) => state.ReviewerReducer.startReviewDialogOpen);
+    const imageNumberList = useSelector((state: RootState) => state.ReviewerReducer.imageNumberList);
 
     const handleClickOKButton = () => {
-        const url = 'api/reviewer';
-        axios.post(url)
-            .then(response => {
-                console.log(response);
-                dispatch(ReviewerAction.setReviewerCount(response.data.reviewerId));
-            }).catch(error => {
-            console.log(error);
-        });
-
         navigate('/review');
+        assignReviewerNumber(reviewerCount => dispatch(ReviewerAction.setReviewerCount(reviewerCount)));
+        getImageNumberList(imageNumberList => dispatch(ReviewerAction.setImageNumberList(imageNumberList)));
+        if (imageNumberList.length > 0) {
+            dispatch(ReviewerAction.setCurrentImageNumber(imageNumberList[0]));
+        }
         handleClose();
     };
 
