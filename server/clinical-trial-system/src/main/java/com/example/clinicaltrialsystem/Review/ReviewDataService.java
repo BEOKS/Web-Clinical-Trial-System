@@ -21,10 +21,7 @@ import java.util.function.Function;
 public class ReviewDataService {
     private final ReviewDataRepository reviewDataRepository;
     private final StorageService storageService;
-    public ReviewData getReviewData(int reviewDataNumber) throws InvalidDataNumberException, InternalServerException, CannotFindByReviewId {
-        if(reviewDataNumber<0 || reviewDataRepository.count()<=reviewDataNumber){
-            throw new InvalidDataNumberException();
-        }
+    public ReviewData getReviewData(int reviewDataNumber) throws CannotFindByReviewId {
         Optional<ReviewData> reviewData=reviewDataRepository.findById(reviewDataNumber);
         if (reviewData.isEmpty()){
             throw new CannotFindByReviewId();
@@ -53,22 +50,23 @@ public class ReviewDataService {
         reviewDataRepository.truncate();
     }
 
-    public byte[] getOriginalImageBytes(int reviewDataNumber)
-            throws InvalidDataNumberException, InternalServerException,
-            CannotFindByReviewId, IOException {
-        return getImageBytes(reviewDataNumber,(reviewData -> reviewData.getOriginalImageName()));
-    }
-
-    private byte[] getImageBytes(int reviewDataNumber, Function<ReviewData,String> function) throws InvalidDataNumberException, InternalServerException, CannotFindByReviewId, IOException {
+    private byte[] getImageBytes(int reviewDataNumber, Function<ReviewData,String> function)
+            throws  CannotFindByReviewId, IOException {
         ReviewData reviewData=getReviewData(reviewDataNumber);
         String image=function.apply(reviewData);
         File file=storageService.getFile(image);
         return StreamUtils.copyToByteArray(new FileInputStream(file));
     }
 
-    public byte[] getMLResultImage(int reviewDataNumber) throws
-            InvalidDataNumberException, InternalServerException,
-            CannotFindByReviewId, IOException {
+    public byte[] getOriginalImageBytes(int reviewDataNumber) throws CannotFindByReviewId, IOException {
+        return getImageBytes(reviewDataNumber,(reviewData -> reviewData.getOriginalImageName()));
+    }
+
+    public byte[] getMLResultImage(int reviewDataNumber) throws CannotFindByReviewId, IOException {
         return getImageBytes(reviewDataNumber,(reviewData -> reviewData.getMlResultImageName()));
+    }
+
+    public int[] getIdLists() {
+        return reviewDataRepository.selectAllDataId();
     }
 }

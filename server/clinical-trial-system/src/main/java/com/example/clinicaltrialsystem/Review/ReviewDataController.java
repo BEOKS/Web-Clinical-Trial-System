@@ -1,6 +1,9 @@
 package com.example.clinicaltrialsystem.Review;
 
 import com.example.clinicaltrialsystem.Review.Dto.CreatReviewDataDto;
+import com.example.clinicaltrialsystem.Review.Exception.CannotFindByReviewId;
+import com.example.clinicaltrialsystem.Review.Exception.InternalServerException;
+import com.example.clinicaltrialsystem.Review.Exception.InvalidDataNumberException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -9,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 /**
  * 리뷰에 사용될 메타 데이터, 원본 이미지 그리고 머신러닝 결과 이미지를 처리하기 위한 컨트롤러입니다.
@@ -22,10 +27,26 @@ import org.springframework.web.bind.annotation.*;
 public class ReviewDataController {
     final ReviewDataService reviewDataService;
 
+
     public ReviewDataController(ReviewDataService reviewDataService) {
         this.reviewDataService = reviewDataService;
     }
-    @GetMapping(value = "/{reviewDataNumber}/originalImage",produces = MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value = "/idList")
+    @ApiOperation(value = "Review 데이터 아이디 리스트")
+    @ApiResponses(value = {
+            @ApiResponse(code=200
+                    ,message = "현재 저장된 Review 데이터 아이디 리스트를 가져올 수 있습니다."
+                    ,response = ReviewData.class),
+            @ApiResponse(code=500
+                    ,message = "API 호출처리를 서버에서 실패한 경우 입니다. 데이터베이스 오류 등 다양한 오류가 존재 할 수 있으며" +
+                    "발생한 오류 내용을 반환합니다."
+                    ,response = String.class)
+    })
+    public ResponseEntity<?> getDataIdList() {
+        int[] idList=reviewDataService.getIdLists();
+        return ResponseEntity.ok(idList);
+    }
+    @GetMapping(value = "/{reviewDataNumber}/originalImage")
     @ApiOperation(value = "Review 원본 데이터 요청")
     @ApiResponses(value = {
             @ApiResponse(code=200
@@ -52,7 +73,7 @@ public class ReviewDataController {
                 .body(inputStream);
     }
 
-    @GetMapping(value = "/{reviewDataNumber}/mlResultImage",produces = MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value = "/{reviewDataNumber}/mlResultImage")
     @ApiOperation(value = "Review AI 추론 결과 데이터 요청")
     @ApiResponses(value = {
             @ApiResponse(code=200
@@ -73,7 +94,7 @@ public class ReviewDataController {
         try {
             inputStream = reviewDataService.getMLResultImage(reviewDataNumber);
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG)
                 .body(inputStream);
