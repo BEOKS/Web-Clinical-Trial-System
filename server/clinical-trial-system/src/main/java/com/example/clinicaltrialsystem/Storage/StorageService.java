@@ -24,8 +24,8 @@ public class StorageService {
         multipartFile.transferTo(new File(path+multipartFile.getOriginalFilename()));
     }
 
-    public void getMultipartFileFrom(String name) throws IOException{
-        String path=System.getProperty("user.home")+STORAGE_DIR_NAME;
-
+    public File getFile(String fileName) {
+        String path=System.getProperty("user.home")+STORAGE_DIR_NAME+fileName;
+        return new File(path);
     }
 }
