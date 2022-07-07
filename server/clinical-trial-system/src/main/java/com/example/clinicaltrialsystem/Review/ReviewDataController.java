@@ -1,6 +1,9 @@
 package com.example.clinicaltrialsystem.Review;
 
 import com.example.clinicaltrialsystem.Review.Dto.CreatReviewDataDto;
+import com.example.clinicaltrialsystem.Review.Exception.CannotFindByReviewId;
+import com.example.clinicaltrialsystem.Review.Exception.InternalServerException;
+import com.example.clinicaltrialsystem.Review.Exception.InvalidDataNumberException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -9,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 /**
  * 리뷰에 사용될 메타 데이터, 원본 이미지 그리고 머신러닝 결과 이미지를 처리하기 위한 컨트롤러입니다.
@@ -41,7 +46,7 @@ public class ReviewDataController {
         int[] idList=reviewDataService.getIdLists();
         return ResponseEntity.ok(idList);
     }
-    @GetMapping(value = "/{reviewDataNumber}/originalImage",produces = MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value = "/{reviewDataNumber}/originalImage")
     @ApiOperation(value = "Review 원본 데이터 요청")
     @ApiResponses(value = {
             @ApiResponse(code=200
@@ -68,7 +73,7 @@ public class ReviewDataController {
                 .body(inputStream);
     }
 
-    @GetMapping(value = "/{reviewDataNumber}/mlResultImage",produces = MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value = "/{reviewDataNumber}/mlResultImage")
     @ApiOperation(value = "Review AI 추론 결과 데이터 요청")
     @ApiResponses(value = {
             @ApiResponse(code=200
@@ -89,7 +94,7 @@ public class ReviewDataController {
         try {
             inputStream = reviewDataService.getMLResultImage(reviewDataNumber);
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG)
                 .body(inputStream);
