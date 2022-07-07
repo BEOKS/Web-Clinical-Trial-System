@@ -11,13 +11,19 @@ import {REVIEW_STEP, ReviewerAction} from "../ReviewerReducer";
 import {RootState} from "../../../store";
 import {useNavigate} from "react-router-dom";
 
-const marks = [
+const marksPOM = [
     {value: 0, label: '0',},
     {value: 20, label: '20',},
     {value: 40, label: '40',},
     {value: 60, label: '60',},
     {value: 80, label: '80',},
     {value: 100, label: '100',},
+];
+
+const marksConfidence = [
+    {value: 0, label: '0',},
+    {value: 5, label: '5',},
+    {value: 10, label: '10',},
 ];
 
 const ReviewInputBox = () => {
@@ -72,12 +78,28 @@ const ReviewInputBox = () => {
                         defaultValue={30}
                         step={1}
                         valueLabelDisplay="auto"
-                        marks={marks}
+                        marks={marksPOM}
                         orientation="vertical"
                         sx={{mt: 1}}
                     />
                 </Box>
             </Stack>
+            {reviewStep === REVIEW_STEP.RESULT &&
+                <Box sx={{mt: 4}}>
+                    <Typography id="confidence-slider" gutterBottom color="text.secondary">
+                        Confidence Level
+                    </Typography>
+                    <Slider
+                        aria-labelledby="confidence-slider"
+                        defaultValue={9}
+                        step={1}
+                        valueLabelDisplay="auto"
+                        marks={marksConfidence}
+                        min={0} max={10}
+                        sx={{mt: 1}}
+                    />
+                </Box>
+            }
             <Box sx={{display: 'flex', justifyContent: 'center', mt: 4}}>
                 <Button variant="contained" sx={{px: 6}}
                         onClick={handleClickVerify}>Verify</Button>
