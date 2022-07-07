@@ -71,4 +71,8 @@ public class ReviewDataService {
             CannotFindByReviewId, IOException {
         return getImageBytes(reviewDataNumber,(reviewData -> reviewData.getMlResultImageName()));
     }
+
+    public int[] getIdLists() {
+        return reviewDataRepository.selectAllDataId();
+    }
 }

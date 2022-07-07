@@ -13,4 +13,7 @@ public interface ReviewDataRepository extends CrudRepository<ReviewData, Integer
     )
     @Transactional
     void truncate();
+
+    @Query(value = "select data_id from review_data",nativeQuery = true)
+    int[] selectAllDataId();
 }

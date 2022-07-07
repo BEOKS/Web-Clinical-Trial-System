@@ -22,8 +22,24 @@ import org.springframework.web.bind.annotation.*;
 public class ReviewDataController {
     final ReviewDataService reviewDataService;
 
+
     public ReviewDataController(ReviewDataService reviewDataService) {
         this.reviewDataService = reviewDataService;
+    }
+    @GetMapping(value = "/idList")
+    @ApiOperation(value = "Review 데이터 아이디 리스트")
+    @ApiResponses(value = {
+            @ApiResponse(code=200
+                    ,message = "현재 저장된 Review 데이터 아이디 리스트를 가져올 수 있습니다."
+                    ,response = ReviewData.class),
+            @ApiResponse(code=500
+                    ,message = "API 호출처리를 서버에서 실패한 경우 입니다. 데이터베이스 오류 등 다양한 오류가 존재 할 수 있으며" +
+                    "발생한 오류 내용을 반환합니다."
+                    ,response = String.class)
+    })
+    public ResponseEntity<?> getDataIdList() {
+        int[] idList=reviewDataService.getIdLists();
+        return ResponseEntity.ok(idList);
     }
     @GetMapping(value = "/{reviewDataNumber}/originalImage",produces = MediaType.IMAGE_PNG_VALUE)
     @ApiOperation(value = "Review 원본 데이터 요청")
