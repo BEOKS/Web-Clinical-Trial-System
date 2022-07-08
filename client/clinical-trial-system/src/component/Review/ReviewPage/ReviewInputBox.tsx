@@ -38,15 +38,19 @@ const ReviewInputBox = () => {
     };
 
     const handleClickVerify = () => {
-        if (reviewStep === REVIEW_STEP.REVIEW) {
-            dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.RESULT));
-        } else if (reviewStep === REVIEW_STEP.RESULT) {
-            if (checkLastImage()) {
-                navigate('/close-session');
-            } else {
-                dispatch(ReviewerAction.setCurrentImageNumber(currentImageNumber + 1));
-                dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.REVIEW));
-            }
+        if (reviewStep === REVIEW_STEP.ORIGINAL) {
+            dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.ML_RESULT));
+        } else if (reviewStep === REVIEW_STEP.ML_RESULT) {
+            dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.CONFIDENCE));
+        }
+    };
+
+    const hadleClickNext = () => {
+        if (checkLastImage()) {
+            navigate('/close-session');
+        } else {
+            dispatch(ReviewerAction.setCurrentImageNumber(currentImageNumber + 1));
+            dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.ORIGINAL));
         }
     };
 
@@ -54,32 +58,40 @@ const ReviewInputBox = () => {
         <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
             <Stack direction="row" spacing={3}>
                 <FormControl>
-                    <FormLabel id="bi-rads-label">BI-RADS</FormLabel>
+                    <FormLabel id="bi-rads-label"
+                               disabled={reviewStep === REVIEW_STEP.CONFIDENCE}>BI-RADS</FormLabel>
                     <RadioGroup
                         aria-labelledby="bi-rads-label"
                         defaultValue="1"
                         name="bi-rads-group"
                     >
-                        <Tooltip title="Negative" placement="left">
-                            <FormControlLabel value="1" control={<Radio/>} label="1"/>
+                        <Tooltip title="Negative" placement="left" arrow>
+                            <FormControlLabel value="1" control={<Radio/>} label="1"
+                                              disabled={reviewStep === REVIEW_STEP.CONFIDENCE}/>
                         </Tooltip>
-                        <Tooltip title="Benign" placement="left">
-                            <FormControlLabel value="2" control={<Radio/>} label="2"/>
+                        <Tooltip title="Benign" placement="left" arrow>
+                            <FormControlLabel value="2" control={<Radio/>} label="2"
+                                              disabled={reviewStep === REVIEW_STEP.CONFIDENCE}/>
                         </Tooltip>
-                        <Tooltip title="Probably Benign" placement="left">
-                            <FormControlLabel value="3" control={<Radio/>} label="3"/>
+                        <Tooltip title="Probably Benign" placement="left" arrow>
+                            <FormControlLabel value="3" control={<Radio/>} label="3"
+                                              disabled={reviewStep === REVIEW_STEP.CONFIDENCE}/>
                         </Tooltip>
-                        <Tooltip title="Low Suspicion for Malignancy" placement="left">
-                            <FormControlLabel value="4a" control={<Radio/>} label="4a"/>
+                        <Tooltip title="Low Suspicion for Malignancy" placement="left" arrow>
+                            <FormControlLabel value="4a" control={<Radio/>} label="4a"
+                                              disabled={reviewStep === REVIEW_STEP.CONFIDENCE}/>
                         </Tooltip>
-                        <Tooltip title="Moderate Suspicion for Malignancy" placement="left">
-                            <FormControlLabel value="4b" control={<Radio/>} label="4b"/>
+                        <Tooltip title="Moderate Suspicion for Malignancy" placement="left" arrow>
+                            <FormControlLabel value="4b" control={<Radio/>} label="4b"
+                                              disabled={reviewStep === REVIEW_STEP.CONFIDENCE}/>
                         </Tooltip>
-                        <Tooltip title="High Suspicion for Malignancy" placement="left">
-                            <FormControlLabel value="4c" control={<Radio/>} label="4c"/>
+                        <Tooltip title="High Suspicion for Malignancy" placement="left" arrow>
+                            <FormControlLabel value="4c" control={<Radio/>} label="4c"
+                                              disabled={reviewStep === REVIEW_STEP.CONFIDENCE}/>
                         </Tooltip>
-                        <Tooltip title="Highly Suggestive of Malignancy" placement="left">
-                            <FormControlLabel value="5" control={<Radio/>} label="5"/>
+                        <Tooltip title="Highly Suggestive of Malignancy" placement="left" arrow>
+                            <FormControlLabel value="5" control={<Radio/>} label="5"
+                                              disabled={reviewStep === REVIEW_STEP.CONFIDENCE}/>
                         </Tooltip>
                     </RadioGroup>
                 </FormControl>
@@ -89,6 +101,7 @@ const ReviewInputBox = () => {
                     </Typography>
                     <Slider
                         aria-labelledby="pom-slider"
+                        disabled={reviewStep === REVIEW_STEP.CONFIDENCE}
                         defaultValue={30}
                         step={1}
                         valueLabelDisplay="auto"
@@ -98,26 +111,32 @@ const ReviewInputBox = () => {
                     />
                 </Box>
             </Stack>
-            {reviewStep === REVIEW_STEP.RESULT &&
-                <Box sx={{mt: 4}}>
+            <Box sx={{display: 'flex', justifyContent: 'center', mt: 3}}>
+                <Button variant="contained" sx={{px: 6}}
+                        disabled={reviewStep === REVIEW_STEP.CONFIDENCE}
+                        onClick={handleClickVerify}>Verify</Button>
+            </Box>
+            {reviewStep !== REVIEW_STEP.ORIGINAL &&
+                <Box sx={{mt: 6}}>
                     <Typography id="confidence-slider" gutterBottom color="text.secondary">
                         Confidence Level
                     </Typography>
                     <Slider
                         aria-labelledby="confidence-slider"
+                        disabled={reviewStep !== REVIEW_STEP.CONFIDENCE}
                         defaultValue={9}
                         step={1}
                         valueLabelDisplay="auto"
                         marks={marksConfidence}
                         min={0} max={10}
-                        sx={{mt: 1}}
                     />
+                    <Box sx={{display: 'flex', justifyContent: 'center', mt: 2}}>
+                        <Button variant="contained" sx={{px: 6}}
+                                disabled={reviewStep !== REVIEW_STEP.CONFIDENCE}
+                                onClick={hadleClickNext}>Next</Button>
+                    </Box>
                 </Box>
             }
-            <Box sx={{display: 'flex', justifyContent: 'center', mt: 4}}>
-                <Button variant="contained" sx={{px: 6}}
-                        onClick={handleClickVerify}>Verify</Button>
-            </Box>
         </Box>
     )
 };

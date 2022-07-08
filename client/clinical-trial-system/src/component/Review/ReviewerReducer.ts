@@ -32,8 +32,9 @@ type ReviewerActionType =
 
 // state
 export const REVIEW_STEP = {
-    REVIEW: 1,
-    RESULT: 2,
+    ORIGINAL: 1,
+    ML_RESULT: 2,
+    CONFIDENCE: 3,
 }
 
 export type ReviewerState = {
@@ -49,7 +50,7 @@ const INIT_REVIEWER_STATE: ReviewerState = {
     startReviewDialogOpen: false,
     currentImageNumber: 1,
     imageNumberList: [],
-    reviewStep: REVIEW_STEP.REVIEW,
+    reviewStep: REVIEW_STEP.ORIGINAL,
 };
 
 

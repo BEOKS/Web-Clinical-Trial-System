@@ -33,7 +33,6 @@ const ReviewPage = () => {
                         </Grid>
                         <Grid item container spacing={3}>
                             <Grid item xs>
-                                {/*<Skeleton variant="rectangular" height={400}/>*/}
                                 <img src={`/api/review/data/${currentImageNumber}/originalImage`} alt="Original Data"
                                      width={'100%'}/>
                                 <Box sx={{display: 'flex', justifyContent: 'center', mt: 1}}>
@@ -41,7 +40,7 @@ const ReviewPage = () => {
                                 </Box>
                             </Grid>
                             <Grid item xs>
-                                {reviewStep === REVIEW_STEP.REVIEW ?
+                                {reviewStep === REVIEW_STEP.ORIGINAL ?
                                     <Skeleton variant="rectangular" height={430}/> :
                                     <img src={`/api/review/data/${currentImageNumber}/mlResultImage`}
                                          alt="ML Result Data"
