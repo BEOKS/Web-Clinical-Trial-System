@@ -4,8 +4,7 @@ import com.example.clinicaltrialsystem.Review.Dto.CreatReviewDataDto;
 import com.example.clinicaltrialsystem.Review.Exception.CannotFindByReviewId;
 import com.example.clinicaltrialsystem.Review.Exception.IllegalDtoRequestException;
 import com.example.clinicaltrialsystem.Review.Exception.InternalServerException;
-import com.example.clinicaltrialsystem.Review.Exception.InvalidDataNumberException;
-import com.example.clinicaltrialsystem.Storage.StorageService;
+import com.example.clinicaltrialsystem.Storage.ImageFileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
@@ -20,7 +19,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class ReviewDataService {
     private final ReviewDataRepository reviewDataRepository;
-    private final StorageService storageService;
+    private final ImageFileStorageService storageService;
     public ReviewData getReviewData(int reviewDataNumber) throws CannotFindByReviewId {
         Optional<ReviewData> reviewData=reviewDataRepository.findById(reviewDataNumber);
         if (reviewData.isEmpty()){
@@ -47,6 +46,7 @@ public class ReviewDataService {
 
 
     public void deleteAll() {
+        storageService.deleteAll();
         reviewDataRepository.truncate();
     }
 
