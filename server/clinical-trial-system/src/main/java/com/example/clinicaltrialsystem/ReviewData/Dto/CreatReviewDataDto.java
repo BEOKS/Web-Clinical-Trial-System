@@ -1,4 +1,4 @@
-package com.example.clinicaltrialsystem.Review.Dto;
+package com.example.clinicaltrialsystem.ReviewData.Dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

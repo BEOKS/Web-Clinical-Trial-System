@@ -1,9 +1,6 @@
-package com.example.clinicaltrialsystem.Review;
+package com.example.clinicaltrialsystem.ReviewData;
 
-import com.example.clinicaltrialsystem.Review.Dto.CreatReviewDataDto;
-import com.example.clinicaltrialsystem.Review.Exception.CannotFindByReviewId;
-import com.example.clinicaltrialsystem.Review.Exception.InternalServerException;
-import com.example.clinicaltrialsystem.Review.Exception.InvalidDataNumberException;
+import com.example.clinicaltrialsystem.ReviewData.Dto.CreatReviewDataDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -12,8 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 
 /**
  * 리뷰에 사용될 메타 데이터, 원본 이미지 그리고 머신러닝 결과 이미지를 처리하기 위한 컨트롤러입니다.

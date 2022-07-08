@@ -1,4 +1,4 @@
-package com.example.clinicaltrialsystem.Review.Exception;
+package com.example.clinicaltrialsystem.ReviewData.Exception;
 
 public class IllegalDtoRequestException extends Exception{
     public static final String MESSAGE="요청 시 원본 이미지, ML 결과 이미지 그리고 노트의 내용이 필요합니다. " +

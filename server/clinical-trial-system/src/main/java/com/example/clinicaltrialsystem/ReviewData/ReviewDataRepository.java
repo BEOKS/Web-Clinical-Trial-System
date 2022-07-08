@@ -1,4 +1,4 @@
-package com.example.clinicaltrialsystem.Review;
+package com.example.clinicaltrialsystem.ReviewData;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,9 +1,8 @@
-package com.example.clinicaltrialsystem.Review;
+package com.example.clinicaltrialsystem.ReviewData;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 

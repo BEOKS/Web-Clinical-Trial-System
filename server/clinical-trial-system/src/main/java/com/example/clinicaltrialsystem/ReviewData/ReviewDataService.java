@@ -1,9 +1,9 @@
-package com.example.clinicaltrialsystem.Review;
+package com.example.clinicaltrialsystem.ReviewData;
 
-import com.example.clinicaltrialsystem.Review.Dto.CreatReviewDataDto;
-import com.example.clinicaltrialsystem.Review.Exception.CannotFindByReviewId;
-import com.example.clinicaltrialsystem.Review.Exception.IllegalDtoRequestException;
-import com.example.clinicaltrialsystem.Review.Exception.InternalServerException;
+import com.example.clinicaltrialsystem.ReviewData.Dto.CreatReviewDataDto;
+import com.example.clinicaltrialsystem.ReviewData.Exception.CannotFindByReviewId;
+import com.example.clinicaltrialsystem.ReviewData.Exception.IllegalDtoRequestException;
+import com.example.clinicaltrialsystem.ReviewData.Exception.InternalServerException;
 import com.example.clinicaltrialsystem.Storage.ImageFileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

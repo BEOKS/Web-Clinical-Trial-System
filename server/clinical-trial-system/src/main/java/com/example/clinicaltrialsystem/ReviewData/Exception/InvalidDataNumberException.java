@@ -1,4 +1,4 @@
-package com.example.clinicaltrialsystem.Review.Exception;
+package com.example.clinicaltrialsystem.ReviewData.Exception;
 
 public class InvalidDataNumberException extends Exception{
     public static final String MESSAGE="데이터 범위에 적합하지 않은 번호를 호출하였습니다," +
