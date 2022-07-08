@@ -2,11 +2,20 @@ import * as React from "react";
 import DrawerHeader from "../Drawer/DrawerHeader";
 import {Main} from "./Main";
 import {Typography} from "@mui/material";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
+import {useEffect} from "react";
+import {DrawerAction} from "../Drawer/DrawerReducer";
+import {ProjectAction} from "../AppBar/Project/ProjectReducer";
 
 const PIPage = () => {
+    const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
+
+    useEffect(() => {
+        dispatch(DrawerAction.displayMenuButton());
+        dispatch(ProjectAction.displaySelectProject());
+    });
 
     return (
         <Main open={drawerOpen}>

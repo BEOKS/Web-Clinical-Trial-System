@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--    <form method="POST" enctype="application/x-www-form-urlencoded" id="fileUploadForm"-->
+<!--          action="/api/review/data">-->
+<!--        <input type="text" name="note"/><br/><br/>-->
+<!--        <input type="file" name="originalImage"/><br/><br/>-->
+<!--        <input type="file" name="mlResultImage"/><br/><br/>-->
+<!--        <input type="submit" value="Submit" id="btnSubmit"/>-->
+<!--    </form>-->
+    <form action="/api/review/data" th:action="@{/api/review/data}" th:object="${employee}" method="post" enctype="multipart/form-data">
+         <input type="text" th:field="*{note}" field="note" name="note"/>
+        <input type="file" th:field="*{originalImage}"/>
+            <input type="file" th:field="*{mlResultImage}"/>
+            <input type="submit" value="upload" />
+            <input type="reset" value="Reset" />
+    </form>
+</body>
+</html>

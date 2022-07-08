@@ -3,7 +3,7 @@ services:
   client-with-proxy:
     image: cts/client-with-proxy:0.1
     build:
-      context: ./client
+      context: ../client
       dockerfile: ./Dockerfile
     container_name: proxy
     ports:
@@ -18,7 +18,7 @@ services:
   middleware:
     image: cts/middleware:0.1
     build: 
-      context: ./server
+      context: ../server
       args:
         - local
       dockerfile: ./Dockerfile

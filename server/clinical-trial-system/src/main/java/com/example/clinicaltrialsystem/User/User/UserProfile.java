@@ -1,5 +1,6 @@
 package com.example.clinicaltrialsystem.User.User;
 
+
 import javax.persistence.*;
 
 @Entity
