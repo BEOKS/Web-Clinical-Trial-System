@@ -1,4 +1,4 @@
-import {Box, Button, Stack, Typography} from "@mui/material";
+import {Box, Button, Stack, Tooltip, Typography} from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -60,13 +60,27 @@ const ReviewInputBox = () => {
                         defaultValue="1"
                         name="bi-rads-group"
                     >
-                        <FormControlLabel value="1" control={<Radio/>} label="1"/>
-                        <FormControlLabel value="2" control={<Radio/>} label="2"/>
-                        <FormControlLabel value="3" control={<Radio/>} label="3"/>
-                        <FormControlLabel value="4a" control={<Radio/>} label="4a"/>
-                        <FormControlLabel value="4b" control={<Radio/>} label="4b"/>
-                        <FormControlLabel value="4c" control={<Radio/>} label="4c"/>
-                        <FormControlLabel value="5" control={<Radio/>} label="5"/>
+                        <Tooltip title="Negative" placement="left">
+                            <FormControlLabel value="1" control={<Radio/>} label="1"/>
+                        </Tooltip>
+                        <Tooltip title="Benign" placement="left">
+                            <FormControlLabel value="2" control={<Radio/>} label="2"/>
+                        </Tooltip>
+                        <Tooltip title="Probably Benign" placement="left">
+                            <FormControlLabel value="3" control={<Radio/>} label="3"/>
+                        </Tooltip>
+                        <Tooltip title="Low Suspicion for Malignancy" placement="left">
+                            <FormControlLabel value="4a" control={<Radio/>} label="4a"/>
+                        </Tooltip>
+                        <Tooltip title="Moderate Suspicion for Malignancy" placement="left">
+                            <FormControlLabel value="4b" control={<Radio/>} label="4b"/>
+                        </Tooltip>
+                        <Tooltip title="High Suspicion for Malignancy" placement="left">
+                            <FormControlLabel value="4c" control={<Radio/>} label="4c"/>
+                        </Tooltip>
+                        <Tooltip title="Highly Suggestive of Malignancy" placement="left">
+                            <FormControlLabel value="5" control={<Radio/>} label="5"/>
+                        </Tooltip>
                     </RadioGroup>
                 </FormControl>
                 <Box sx={{height: 270}}>

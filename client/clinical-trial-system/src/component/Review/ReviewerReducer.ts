@@ -47,7 +47,7 @@ export type ReviewerState = {
 const INIT_REVIEWER_STATE: ReviewerState = {
     reviewerCount: 0,
     startReviewDialogOpen: false,
-    currentImageNumber: 0,
+    currentImageNumber: 1,
     imageNumberList: [],
     reviewStep: REVIEW_STEP.REVIEW,
 };
