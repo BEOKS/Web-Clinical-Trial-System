@@ -32,7 +32,12 @@ public class ImageFileStorageService {
     public File[] getAllFiles(){
         String dirPath=System.getProperty("user.home")+STORAGE_DIR_NAME;
         File dir=new File(dirPath);
-        return dir.listFiles();
+        if(dir.exists()){
+            return dir.listFiles();
+        }
+        else{
+            return null;
+        }
     }
 
     public boolean deleteFile(String filename){
@@ -42,7 +47,11 @@ public class ImageFileStorageService {
 
     public boolean deleteAll(){
         String path=System.getProperty("user.home")+STORAGE_DIR_NAME;
-        for(File file : getAllFiles()){
+        File[] subFileList=getAllFiles();
+        if(subFileList==null){
+            return true;
+        }
+        for(File file : subFileList){
             file.delete();
         }
         return new File(path).delete();
