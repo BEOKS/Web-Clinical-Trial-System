@@ -4,8 +4,8 @@ import javax.persistence.Embeddable
 import javax.persistence.EmbeddedId
 import javax.persistence.Entity
 @Embeddable
-class OriginalReviewResultId(var dataId: Int?,var reviewerId: Int?): java.io.Serializable {
-    constructor() : this(null,null)
+data class OriginalReviewResultId(var dataId: Int,var reviewerId: Int): java.io.Serializable {
+    constructor() : this(-1,-1)
 }
 
 @Entity
