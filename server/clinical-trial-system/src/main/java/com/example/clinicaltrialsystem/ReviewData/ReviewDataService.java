@@ -28,21 +28,17 @@ public class ReviewDataService {
         return reviewData.get();
     }
 
-    public int saveNewReviewData(CreatReviewDataDto reviewData)
+    public int saveNewReviewData(CreatReviewDataDto reviewDataDto)
             throws InternalServerException, IOException, IllegalDtoRequestException {
-        if(reviewData.getNote()==null
-            || reviewData.getMlResultImage()==null
-            || reviewData.getOriginalImage()==null){
-            throw new IllegalDtoRequestException(reviewData);
+        if(reviewDataDto.hasEmptyValue()){
+            throw new IllegalDtoRequestException(reviewDataDto);
         }
-        ReviewData reviewData1=reviewDataRepository.save(ReviewData.builder()
-                .originalImageName(reviewData.getMlResultImage().getOriginalFilename())
-                .mlResultImageName(reviewData.getOriginalImage().getOriginalFilename())
-                .note(reviewData.getNote()).build());
-        storageService.saveFile(reviewData.getMlResultImage());
-        storageService.saveFile(reviewData.getOriginalImage());
+        ReviewData reviewData1=reviewDataRepository.save(reviewDataDto.toReviewData());
+        storageService.saveFile(reviewDataDto.getMlResultImage());
+        storageService.saveFile(reviewDataDto.getOriginalImage());
         return reviewData1.getDataId();
     }
+
 
 
     public void deleteAll() {

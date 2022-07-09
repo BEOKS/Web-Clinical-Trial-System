@@ -1,5 +1,6 @@
 package com.example.clinicaltrialsystem.ReviewData.Dto;
 
+import com.example.clinicaltrialsystem.ReviewData.ReviewData;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -25,5 +26,18 @@ public class CreatReviewDataDto {
                 ",  \nmlResultImage=" + mlResultImage +
                 ",  \nnote=" + note + '\n' +
                 '}';
+    }
+
+    public boolean hasEmptyValue(){
+        return this.note == null
+                || this.mlResultImage == null
+                || this.originalImage == null;
+    }
+
+    public ReviewData toReviewData(){
+        return ReviewData.builder()
+                .originalImageName(this.mlResultImage.getOriginalFilename())
+                .mlResultImageName(this.originalImage.getOriginalFilename())
+                .note(this.note).build();
     }
 }
