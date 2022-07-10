@@ -6,7 +6,6 @@ const assignReviewerNumber = (onSuccess: (reviewerCount: number) => void) => {
 
     axios.post(url)
         .then(response => {
-            console.log(response);
             onSuccess(response.data.reviewerId);
         }).catch(error => {
         console.log(error);
@@ -19,11 +18,29 @@ const getImageNumberList = (onSuccess: (imageNumberList: number[]) => void) => {
 
     axios.get(url)
         .then(response => {
-            console.log(response);
             onSuccess(response.data);
         }).catch(error => {
         console.log(error);
     });
 };
 
-export {assignReviewerNumber, getImageNumberList};
+// 원본 이미지 리뷰 결과 저장
+const saveOriginalReviewResult = (biRads: string, dataId: number, pom: number, reviewerId: number, verifyTime: number,
+                                  onSuccess: () => void) => {
+    const url = '/api/review/result/original';
+    const data = {
+        bi_rads: biRads,
+        dataId: dataId,
+        pom: pom,
+        reviewerId: reviewerId,
+        verifyTime: verifyTime,
+    };
+
+    axios.post(url, data)
+        .then(response => {
+            onSuccess();
+        })
+        .catch(error => console.log(error));
+};
+
+export {assignReviewerNumber, getImageNumberList, saveOriginalReviewResult};

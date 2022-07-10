@@ -19,6 +19,7 @@ const StartReviewDialog = () => {
         if (imageNumberList.length > 0) {
             dispatch(ReviewerAction.setCurrentImageNumber(imageNumberList[0]));
         }
+        dispatch(ReviewerAction.setStartTime(performance.now()));
         handleClose();
     };
 
