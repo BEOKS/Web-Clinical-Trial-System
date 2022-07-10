@@ -1,7 +1,7 @@
 package com.beamworks.clinicaltrialsystem.ReviewResult.OriginalReviewResult
 
 import com.beamworks.clinicaltrialsystem.ReviewResult.OriginalReviewResult.Dto.CreateOriginalReviewResultDto
-import com.beamworks.clinicaltrialsystem.ReviewResult.OriginalReviewResult.Exception.CannotFindByID
+import com.beamworks.clinicaltrialsystem.ReviewResult.Exception.CannotFindByID
 import org.springframework.stereotype.Service
 
 @Service

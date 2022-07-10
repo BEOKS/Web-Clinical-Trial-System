@@ -26,7 +26,7 @@ class OriginalReviewResultController
 
 
     @GetMapping(value = ["/{reviewerId}/{dataId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    @ApiOperation(value = "저장된 원본 이미지 리뷰 결과를 가져옵니다.")
+    @ApiOperation(value = "저장된 원본 리뷰 결과를 가져옵니다.")
     @ApiResponses(
         value = [ApiResponse(
             code = 200,
