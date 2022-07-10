@@ -23,6 +23,8 @@ services:
         - local
       dockerfile: ./Dockerfile
     container_name: middleware
+    volumes:
+      - ./Storage:/root/Storage
     ports:
       - 8080:8080
     depends_on:
