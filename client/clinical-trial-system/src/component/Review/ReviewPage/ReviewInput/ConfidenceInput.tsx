@@ -1,7 +1,7 @@
 import {Box, Typography, Slider} from "@mui/material";
-import {REVIEW_STEP} from "../../ReviewerReducer";
+import {REVIEW_STEP, ReviewerAction} from "../../ReviewerReducer";
 import * as React from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../store";
 
 const marksConfidence = [
@@ -11,7 +11,12 @@ const marksConfidence = [
 ];
 
 const ConfidenceInput = () => {
+    const dispatch = useDispatch();
     const reviewStep = useSelector((state: RootState) => state.ReviewerReducer.reviewStep);
+
+    const handleChange = (event: Event, newValue: number | number[]) => {
+        dispatch(ReviewerAction.setConfidenceLevel(newValue as number));
+    };
 
     return (
         <Box>
@@ -26,6 +31,7 @@ const ConfidenceInput = () => {
                 valueLabelDisplay="auto"
                 marks={marksConfidence}
                 min={0} max={10}
+                onChange={handleChange}
             />
         </Box>
     )

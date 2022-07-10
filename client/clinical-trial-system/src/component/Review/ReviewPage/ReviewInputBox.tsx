@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import BiRadsInput from "./ReviewInput/BiRadsInput";
 import PomInput from "./ReviewInput/PomInput";
 import ConfidenceInput from "./ReviewInput/ConfidenceInput";
-import {saveOriginalReviewResult} from "../../../api/review";
+import {saveMLReviewResult, saveOriginalReviewResult} from "../../../api/review";
 
 const ReviewInputBox = () => {
     const dispatch = useDispatch();
@@ -19,6 +19,8 @@ const ReviewInputBox = () => {
     const biRads = useSelector((state: RootState) => state.ReviewerReducer.biRads);
     const pom = useSelector((state: RootState) => state.ReviewerReducer.pom);
     const reviewerId = useSelector((state: RootState) => state.ReviewerReducer.reviewerCount);
+    const confidenceLevel = useSelector((state: RootState) => state.ReviewerReducer.confidenceLevel);
+    const mlVerifyTime = useSelector((state: RootState) => state.ReviewerReducer.mlVerifyTime);
 
     const checkLastImage = (): boolean => {
         return imageNumberList.length > 0 && currentImageNumber === imageNumberList[imageNumberList.length - 1];
@@ -29,16 +31,19 @@ const ReviewInputBox = () => {
         const verifyTime = endTime - startTime;
 
         if (reviewStep === REVIEW_STEP.ORIGINAL) {
+            saveOriginalReviewResult(biRads, currentImageNumber, pom, reviewerId, verifyTime,
+                () => dispatch(ReviewerAction.setStartTime(performance.now())));
             dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.ML_RESULT));
         } else if (reviewStep === REVIEW_STEP.ML_RESULT) {
+            dispatch(ReviewerAction.setMLVerifyTime(verifyTime));
             dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.CONFIDENCE));
         }
-
-        saveOriginalReviewResult(biRads, currentImageNumber, pom, reviewerId, verifyTime,
-            () => dispatch(ReviewerAction.setStartTime(performance.now())));
     };
 
     const hadleClickNext = () => {
+        saveMLReviewResult(biRads, confidenceLevel, currentImageNumber, pom, reviewerId, mlVerifyTime,
+            () => dispatch(ReviewerAction.setStartTime(performance.now())));
+
         if (checkLastImage()) {
             navigate('/close-session');
         } else {

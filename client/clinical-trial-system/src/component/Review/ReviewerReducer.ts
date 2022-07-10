@@ -10,6 +10,8 @@ const TYPE = {
     SET_BI_RADS: `${HEADER}/SET_BI_RADS` as const,
     SET_POM: `${HEADER}/SET_POM` as const,
     SET_START_TIME: `${HEADER}/SET_START_TIME` as const,
+    SET_CONFIDENCE_LEVEL: `${HEADER}/SET_CONFIDENCE_LEVEL` as const,
+    SET_ML_VERIFY_TIME: `${HEADER}/SET_ML_VERIFY_TIME` as const,
 };
 
 export const ReviewerAction = {
@@ -25,6 +27,8 @@ export const ReviewerAction = {
     setBiRads: (biRads: string) => ({type: TYPE.SET_BI_RADS, payload: biRads}),
     setPom: (pom: number) => ({type: TYPE.SET_POM, payload: pom}),
     setStartTime: (startTime: number) => ({type: TYPE.SET_START_TIME, payload: startTime}),
+    setConfidenceLevel: (confidenceLevel: number) => ({type: TYPE.SET_CONFIDENCE_LEVEL, payload: confidenceLevel}),
+    setMLVerifyTime: (mlVerifyTime: number) => ({type: TYPE.SET_ML_VERIFY_TIME, payload: mlVerifyTime}),
 };
 
 type ReviewerActionType =
@@ -36,7 +40,9 @@ type ReviewerActionType =
     ReturnType<typeof ReviewerAction.setReviewStep> |
     ReturnType<typeof ReviewerAction.setBiRads> |
     ReturnType<typeof ReviewerAction.setPom> |
-    ReturnType<typeof ReviewerAction.setStartTime>;
+    ReturnType<typeof ReviewerAction.setStartTime> |
+    ReturnType<typeof ReviewerAction.setConfidenceLevel> |
+    ReturnType<typeof ReviewerAction.setMLVerifyTime>;
 
 
 // state
@@ -55,6 +61,8 @@ export type ReviewerState = {
     biRads: string,
     pom: number,
     startTime: number,
+    confidenceLevel: number,
+    mlVerifyTime: number,
 }
 
 const INIT_REVIEWER_STATE: ReviewerState = {
@@ -66,6 +74,8 @@ const INIT_REVIEWER_STATE: ReviewerState = {
     biRads: '',
     pom: 0,
     startTime: 0,
+    confidenceLevel: 0,
+    mlVerifyTime: 0,
 };
 
 
@@ -90,6 +100,10 @@ export default function ReviewerReducer(state: ReviewerState = INIT_REVIEWER_STA
             return {...state, pom: action.payload};
         case TYPE.SET_START_TIME:
             return {...state, startTime: action.payload};
+        case TYPE.SET_CONFIDENCE_LEVEL:
+            return {...state, confidenceLevel: action.payload};
+        case TYPE.SET_ML_VERIFY_TIME:
+            return {...state, mlVerifyTime: action.payload};
         default:
             return state;
     }

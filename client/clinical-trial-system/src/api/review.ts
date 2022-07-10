@@ -38,9 +38,29 @@ const saveOriginalReviewResult = (biRads: string, dataId: number, pom: number, r
 
     axios.post(url, data)
         .then(response => {
+            console.log(response);
             onSuccess();
-        })
-        .catch(error => console.log(error));
+        }).catch(error => console.log(error));
 };
 
-export {assignReviewerNumber, getImageNumberList, saveOriginalReviewResult};
+// ML 이미지 리뷰 결과 저장
+const saveMLReviewResult = (biRads: string, confidenceLevel: number, dataId: number, pom: number,
+                            reviewerId: number, verifyTime: number, onSuccess: () => void) => {
+    const url = '/api/review/result/ml';
+    const data = {
+        bi_rads: biRads,
+        confidenceLevel: confidenceLevel,
+        dataId: dataId,
+        pom: pom,
+        reviewerId: reviewerId,
+        verifyTime: verifyTime,
+    };
+
+    axios.post(url, data)
+        .then(response => {
+            console.log(response);
+            onSuccess();
+        }).catch(error => console.log(error));
+}
+
+export {assignReviewerNumber, getImageNumberList, saveOriginalReviewResult, saveMLReviewResult};
