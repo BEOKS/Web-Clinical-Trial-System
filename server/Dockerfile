@@ -11,5 +11,5 @@ COPY ${DEPENDENCY}/BOOT-INF/classes /app
 ARG PROFILE
 ENV PROFILE $PROFILE
 RUN echo -Dspring.profiles.active=$PROFILE
-ENTRYPOINT java -cp app:app/lib/* com.example.clinicaltrialsystem.ClinicalTrialSystemApplication --spring.profiles.active=$PROFILE
+ENTRYPOINT java -cp app:app/lib/* com.beamworks.clinicaltrialsystem.ClinicalTrialSystemApplication --spring.profiles.active=$PROFILE
 
