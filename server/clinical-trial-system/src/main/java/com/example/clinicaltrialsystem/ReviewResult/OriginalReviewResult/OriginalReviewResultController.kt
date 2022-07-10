@@ -1,7 +1,7 @@
 package com.example.clinicaltrialsystem.ReviewResult.OriginalReviewResult
 
-import com.example.clinicaltrialsystem.ReviewData.ReviewData
 import com.example.clinicaltrialsystem.ReviewResult.OriginalReviewResult.Dto.CreateOriginalReviewResultDto
+import com.example.clinicaltrialsystem.Utils.Controller.errorHandler
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
 
 @Controller
 @RequestMapping("/api/review/result/original")
@@ -25,15 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody
 class OriginalReviewResultController
     (private val originalReviewResultService: OriginalReviewResultService) {
 
-    private inline fun errorHandler(method : ()->ResponseEntity<Any>): ResponseEntity<Any>{
-        return try {
-            method()
-        }catch (e: InternalError){
-            ResponseEntity.internalServerError().body(e.message)
-        }catch (e: IllegalArgumentException){
-            ResponseEntity.badRequest().body(e.message)
-        }
-    }
 
     @GetMapping(value = ["/{reviewerId}/{dataId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ApiOperation(value = "저장된 원본 이미지 리뷰 결과를 가져옵니다.")
@@ -77,7 +67,7 @@ class OriginalReviewResultController
     fun createOriginalReviewResult(@RequestBody result: CreateOriginalReviewResultDto): ResponseEntity<Any>{
         return errorHandler {
             originalReviewResultService.saveResult(result)
-            return ResponseEntity.ok().build()
+            ResponseEntity.ok().build()
         }
     }
 }
