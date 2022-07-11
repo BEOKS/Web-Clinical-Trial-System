@@ -11,10 +11,12 @@ const StartReviewDialog = () => {
     const navigate = useNavigate();
     const startReviewDialogOpen = useSelector((state: RootState) => state.ReviewerReducer.startReviewDialogOpen);
     const imageNumberList = useSelector((state: RootState) => state.ReviewerReducer.imageNumberList);
+    const experienceYear = useSelector((state: RootState) => state.ReviewerReducer.experienceYear);
+    const speciality = useSelector((state: RootState) => state.ReviewerReducer.speciality);
 
     const handleClickOKButton = () => {
         navigate('/review');
-        assignReviewerNumber(reviewerCount => dispatch(ReviewerAction.setReviewerCount(reviewerCount)));
+        assignReviewerNumber(experienceYear, speciality, reviewerCount => dispatch(ReviewerAction.setReviewerCount(reviewerCount)));
         getImageNumberList(imageNumberList => dispatch(ReviewerAction.setImageNumberList(imageNumberList)));
         if (imageNumberList.length > 0) {
             dispatch(ReviewerAction.setCurrentImageNumber(imageNumberList[0]));

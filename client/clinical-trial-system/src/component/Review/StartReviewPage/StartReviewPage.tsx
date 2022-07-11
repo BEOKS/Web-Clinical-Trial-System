@@ -37,7 +37,7 @@ const StartReviewPage = () => {
                     </Typography>
                 </Box>
                 <Grid container sx={{mt: 3}} columnSpacing={3}>
-                    <Grid item xs>
+                    <Grid item xs sx={{display: 'flex'}}>
                         <Alert variant="outlined" severity="info">
                             <AlertTitle>1. Info Title</AlertTitle>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
@@ -51,7 +51,7 @@ const StartReviewPage = () => {
                             software like Aldus PageMaker including versions of Lorem Ipsum.
                         </Alert>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={4} sx={{display: 'flex'}}>
                         <ReviewerInfoInput/>
                     </Grid>
                 </Grid>
