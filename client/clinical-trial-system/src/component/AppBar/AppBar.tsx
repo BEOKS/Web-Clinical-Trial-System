@@ -3,7 +3,7 @@ import {styled} from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import {drawerWidth} from "../Drawer/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
-import {Box, IconButton, Toolbar} from "@mui/material";
+import {Box, IconButton, Toolbar, Typography} from "@mui/material";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
@@ -39,6 +39,7 @@ const AppBar = () => {
     const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
     const displayMenuButton = useSelector((state: RootState) => state.DrawerReducer.displayMenuButton);
+    const displaySelectProject = useSelector((state: RootState) => state.ProjectReducer.displaySelectProject);
 
     const handleDrawerOpen = () => {
         dispatch(DrawerAction.openDrawer());
@@ -59,6 +60,11 @@ const AppBar = () => {
                 <SelectProject/>
                 <AddProjectButton/>
                 <AddProjectDialog/>
+                {!displaySelectProject &&
+                    <Typography variant="h6" component="div">
+                        CadAI-B<sup>TM</sup>
+                    </Typography>
+                }
                 <Box flexGrow={2}/>
                 <Box>
                     <img src={beamworksLogoWhite} height={35} alt="beamworks logo"/>
