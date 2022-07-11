@@ -1,24 +1,13 @@
-import {Box, Button, Stack, Typography} from "@mui/material";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Radio from "@mui/material/Radio";
-import Slider from "@mui/material/Slider";
+import {Box, Button, Stack} from "@mui/material";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {REVIEW_STEP, ReviewerAction} from "../ReviewerReducer";
 import {RootState} from "../../../store";
 import {useNavigate} from "react-router-dom";
-
-const marks = [
-    {value: 0, label: '0',},
-    {value: 20, label: '20',},
-    {value: 40, label: '40',},
-    {value: 60, label: '60',},
-    {value: 80, label: '80',},
-    {value: 100, label: '100',},
-];
+import BiRadsInput from "./ReviewInput/BiRadsInput";
+import PomInput from "./ReviewInput/PomInput";
+import ConfidenceInput from "./ReviewInput/ConfidenceInput";
+import {saveMLReviewResult, saveOriginalReviewResult} from "../../../api/review";
 
 const ReviewInputBox = () => {
     const dispatch = useDispatch();
@@ -26,62 +15,64 @@ const ReviewInputBox = () => {
     const reviewStep = useSelector((state: RootState) => state.ReviewerReducer.reviewStep);
     const currentImageNumber = useSelector((state: RootState) => state.ReviewerReducer.currentImageNumber);
     const imageNumberList = useSelector((state: RootState) => state.ReviewerReducer.imageNumberList);
+    const startTime = useSelector((state: RootState) => state.ReviewerReducer.startTime);
+    const biRads = useSelector((state: RootState) => state.ReviewerReducer.biRads);
+    const pom = useSelector((state: RootState) => state.ReviewerReducer.pom);
+    const reviewerId = useSelector((state: RootState) => state.ReviewerReducer.reviewerCount);
+    const confidenceLevel = useSelector((state: RootState) => state.ReviewerReducer.confidenceLevel);
+    const mlVerifyTime = useSelector((state: RootState) => state.ReviewerReducer.mlVerifyTime);
 
     const checkLastImage = (): boolean => {
         return imageNumberList.length > 0 && currentImageNumber === imageNumberList[imageNumberList.length - 1];
     };
 
     const handleClickVerify = () => {
-        if (reviewStep === REVIEW_STEP.REVIEW) {
-            dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.RESULT));
-        } else if (reviewStep === REVIEW_STEP.RESULT) {
-            if (checkLastImage()) {
-                navigate('/close-session');
-            } else {
-                dispatch(ReviewerAction.setCurrentImageNumber(currentImageNumber + 1));
-                dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.REVIEW));
-            }
+        const endTime = performance.now();
+        const verifyTime = endTime - startTime;
+
+        if (reviewStep === REVIEW_STEP.ORIGINAL) {
+            saveOriginalReviewResult(biRads, currentImageNumber, pom, reviewerId, verifyTime,
+                () => dispatch(ReviewerAction.setStartTime(performance.now())));
+            dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.ML_RESULT));
+        } else if (reviewStep === REVIEW_STEP.ML_RESULT) {
+            dispatch(ReviewerAction.setMLVerifyTime(verifyTime));
+            dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.CONFIDENCE));
+        }
+    };
+
+    const hadleClickNext = () => {
+        saveMLReviewResult(biRads, confidenceLevel, currentImageNumber, pom, reviewerId, mlVerifyTime,
+            () => dispatch(ReviewerAction.setStartTime(performance.now())));
+
+        if (checkLastImage()) {
+            navigate('/close-session');
+        } else {
+            dispatch(ReviewerAction.setCurrentImageNumber(currentImageNumber + 1));
+            dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.ORIGINAL));
         }
     };
 
     return (
         <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
             <Stack direction="row" spacing={3}>
-                <FormControl>
-                    <FormLabel id="bi-rads-label">BI-RADS</FormLabel>
-                    <RadioGroup
-                        aria-labelledby="bi-rads-label"
-                        defaultValue="1"
-                        name="bi-rads-group"
-                    >
-                        <FormControlLabel value="1" control={<Radio/>} label="1"/>
-                        <FormControlLabel value="2" control={<Radio/>} label="2"/>
-                        <FormControlLabel value="3" control={<Radio/>} label="3"/>
-                        <FormControlLabel value="4a" control={<Radio/>} label="4a"/>
-                        <FormControlLabel value="4b" control={<Radio/>} label="4b"/>
-                        <FormControlLabel value="4c" control={<Radio/>} label="4c"/>
-                        <FormControlLabel value="5" control={<Radio/>} label="5"/>
-                    </RadioGroup>
-                </FormControl>
-                <Box sx={{height: 270}}>
-                    <Typography id="pom-slider" gutterBottom color="text.secondary">
-                        POM
-                    </Typography>
-                    <Slider
-                        aria-labelledby="pom-slider"
-                        defaultValue={30}
-                        step={1}
-                        valueLabelDisplay="auto"
-                        marks={marks}
-                        orientation="vertical"
-                        sx={{mt: 1}}
-                    />
-                </Box>
+                <BiRadsInput/>
+                <PomInput/>
             </Stack>
-            <Box sx={{display: 'flex', justifyContent: 'center', mt: 4}}>
+            <Box sx={{display: 'flex', justifyContent: 'center', mt: 3}}>
                 <Button variant="contained" sx={{px: 6}}
+                        disabled={reviewStep === REVIEW_STEP.CONFIDENCE}
                         onClick={handleClickVerify}>Verify</Button>
             </Box>
+            {reviewStep !== REVIEW_STEP.ORIGINAL &&
+                <Box sx={{mt: 6}}>
+                    <ConfidenceInput/>
+                    <Box sx={{display: 'flex', justifyContent: 'center', mt: 2}}>
+                        <Button variant="contained" sx={{px: 6}}
+                                disabled={reviewStep !== REVIEW_STEP.CONFIDENCE}
+                                onClick={hadleClickNext}>Next</Button>
+                    </Box>
+                </Box>
+            }
         </Box>
     )
 };
