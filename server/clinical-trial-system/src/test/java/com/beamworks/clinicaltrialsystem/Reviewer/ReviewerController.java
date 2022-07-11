@@ -5,11 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(controllers = com.beamworks.clinicaltrialsystem.User.Reviewer.ReviewerController.class)
@@ -21,9 +23,13 @@ public class ReviewerController {
 
     @Test
     public void createNewReviewer() throws Exception {
-        when(reviewerService.createNewReviewer()).thenReturn(123);
-        mockMvc.perform(post("/api/reviewer"))
+
+        when(reviewerService.createNewReviewer(any())).thenReturn(123);
+        mockMvc.perform(post("/api/reviewer").content("{\n" +
+                        "\t\"experienceYear\": \"ZERO_TO_FIVE\",\n" +
+                        "\t\"isSpeciality\": true\n" +
+                        "}").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.reviewerId").value(123));
+                .andExpect(content().string("123"));
     }
 }
