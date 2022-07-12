@@ -56,12 +56,12 @@ const ReviewerInfoInput = () => {
                 </Select>
             </FormControl>
             <FormControl fullWidth size="small" sx={{mt: 3}}>
-                <InputLabel id="trained-or-dedicated-select-label">Trained or Dedicated</InputLabel>
+                <InputLabel id="trained-or-dedicated-select-label">Trained for Breast Imaging</InputLabel>
                 <Select
                     labelId="trained-or-dedicated-select-label"
                     id="trained-or-dedicated-select"
                     value={trainedOrDedicated ? 'yes' : 'no'}
-                    label="Trained or Dedicated"
+                    label="Trained for Breast Imaging"
                     onChange={handleTrainedOrDedicatedChange}
                 >
                     <MenuItem value="yes">Yes</MenuItem>
