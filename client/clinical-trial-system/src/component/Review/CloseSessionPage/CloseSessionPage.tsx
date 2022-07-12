@@ -9,6 +9,7 @@ import DrawerHeader from "../../Drawer/DrawerHeader";
 import * as React from "react";
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import {useNavigate} from "react-router-dom";
+import {ReviewerAction} from "../ReviewerReducer";
 
 const CloseSessionPage = () => {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const CloseSessionPage = () => {
     });
 
     const handleClickFinishReview = () => {
+        dispatch(ReviewerAction.setAgreeReviewCheckbox(false));
         navigate('/start-review');
     };
 
