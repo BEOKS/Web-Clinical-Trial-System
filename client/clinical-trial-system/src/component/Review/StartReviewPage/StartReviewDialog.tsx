@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../store";
-import {ReviewerAction} from "../ReviewerReducer";
+import {REVIEW_STEP, ReviewerAction} from "../ReviewerReducer";
 import {useNavigate} from "react-router-dom";
 import {assignReviewerNumber, getImageNumberList} from "../../../api/review";
 
@@ -23,6 +23,7 @@ const StartReviewDialog = () => {
             dispatch(ReviewerAction.setCurrentImageNumber(imageNumberList[0]));
         }
         dispatch(ReviewerAction.setStartTime(performance.now()));
+        dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.ORIGINAL));
         handleClose();
     };
 
