@@ -12,6 +12,10 @@ const TYPE = {
     SET_START_TIME: `${HEADER}/SET_START_TIME` as const,
     SET_CONFIDENCE_LEVEL: `${HEADER}/SET_CONFIDENCE_LEVEL` as const,
     SET_ML_VERIFY_TIME: `${HEADER}/SET_ML_VERIFY_TIME` as const,
+    SET_SPECIALITY: `${HEADER}/SET_SPECIALITY` as const,
+    SET_EXPERIENCE_YEAR: `${HEADER}/SET_EXPERIENCE_YEAR` as const,
+    SET_AGREE_REVIEW_CHECKBOX: `${HEADER}/SET_AGREE_REVIEW_CHECKBOX` as const,
+    SET_TRAINED_OR_DEDICATED: `${HEADER}/SET_TRAINED_OR_DEDICATED` as const,
 };
 
 export const ReviewerAction = {
@@ -29,6 +33,21 @@ export const ReviewerAction = {
     setStartTime: (startTime: number) => ({type: TYPE.SET_START_TIME, payload: startTime}),
     setConfidenceLevel: (confidenceLevel: number) => ({type: TYPE.SET_CONFIDENCE_LEVEL, payload: confidenceLevel}),
     setMLVerifyTime: (mlVerifyTime: number) => ({type: TYPE.SET_ML_VERIFY_TIME, payload: mlVerifyTime}),
+    setSpeciality: (speciality: typeof SPECIALITY.BREAST_RADIOLOGY | typeof SPECIALITY.GENERAL_RADIOLOGY |
+        typeof SPECIALITY.BREAST_SURGERY | typeof SPECIALITY.OB_OR_GYM |
+        typeof SPECIALITY.RADIOLOGY_RESIDENT | typeof SPECIALITY.OTHERS) => ({
+        type: TYPE.SET_SPECIALITY,
+        payload: speciality
+    }),
+    setExperienceYear: (experienceYear: typeof EXPERIENCE_YEAR.ZERO_TO_FIVE | typeof EXPERIENCE_YEAR.MORE_THAN_FIVE) => ({
+        type: TYPE.SET_EXPERIENCE_YEAR,
+        payload: experienceYear
+    }),
+    setAgreeReviewCheckbox: (agreeReview: boolean) => ({type: TYPE.SET_AGREE_REVIEW_CHECKBOX, payload: agreeReview}),
+    setTrainedOrDedicated: (trainedOrDedicated: boolean) => ({
+        type: TYPE.SET_TRAINED_OR_DEDICATED,
+        payload: trainedOrDedicated
+    }),
 };
 
 type ReviewerActionType =
@@ -42,7 +61,11 @@ type ReviewerActionType =
     ReturnType<typeof ReviewerAction.setPom> |
     ReturnType<typeof ReviewerAction.setStartTime> |
     ReturnType<typeof ReviewerAction.setConfidenceLevel> |
-    ReturnType<typeof ReviewerAction.setMLVerifyTime>;
+    ReturnType<typeof ReviewerAction.setMLVerifyTime> |
+    ReturnType<typeof ReviewerAction.setSpeciality> |
+    ReturnType<typeof ReviewerAction.setExperienceYear> |
+    ReturnType<typeof ReviewerAction.setAgreeReviewCheckbox> |
+    ReturnType<typeof ReviewerAction.setTrainedOrDedicated>;
 
 
 // state
@@ -51,6 +74,20 @@ export const REVIEW_STEP = {
     ML_RESULT: 2,
     CONFIDENCE: 3,
 }
+
+export const EXPERIENCE_YEAR = {
+    ZERO_TO_FIVE: 'ZERO_TO_FIVE',
+    MORE_THAN_FIVE: 'MORE_THAN_FIVE',
+} as const
+
+export const SPECIALITY = {
+    BREAST_RADIOLOGY: 'BREAST_RADIOLOGY',
+    GENERAL_RADIOLOGY: 'GENERAL_RADIOLOGY',
+    BREAST_SURGERY: 'BREAST_SURGERY',
+    OB_OR_GYM: 'OB_OR_GYM',
+    RADIOLOGY_RESIDENT: 'RADIOLOGY_RESIDENT',
+    OTHERS: 'OTHERS',
+} as const
 
 export type ReviewerState = {
     reviewerCount: number,
@@ -63,6 +100,12 @@ export type ReviewerState = {
     startTime: number,
     confidenceLevel: number,
     mlVerifyTime: number,
+    speciality: typeof SPECIALITY.BREAST_RADIOLOGY | typeof SPECIALITY.GENERAL_RADIOLOGY |
+        typeof SPECIALITY.BREAST_SURGERY | typeof SPECIALITY.OB_OR_GYM |
+        typeof SPECIALITY.RADIOLOGY_RESIDENT | typeof SPECIALITY.OTHERS,
+    experienceYear: typeof EXPERIENCE_YEAR.ZERO_TO_FIVE | typeof EXPERIENCE_YEAR.MORE_THAN_FIVE,
+    agreeReview: boolean,
+    trainedOrDedicated: boolean,
 }
 
 const INIT_REVIEWER_STATE: ReviewerState = {
@@ -76,6 +119,10 @@ const INIT_REVIEWER_STATE: ReviewerState = {
     startTime: 0,
     confidenceLevel: 0,
     mlVerifyTime: 0,
+    speciality: SPECIALITY.BREAST_RADIOLOGY,
+    experienceYear: EXPERIENCE_YEAR.ZERO_TO_FIVE,
+    agreeReview: false,
+    trainedOrDedicated: true,
 };
 
 
@@ -104,6 +151,14 @@ export default function ReviewerReducer(state: ReviewerState = INIT_REVIEWER_STA
             return {...state, confidenceLevel: action.payload};
         case TYPE.SET_ML_VERIFY_TIME:
             return {...state, mlVerifyTime: action.payload};
+        case TYPE.SET_SPECIALITY:
+            return {...state, speciality: action.payload};
+        case TYPE.SET_EXPERIENCE_YEAR:
+            return {...state, experienceYear: action.payload};
+        case TYPE.SET_AGREE_REVIEW_CHECKBOX:
+            return {...state, agreeReview: action.payload};
+        case TYPE.SET_TRAINED_OR_DEDICATED:
+            return {...state, trainedOrDedicated: action.payload};
         default:
             return state;
     }

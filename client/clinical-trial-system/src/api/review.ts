@@ -1,12 +1,20 @@
 import axios from "axios";
 
-// 리뷰어 번호 할당
-const assignReviewerNumber = (onSuccess: (reviewerCount: number) => void) => {
+// 리뷰어 정보 저장 및 리뷰어 번호 할당
+const assignReviewerNumber = (experienceYear: "ZERO_TO_FIVE" | "MORE_THAN_FIVE",
+                              speciality: 'BREAST_RADIOLOGY' | 'GENERAL_RADIOLOGY' | 'BREAST_SURGERY' | 'OB_OR_GYM' | 'RADIOLOGY_RESIDENT' | 'OTHERS',
+                              isTrainedOrDedicated: boolean,
+                              onSuccess: (reviewerCount: number) => void) => {
     const url = '/api/reviewer';
+    const data = {
+        experienceYear: experienceYear,
+        speciality: speciality,
+        isTrainedOrDedicated: isTrainedOrDedicated
+    };
 
-    axios.post(url)
+    axios.post(url, data)
         .then(response => {
-            onSuccess(response.data.reviewerId);
+            onSuccess(response.data);
         }).catch(error => {
         console.log(error);
     });
