@@ -16,6 +16,8 @@ const TYPE = {
     SET_EXPERIENCE_YEAR: `${HEADER}/SET_EXPERIENCE_YEAR` as const,
     SET_AGREE_REVIEW_CHECKBOX: `${HEADER}/SET_AGREE_REVIEW_CHECKBOX` as const,
     SET_TRAINED_OR_DEDICATED: `${HEADER}/SET_TRAINED_OR_DEDICATED` as const,
+    OPEN_EXIT_REVIEW_DIALOG: `${HEADER}/OPEN_EXIT_REVIEW_DIALOG` as const,
+    CLOSE_EXIT_REVIEW_DIALOG: `${HEADER}/CLOSE_EXIT_REVIEW_DIALOG` as const,
 };
 
 export const ReviewerAction = {
@@ -48,6 +50,8 @@ export const ReviewerAction = {
         type: TYPE.SET_TRAINED_OR_DEDICATED,
         payload: trainedOrDedicated
     }),
+    openExitReviewDialog: () => ({type: TYPE.OPEN_EXIT_REVIEW_DIALOG}),
+    closeExitReviewDialog: () => ({type: TYPE.CLOSE_EXIT_REVIEW_DIALOG}),
 };
 
 type ReviewerActionType =
@@ -65,7 +69,9 @@ type ReviewerActionType =
     ReturnType<typeof ReviewerAction.setSpeciality> |
     ReturnType<typeof ReviewerAction.setExperienceYear> |
     ReturnType<typeof ReviewerAction.setAgreeReviewCheckbox> |
-    ReturnType<typeof ReviewerAction.setTrainedOrDedicated>;
+    ReturnType<typeof ReviewerAction.setTrainedOrDedicated> |
+    ReturnType<typeof ReviewerAction.openExitReviewDialog> |
+    ReturnType<typeof ReviewerAction.closeExitReviewDialog>;
 
 
 // state
@@ -106,6 +112,7 @@ export type ReviewerState = {
     experienceYear: typeof EXPERIENCE_YEAR.ZERO_TO_FIVE | typeof EXPERIENCE_YEAR.MORE_THAN_FIVE,
     agreeReview: boolean,
     trainedOrDedicated: boolean,
+    exitReviewDialogOpen: boolean,
 }
 
 const INIT_REVIEWER_STATE: ReviewerState = {
@@ -123,6 +130,7 @@ const INIT_REVIEWER_STATE: ReviewerState = {
     experienceYear: EXPERIENCE_YEAR.ZERO_TO_FIVE,
     agreeReview: false,
     trainedOrDedicated: true,
+    exitReviewDialogOpen: false,
 };
 
 
@@ -159,6 +167,10 @@ export default function ReviewerReducer(state: ReviewerState = INIT_REVIEWER_STA
             return {...state, agreeReview: action.payload};
         case TYPE.SET_TRAINED_OR_DEDICATED:
             return {...state, trainedOrDedicated: action.payload};
+        case TYPE.OPEN_EXIT_REVIEW_DIALOG:
+            return {...state, exitReviewDialogOpen: true};
+        case TYPE.CLOSE_EXIT_REVIEW_DIALOG:
+            return {...state, exitReviewDialogOpen: false};
         default:
             return state;
     }

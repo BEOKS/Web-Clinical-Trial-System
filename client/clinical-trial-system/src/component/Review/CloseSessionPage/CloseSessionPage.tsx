@@ -15,7 +15,7 @@ const CloseSessionPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
-    const imageNumberList = useSelector((state: RootState) => state.ReviewerReducer.imageNumberList);
+    const currentImageNumber = useSelector((state: RootState) => state.ReviewerReducer.currentImageNumber);
 
     useEffect(() => {
         dispatch(DrawerAction.dontDisplayMenuButton());
@@ -38,7 +38,7 @@ const CloseSessionPage = () => {
                 </Typography>
                 <Alert severity="success" sx={{mt: 3}}>
                     <AlertTitle>This session has ended.</AlertTitle>
-                    You reviewed a total of <strong>{imageNumberList.length} images.</strong> Thank you!<br/>
+                    You reviewed a total of <strong>{currentImageNumber} images.</strong> Thank you!<br/>
                     Click the Finish Review button below to return to the Start Review page.
                 </Alert>
                 <Box sx={{display: 'flex', justifyContent: 'center', mt: 6}}>
