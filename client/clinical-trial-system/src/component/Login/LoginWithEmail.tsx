@@ -43,7 +43,7 @@ export default function LoginWithEmail() {
     const emailValidation = useSelector((state: RootState) => state.LoginReducer.emailValidation);
 
     // 이메일 유효성 검사
-    const checkEmail = (email:string) => {
+    const isEmailValidate = (email:string) => {
         const emailRegex =
             /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
         const result = emailRegex.test(email);
@@ -52,7 +52,7 @@ export default function LoginWithEmail() {
     };
 
     const handleEmailLogin = () => {
-        if (checkEmail(email)) {
+        if (isEmailValidate(email)) {
             dispatch(DrawerAction.displayMenuButton());
             navigate('/select-role');
         }
