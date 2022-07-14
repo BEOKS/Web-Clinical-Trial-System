@@ -17,6 +17,7 @@ const assignReviewerNumber = (experienceYear: "ZERO_TO_FIVE" | "MORE_THAN_FIVE",
             onSuccess(response.data);
         }).catch(error => {
         alert(error)
+        onSuccess(0)
     });
 };
 
@@ -28,7 +29,8 @@ const getImageNumberList = (onSuccess: (imageNumberList: number[]) => void) => {
         .then(response => {
             onSuccess(response.data);
         }).catch(error => {
-        console.log(error);
+            alert(error)
+            onSuccess([])
     });
 };
 
