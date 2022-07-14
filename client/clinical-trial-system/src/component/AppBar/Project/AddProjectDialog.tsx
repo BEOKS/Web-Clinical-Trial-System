@@ -4,6 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../store";
 import {ProjectAction} from "./ProjectReducer";
 
+const ADD_PROJECT_DIALOG_TITLE_MESSAGE = <>Add Project</>;
+const ADD_PROJECT_DIALOG_CONTENT_MESSAGE = <>Please enter a project name to create a new project. The project name must
+    be less than ** characters.</>
+
 export default function AddProjectDialog() {
     const dispatch = useDispatch();
     const projectAddDialogOpen = useSelector((state: RootState) => state.ProjectReducer.projectAddDialogOpen);
@@ -22,12 +26,9 @@ export default function AddProjectDialog() {
 
     return (
         <Dialog open={projectAddDialogOpen} onClose={handleClose}>
-            <DialogTitle>Add Project</DialogTitle>
+            <DialogTitle>{ADD_PROJECT_DIALOG_TITLE_MESSAGE}</DialogTitle>
             <DialogContent>
-                <DialogContentText>
-                    Please enter a project name to create a new project. The project name must be less than **
-                    characters.
-                </DialogContentText>
+                <DialogContentText>{ADD_PROJECT_DIALOG_CONTENT_MESSAGE}</DialogContentText>
                 <TextField
                     autoFocus
                     margin="dense"

@@ -11,6 +11,11 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import {useNavigate} from "react-router-dom";
 import {ReviewerAction} from "../ReviewerReducer";
 
+const CLOSE_SESSION_ALERT_TITLE_MESSAGE = <>This session has ended.</>;
+const closeSessionAlertContentMessageWith = (currentImageNumber: number) =>
+    <>You reviewed a total of <strong>{currentImageNumber} images.</strong> Thank you!<br/>
+        Click the Finish Review button below to return to the Start Review page.</>;
+
 const CloseSessionPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -37,9 +42,8 @@ const CloseSessionPage = () => {
                     THANK YOU!<span><AutoAwesomeIcon sx={{fontSize: 70}}/></span>
                 </Typography>
                 <Alert severity="success" sx={{mt: 3}}>
-                    <AlertTitle>This session has ended.</AlertTitle>
-                    You reviewed a total of <strong>{currentImageNumber} images.</strong> Thank you!<br/>
-                    Click the Finish Review button below to return to the Start Review page.
+                    <AlertTitle>{CLOSE_SESSION_ALERT_TITLE_MESSAGE}</AlertTitle>
+                    {closeSessionAlertContentMessageWith(currentImageNumber)}
                 </Alert>
                 <Box sx={{display: 'flex', justifyContent: 'center', mt: 6}}>
                     <Button variant="contained" sx={{px: 10, py: 2}}

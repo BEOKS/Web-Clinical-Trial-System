@@ -48,9 +48,7 @@ const StartReviewDialog = () => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>Cancel</Button>
-                <Button onClick={handleClickOKButton} autoFocus>
-                    OK
-                </Button>
+                <Button onClick={handleClickOKButton} autoFocus>OK</Button>
             </DialogActions>
         </Dialog>
     );
