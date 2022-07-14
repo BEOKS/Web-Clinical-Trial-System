@@ -16,7 +16,7 @@ const assignReviewerNumber = (experienceYear: "ZERO_TO_FIVE" | "MORE_THAN_FIVE",
         .then(response => {
             onSuccess(response.data);
         }).catch(error => {
-        console.log(error);
+        alert(error)
     });
 };
 
