@@ -21,7 +21,7 @@ function EmailInputTextField(props: { onChange: (e : any) => void, value: string
     />;
 }
 
-function PasswordInputTextField(props: { onChange: (e) => void, value: string }) {
+function PasswordInputTextField(props: { onChange: (e : any) => void, value: string }) {
     return <TextField
         id="password"
         label="Password"
