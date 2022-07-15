@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "cross-env API_HOST=localhost vite",
+    "dev": "cross-env API_HOST=localhost:8080 vite",
     "build": "tsc && vite build",
     "build:local": "tsc && vite build",
     "build:dev": "tsc && vite build",
