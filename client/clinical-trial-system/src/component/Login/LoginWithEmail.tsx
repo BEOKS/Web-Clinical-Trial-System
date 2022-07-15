@@ -1,12 +1,16 @@
-import { Stack, Typography, TextField, Button, Link, Box } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import {Stack, Typography, TextField, Button, Link, Box} from '@mui/material';
+import {Link as RouterLink} from 'react-router-dom';
+import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {LoginAction} from "./LoginReducer";
 import {DrawerAction} from "../Drawer/DrawerReducer";
+import {ChangeEvent} from "react";
 
-function EmailInputTextField(props: { onChange: (e : any) => void, value: string, emailValidation: boolean }) {
+function EmailInputTextField(props: {
+    onChange: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void,
+    value: string, emailValidation: boolean
+}) {
     return <TextField
         id="email"
         label="Email"
@@ -21,7 +25,10 @@ function EmailInputTextField(props: { onChange: (e : any) => void, value: string
     />;
 }
 
-function PasswordInputTextField(props: { onChange: (e : any) => void, value: string }) {
+function PasswordInputTextField(props: {
+    onChange: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void,
+    value: string
+}) {
     return <TextField
         id="password"
         label="Password"
@@ -43,7 +50,7 @@ export default function LoginWithEmail() {
     const emailValidation = useSelector((state: RootState) => state.LoginReducer.emailValidation);
 
     // 이메일 유효성 검사
-    const isEmailValidate = (email:string) => {
+    const isEmailValidate = (email: string) => {
         const emailRegex =
             /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
         const result = emailRegex.test(email);
