@@ -5,11 +5,18 @@ import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {useDispatch, useSelector} from "react-redux";
 import {ProjectAction} from "./ProjectReducer";
 import {RootState} from "../../../store";
+import {useEffect} from "react";
+import {getProjectList} from "../../../api/project";
 
 const SelectProject = () => {
     const dispatch = useDispatch();
     const currentProject = useSelector((state: RootState) => state.ProjectReducer.currentProject);
     const displaySelectProject = useSelector((state: RootState) => state.ProjectReducer.displaySelectProject);
+    const projectList = useSelector((state: RootState) => state.ProjectReducer.projectList);
+
+    useEffect(() => {
+        getProjectList(projectList => dispatch(ProjectAction.setProjectList(projectList)));
+    }, []);
 
     const handleChange = (event: SelectChangeEvent) => {
         dispatch(ProjectAction.setCurrentProject(event.target.value as string));
@@ -25,12 +32,7 @@ const SelectProject = () => {
                 inputProps={{'aria-label': 'project-select-label'}}
                 sx={{backgroundColor: '#fff'}}
             >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {projectList.map(project => <MenuItem key={project} value={project}>{project}</MenuItem>)}
             </Select>
         </FormControl>
     );

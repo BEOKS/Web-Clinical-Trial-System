@@ -7,6 +7,7 @@ const TYPE = {
     OPEN_ADD_PROJECT_DIALOG: `${HEADER}/OPEN_ADD_PROJECT_DIALOG` as const,
     CLOSE_ADD_PROJECT_DIALOG: `${HEADER}/CLOSE_ADD_PROJECT_DIALOG` as const,
     SET_NEW_PROJECT_NAME: `${HEADER}/SET_NEW_PROJECT_NAME` as const,
+    SET_PROJECT_LIST: `${HEADER}/SET_PROJECT_LIST` as const,
 };
 
 export const ProjectAction = {
@@ -16,6 +17,7 @@ export const ProjectAction = {
     openAddProjectDialog: () => ({type: TYPE.OPEN_ADD_PROJECT_DIALOG}),
     closeAddProjectDialog: () => ({type: TYPE.CLOSE_ADD_PROJECT_DIALOG}),
     setNewProjectName: (newProjectName: string) => ({type: TYPE.SET_NEW_PROJECT_NAME, payload: newProjectName}),
+    setProjectList: (projectList: string[]) => ({type: TYPE.SET_PROJECT_LIST, payload: projectList}),
 };
 
 type ProjectActionType =
@@ -23,8 +25,9 @@ type ProjectActionType =
     ReturnType<typeof ProjectAction.doNotDisplaySelectProject> |
     ReturnType<typeof ProjectAction.displaySelectProject> |
     ReturnType<typeof ProjectAction.openAddProjectDialog> |
-    ReturnType<typeof ProjectAction.closeAddProjectDialog>|
-    ReturnType<typeof ProjectAction.setNewProjectName>;
+    ReturnType<typeof ProjectAction.closeAddProjectDialog> |
+    ReturnType<typeof ProjectAction.setNewProjectName> |
+    ReturnType<typeof ProjectAction.setProjectList>;
 
 
 // state
@@ -33,6 +36,7 @@ type ProjectState = {
     displaySelectProject: boolean,
     projectAddDialogOpen: boolean,
     newProjectName: string,
+    projectList: string[],
 }
 
 const INIT_PROJECT_STATE: ProjectState = {
@@ -40,6 +44,7 @@ const INIT_PROJECT_STATE: ProjectState = {
     displaySelectProject: true,
     projectAddDialogOpen: false,
     newProjectName: '',
+    projectList: [],
 };
 
 
@@ -58,6 +63,8 @@ export default function ProjectReducer(state: ProjectState = INIT_PROJECT_STATE,
             return {...state, projectAddDialogOpen: false};
         case TYPE.SET_NEW_PROJECT_NAME:
             return {...state, newProjectName: action.payload};
+        case TYPE.SET_PROJECT_LIST:
+            return {...state, projectList: action.payload};
         default:
             return state;
     }
