@@ -5,7 +5,7 @@ if(process.env.VITE_API_HOST){
     HOST_LOCATION=process.env.VITE_API_HOST
 }
 else{
-    HOST_LOCATION='beamcts-env.eba-a5zfayqe.us-west-1.elasticbeanstalk.com'
+    HOST_LOCATION='Beamctsdev-env.eba-67wqjxaq.ap-northeast-2.elasticbeanstalk.com'
 }
 // https://vitejs.dev/config/
 export default defineConfig({
