@@ -31,6 +31,61 @@ const EXPERIENCE_YEAR_OPTIONS: REVIEWER_INFO[] = [
     {value: EXPERIENCE_YEAR.MORE_THAN_FIVE, label: 'more than 5 years'},
 ];
 
+function SpecialitySelect(props: { speciality: any, onChange: (e: SelectChangeEvent) => void }) {
+    return (
+        <FormControl fullWidth size="small" sx={{mt: 4}}>
+            <InputLabel id="speciality-select-label">Speciality</InputLabel>
+            <Select
+                labelId="speciality-select-label"
+                id="speciality-select"
+                value={props.speciality}
+                label="Speciality"
+                onChange={props.onChange}
+            >
+                {SPECIALITY_OPTIONS.map(speciality =>
+                    <MenuItem key={speciality.value} value={speciality.value}>{speciality.label}</MenuItem>)}
+            </Select>
+        </FormControl>
+    )
+}
+
+function TrainedOrDedicatedSelect(props: { trainedOrDedicated: any, onChange: (e: SelectChangeEvent) => void }) {
+    return (
+        <FormControl fullWidth size="small" sx={{mt: 3}}>
+            <InputLabel id="trained-or-dedicated-select-label">Trained for Breast Imaging</InputLabel>
+            <Select
+                labelId="trained-or-dedicated-select-label"
+                id="trained-or-dedicated-select"
+                value={props.trainedOrDedicated ? 'yes' : 'no'}
+                label="Trained for Breast Imaging"
+                onChange={props.onChange}
+            >
+                {TRAINED_OR_DEDICATED_OPTIONS.map(option =>
+                    <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>)}
+            </Select>
+        </FormControl>
+    )
+}
+
+function ExperienceYearSelect(props: { experienceYear: any, onChange: (e: SelectChangeEvent) => void }) {
+    return (
+        <FormControl fullWidth size="small" sx={{mt: 3}}>
+            <InputLabel id="experience-year-select-label">Years of Experience</InputLabel>
+            <Select
+                labelId="experience-year-select-label"
+                id="experience-year-select"
+                value={props.experienceYear}
+                label="Years of Experience"
+                onChange={props.onChange}
+            >
+                {EXPERIENCE_YEAR_OPTIONS.map(experienceYear =>
+                    <MenuItem key={experienceYear.value}
+                              value={experienceYear.value}>{experienceYear.label}</MenuItem>)}
+            </Select>
+        </FormControl>
+    )
+}
+
 const ReviewerInfoInput = () => {
     const dispatch = useDispatch();
     const speciality = useSelector((state: RootState) => state.ReviewerReducer.speciality);
@@ -59,48 +114,11 @@ const ReviewerInfoInput = () => {
             <Divider>
                 <Chip label="Reviewer Info" color="success"/>
             </Divider>
-            <FormControl fullWidth size="small" sx={{mt: 4}}>
-                <InputLabel id="speciality-select-label">Speciality</InputLabel>
-                <Select
-                    labelId="speciality-select-label"
-                    id="speciality-select"
-                    value={speciality}
-                    label="Speciality"
-                    onChange={handleSpecialityChange}
-                >
-                    {SPECIALITY_OPTIONS.map(speciality =>
-                        <MenuItem key={speciality.value} value={speciality.value}>{speciality.label}</MenuItem>)}
-                </Select>
-            </FormControl>
-            <FormControl fullWidth size="small" sx={{mt: 3}}>
-                <InputLabel id="trained-or-dedicated-select-label">Trained for Breast Imaging</InputLabel>
-                <Select
-                    labelId="trained-or-dedicated-select-label"
-                    id="trained-or-dedicated-select"
-                    value={trainedOrDedicated ? 'yes' : 'no'}
-                    label="Trained for Breast Imaging"
-                    onChange={handleTrainedOrDedicatedChange}
-                >
-                    {TRAINED_OR_DEDICATED_OPTIONS.map(option =>
-                        <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>)}
-                </Select>
-            </FormControl>
-            <FormControl fullWidth size="small" sx={{mt: 3}}>
-                <InputLabel id="experience-year-select-label">Years of Experience</InputLabel>
-                <Select
-                    labelId="experience-year-select-label"
-                    id="experience-year-select"
-                    value={experienceYear}
-                    label="Years of Experience"
-                    onChange={handleExperienceYearChange}
-                >
-                    {EXPERIENCE_YEAR_OPTIONS.map(experienceYear =>
-                        <MenuItem key={experienceYear.value}
-                                  value={experienceYear.value}>{experienceYear.label}</MenuItem>)}
-                </Select>
-            </FormControl>
-            <FormControlLabel control={<Checkbox checked={agreeReview}
-                                                 onChange={handleAgreeReviewChange}/>}
+            <SpecialitySelect speciality={speciality} onChange={handleSpecialityChange}/>
+            <TrainedOrDedicatedSelect trainedOrDedicated={trainedOrDedicated}
+                                      onChange={handleTrainedOrDedicatedChange}/>
+            <ExperienceYearSelect experienceYear={experienceYear} onChange={handleExperienceYearChange}/>
+            <FormControlLabel control={<Checkbox checked={agreeReview} onChange={handleAgreeReviewChange}/>}
                               label="I agree to utilize the review results."
                               sx={{mt: 3}}/>
         </Box>
