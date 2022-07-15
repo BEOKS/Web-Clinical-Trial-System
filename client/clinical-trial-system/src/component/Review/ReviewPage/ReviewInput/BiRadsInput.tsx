@@ -3,25 +3,28 @@ import {Tooltip, FormLabel, FormControlLabel, FormControl, RadioGroup, Radio} fr
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../store";
-interface BI_RADS_INFO  {
+
+interface BI_RADS_INFO {
     title: string,
     value: string
 }
-const BI_RADS_OPTIONS : BI_RADS_INFO[]=[
-    {title : "Negative", value:"1"},
-    {title : "Benign", value:"2"},
-    {title : "Probably Benign", value:"3"},
-    {title : "Low Suspicion for Malignancy", value:"4a"},
-    {title : "Moderate Suspicion for Malignancy", value:"4"},
-    {title : "High Suspicion for Malignancy", value:"4c"},
-    {title : "Highly Suggestive of Malignancy", value:"5"},
 
+const BI_RADS_OPTIONS: BI_RADS_INFO[] = [
+    {title: "Negative", value: "1"},
+    {title: "Benign", value: "2"},
+    {title: "Probably Benign", value: "3"},
+    {title: "Low Suspicion for Malignancy", value: "4a"},
+    {title: "Moderate Suspicion for Malignancy", value: "4"},
+    {title: "High Suspicion for Malignancy", value: "4c"},
+    {title: "Highly Suggestive of Malignancy", value: "5"},
 ]
-function RadioLabel(props: { reviewStep: number, info : BI_RADS_INFO }) {
-    return (<Tooltip title={props.info.title} placement="left" arrow>
-        <FormControlLabel value={props.info.value} control={<Radio/>} label={props.info.value}
-                          disabled={props.reviewStep === REVIEW_STEP.CONFIDENCE}/>
-    </Tooltip>);
+
+function RadioLabel(props: { reviewStep: number, info: BI_RADS_INFO }) {
+    return (
+        <Tooltip key={props.info.title} title={props.info.title} placement="left" arrow>
+            <FormControlLabel value={props.info.value} control={<Radio/>} label={props.info.value}
+                              disabled={props.reviewStep === REVIEW_STEP.CONFIDENCE}/>
+        </Tooltip>);
 }
 
 const BiRadsInput = () => {
@@ -42,7 +45,7 @@ const BiRadsInput = () => {
                 name="bi-rads-group"
                 onChange={handleChange}
             >
-                {BI_RADS_OPTIONS.map(info=>RadioLabel({reviewStep : reviewStep,info :info}))}
+                {BI_RADS_OPTIONS.map(info => RadioLabel({reviewStep: reviewStep, info: info}))}
             </RadioGroup>
         </FormControl>
     )
