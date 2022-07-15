@@ -23,3 +23,12 @@ spring:
   config:
     activate:
       on-profile: dev
+---
+spring:
+  datasource:
+    url: jdbc:mysql://BEOKS:lee001409!@aa17866dqu1zsnv.ckzqzdfbxqaa.us-west-1.rds.amazonaws.com:3306/BEAM-CTS?createDatabaseIfNotExist=true
+  config:
+    activate:
+      on-profile: prod
+server:
+  port: 5000 #for aws elastic beanstack
