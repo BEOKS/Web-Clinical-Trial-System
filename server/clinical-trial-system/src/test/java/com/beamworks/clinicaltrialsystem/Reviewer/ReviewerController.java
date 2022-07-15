@@ -27,7 +27,8 @@ public class ReviewerController {
         when(reviewerService.createNewReviewer(any())).thenReturn(123);
         mockMvc.perform(post("/api/reviewer").content("{\n" +
                         "\t\"experienceYear\": \"ZERO_TO_FIVE\",\n" +
-                        "\t\"isSpeciality\": true\n" +
+                        "\t\"isTrainedOrDedicated\": true,\n" +
+                        "\t\"speciality\": \"BREAST_RADIOLOGY\"\n" +
                         "}").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string("123"));
