@@ -40,18 +40,14 @@ const RoleSelection = () => {
                                     sx={{width: '300px', p: 5}} onClick={handleClickPIButton}>
                                 <Stack alignItems="center" spacing={3}>
                                     <AccountBoxIcon sx={{fontSize: 200}}/>
-                                    <Typography variant="h4">
-                                        PI
-                                    </Typography>
+                                    <Typography variant="h4">PI</Typography>
                                 </Stack>
                             </Button>
                             <Button data-testid={'reviewer-button'} variant="contained"
                                     sx={{width: '300px', p: 5}} onClick={handleClickReviwerButton}>
                                 <Stack alignItems="center" spacing={3}>
                                     <AccountBoxIcon sx={{fontSize: 200}}/>
-                                    <Typography variant="h4">
-                                        Reviewer
-                                    </Typography>
+                                    <Typography variant="h4">Reviewer</Typography>
                                 </Stack>
                             </Button>
                         </Stack>

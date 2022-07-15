@@ -71,12 +71,10 @@ export default function LoginWithEmail() {
                 Log In
             </Typography>
             <Stack spacing={1.5} mt={3}>
-                <EmailInputTextField onChange={e => {
-                    dispatch(LoginAction.setEmail(e.target.value))
-                }} value={email} emailValidation={emailValidation}/>
-                <PasswordInputTextField onChange={e => {
-                    dispatch(LoginAction.setPassword(e.target.value))
-                }} value={password}/>
+                <EmailInputTextField onChange={e => dispatch(LoginAction.setEmail(e.target.value))}
+                                     value={email} emailValidation={emailValidation}/>
+                <PasswordInputTextField onChange={e => dispatch(LoginAction.setPassword(e.target.value))}
+                                        value={password}/>
                 <Button variant="contained" size="large" onClick={() => handleEmailLogin()}>
                     Log In
                 </Button>
