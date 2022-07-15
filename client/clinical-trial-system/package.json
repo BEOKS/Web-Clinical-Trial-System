@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "cross-env API_HOST=localhost vite",
     "build": "tsc && vite build",
     "build:local": "tsc && vite build",
     "build:dev": "tsc && vite build",
-    "build:prod": "tsc && vite build",
+    "build:prod": "cross-env API_HOST=http://beamcts-env.eba-a5zfayqe.us-west-1.elasticbeanstalk.com tsc && vite build",
     "preview": "vite preview",
     "test": "jest --watchAll  ",
     "ctest": "jest --coverage"
