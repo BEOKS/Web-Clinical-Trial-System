@@ -11,11 +11,38 @@ import ReviewInputBox from "./ReviewInputBox";
 import ReviewInfoBox from "./ReviewInfoBox";
 import {REVIEW_STEP} from "../ReviewerReducer";
 
+interface IMAGE_INFO {
+    type: string,
+    label: string,
+}
+
+const IMAGE_OPTIONS: IMAGE_INFO[] = [
+    {type: 'originalImage', label: 'Original Image'},
+    {type: 'mlResultImage', label: 'ML Result Image'},
+]
+
+const ImageWithLabel = (props: { type: string, label: string }) => {
+    const currentImageNumber = useSelector((state: RootState) => state.ReviewerReducer.currentImageNumber);
+    const reviewStep = useSelector((state: RootState) => state.ReviewerReducer.reviewStep);
+
+    return (
+        <Grid item xs>
+            {reviewStep === REVIEW_STEP.ORIGINAL && props.type === "mlResultImage" ?
+                <Skeleton variant="rectangular">
+                    <img src={`/api/review/data/${currentImageNumber}/${props.type}`} alt={props.label} width={'100%'}/>
+                </Skeleton> :
+                <img src={`/api/review/data/${currentImageNumber}/${props.type}`} alt={props.label} width={'100%'}/>
+            }
+            <Box sx={{display: 'flex', justifyContent: 'center', mt: 1}}>
+                <Chip label={props.label} sx={{width: '100%'}}/>
+            </Box>
+        </Grid>
+    )
+};
+
 const ReviewPage = () => {
     const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
-    const currentImageNumber = useSelector((state: RootState) => state.ReviewerReducer.currentImageNumber);
-    const reviewStep = useSelector((state: RootState) => state.ReviewerReducer.reviewStep);
 
     useEffect(() => {
         dispatch(DrawerAction.dontDisplayMenuButton());
@@ -32,24 +59,9 @@ const ReviewPage = () => {
                             <ReviewInfoBox/>
                         </Grid>
                         <Grid item container spacing={3}>
-                            <Grid item xs>
-                                <img src={`/api/review/data/${currentImageNumber}/originalImage`} alt="Original Data"
-                                     width={'100%'}/>
-                                <Box sx={{display: 'flex', justifyContent: 'center', mt: 1}}>
-                                    <Chip label="Original Image" sx={{width: '100%'}}/>
-                                </Box>
-                            </Grid>
-                            <Grid item xs>
-                                {reviewStep === REVIEW_STEP.ORIGINAL ?
-                                    <Skeleton variant="rectangular" height={430}/> :
-                                    <img src={`/api/review/data/${currentImageNumber}/mlResultImage`}
-                                         alt="ML Result Data"
-                                         width={'100%'}/>
-                                }
-                                <Box sx={{display: 'flex', justifyContent: 'center', mt: 1}}>
-                                    <Chip label="ML Result Image" sx={{width: '100%'}}/>
-                                </Box>
-                            </Grid>
+                            {IMAGE_OPTIONS.map(imageOption =>
+                                <ImageWithLabel type={imageOption.type} label={imageOption.label}
+                                                key={imageOption.type}/>)}
                         </Grid>
                     </Grid>
                     <Grid item xs={2}>
