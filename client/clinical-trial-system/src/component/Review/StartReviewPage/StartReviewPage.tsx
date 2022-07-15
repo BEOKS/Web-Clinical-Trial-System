@@ -30,6 +30,31 @@ const SECOND_INFO_CONTENT_MESSAGE =
         Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the
         word in classical literature, discovered the undoubtable source.</>;
 
+const StartReviewTitle = () => {
+    return (
+        <Box sx={{backgroundColor: 'secondary.light', p: 3, mt: 4}}
+             border={1} borderRadius={1} borderColor="primary.main">
+            <Typography variant="h2" align="center" color="primary.dark">
+                {START_REVIEW_TITLE_MESSAGE}
+            </Typography>
+            <Typography variant="h4" align="center" color="primary.dark">
+                {START_REVIEW_SUBTITLE_MESSAGE}
+            </Typography>
+        </Box>
+    )
+};
+
+const StartReviewInfoAlert = () => {
+    return (
+        <Alert variant="outlined" severity="info">
+            <AlertTitle>{FIRST_INFO_TITLE_MESSAGE}</AlertTitle>
+            {FIRST_INFO_CONTENT_MESSAGE}<br/><br/>
+            <AlertTitle>{SECOND_INFO_TITLE_MESSAGE}</AlertTitle>
+            {SECOND_INFO_CONTENT_MESSAGE}
+        </Alert>
+    )
+};
+
 const StartReviewPage = () => {
     const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
@@ -48,23 +73,10 @@ const StartReviewPage = () => {
         <Main open={drawerOpen}>
             <Container maxWidth="lg">
                 <DrawerHeader/>
-                <Box sx={{backgroundColor: 'secondary.light', p: 3, mt: 4}}
-                     border={1} borderRadius={1} borderColor="primary.main">
-                    <Typography variant="h2" align="center" color="primary.dark">
-                        {START_REVIEW_TITLE_MESSAGE}
-                    </Typography>
-                    <Typography variant="h4" align="center" color="primary.dark">
-                        {START_REVIEW_SUBTITLE_MESSAGE}
-                    </Typography>
-                </Box>
+                <StartReviewTitle/>
                 <Grid container sx={{mt: 3}} columnSpacing={3}>
                     <Grid item xs sx={{display: 'flex'}}>
-                        <Alert variant="outlined" severity="info">
-                            <AlertTitle>{FIRST_INFO_TITLE_MESSAGE}</AlertTitle>
-                            {FIRST_INFO_CONTENT_MESSAGE}<br/><br/>
-                            <AlertTitle>{SECOND_INFO_TITLE_MESSAGE}</AlertTitle>
-                            {SECOND_INFO_CONTENT_MESSAGE}
-                        </Alert>
+                        <StartReviewInfoAlert/>
                     </Grid>
                     <Grid item xs={4} sx={{display: 'flex'}}>
                         <ReviewerInfoInput/>
