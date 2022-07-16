@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../store";
-import {ReviewerAction} from "../ReviewerReducer";
+import {REVIEW_STEP, ReviewerAction} from "../ReviewerReducer";
 import {useNavigate} from "react-router-dom";
 import {assignReviewerNumber, getImageNumberList} from "../../../api/review";
 
@@ -11,14 +11,19 @@ const StartReviewDialog = () => {
     const navigate = useNavigate();
     const startReviewDialogOpen = useSelector((state: RootState) => state.ReviewerReducer.startReviewDialogOpen);
     const imageNumberList = useSelector((state: RootState) => state.ReviewerReducer.imageNumberList);
+    const experienceYear = useSelector((state: RootState) => state.ReviewerReducer.experienceYear);
+    const speciality = useSelector((state: RootState) => state.ReviewerReducer.speciality);
+    const trainedOrDedicated = useSelector((state: RootState) => state.ReviewerReducer.trainedOrDedicated);
 
     const handleClickOKButton = () => {
         navigate('/review');
-        assignReviewerNumber(reviewerCount => dispatch(ReviewerAction.setReviewerCount(reviewerCount)));
+        assignReviewerNumber(experienceYear, speciality, trainedOrDedicated, reviewerCount => dispatch(ReviewerAction.setReviewerCount(reviewerCount)));
         getImageNumberList(imageNumberList => dispatch(ReviewerAction.setImageNumberList(imageNumberList)));
         if (imageNumberList.length > 0) {
             dispatch(ReviewerAction.setCurrentImageNumber(imageNumberList[0]));
         }
+        dispatch(ReviewerAction.setStartTime(performance.now()));
+        dispatch(ReviewerAction.setReviewStep(REVIEW_STEP.ORIGINAL));
         handleClose();
     };
 

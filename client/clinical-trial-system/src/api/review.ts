@@ -1,13 +1,20 @@
 import axios from "axios";
 
-// 리뷰어 번호 할당
-const assignReviewerNumber = (onSuccess: (reviewerCount: number) => void) => {
+// 리뷰어 정보 저장 및 리뷰어 번호 할당
+const assignReviewerNumber = (experienceYear: "ZERO_TO_FIVE" | "MORE_THAN_FIVE",
+                              speciality: 'BREAST_RADIOLOGY' | 'GENERAL_RADIOLOGY' | 'BREAST_SURGERY' | 'OB_OR_GYM' | 'RADIOLOGY_RESIDENT' | 'OTHERS',
+                              isTrainedOrDedicated: boolean,
+                              onSuccess: (reviewerCount: number) => void) => {
     const url = '/api/reviewer';
+    const data = {
+        experienceYear: experienceYear,
+        speciality: speciality,
+        isTrainedOrDedicated: isTrainedOrDedicated
+    };
 
-    axios.post(url)
+    axios.post(url, data)
         .then(response => {
-            console.log(response);
-            onSuccess(response.data.reviewerId);
+            onSuccess(response.data);
         }).catch(error => {
         console.log(error);
     });
@@ -19,11 +26,49 @@ const getImageNumberList = (onSuccess: (imageNumberList: number[]) => void) => {
 
     axios.get(url)
         .then(response => {
-            console.log(response);
             onSuccess(response.data);
         }).catch(error => {
         console.log(error);
     });
 };
 
-export {assignReviewerNumber, getImageNumberList};
+// 원본 이미지 리뷰 결과 저장
+const saveOriginalReviewResult = (biRads: string, dataId: number, pom: number, reviewerId: number, verifyTime: number,
+                                  onSuccess: () => void) => {
+    const url = '/api/review/result/original';
+    const data = {
+        bi_rads: biRads,
+        dataId: dataId,
+        pom: pom,
+        reviewerId: reviewerId,
+        verifyTime: verifyTime,
+    };
+
+    axios.post(url, data)
+        .then(response => {
+            console.log(response);
+            onSuccess();
+        }).catch(error => console.log(error));
+};
+
+// ML 이미지 리뷰 결과 저장
+const saveMLReviewResult = (biRads: string, confidenceLevel: number, dataId: number, pom: number,
+                            reviewerId: number, verifyTime: number, onSuccess: () => void) => {
+    const url = '/api/review/result/ml';
+    const data = {
+        bi_rads: biRads,
+        confidenceLevel: confidenceLevel,
+        dataId: dataId,
+        pom: pom,
+        reviewerId: reviewerId,
+        verifyTime: verifyTime,
+    };
+
+    axios.post(url, data)
+        .then(response => {
+            console.log(response);
+            onSuccess();
+        }).catch(error => console.log(error));
+}
+
+export {assignReviewerNumber, getImageNumberList, saveOriginalReviewResult, saveMLReviewResult};
