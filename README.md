@@ -2,36 +2,6 @@
 CTS(Clinical Trail System) aim convenient and effective Machine Learning Clinical Trial and Testbed Management.
 
 > This project is not implemented yet.
-# Feature
-1. Authentication and Role selection(PI/REVIEWER)
-2. Project Management For PI
-   1. Reviewer Management
-      1. Check User Tutorial Participation
-      2. *C.R.U.D Reviewer
-   2. Session Management 
-      1. Session Create & Configuration
-         1. Set Session Schedule
-         2. Session Start/Stop
-         3. Open/Close Session Data Ground Truth
-         4. Check Participation Information in Session
-      2. Session Monitoring
-         1. Check User Evaluation Time
-      3. Session Clinical Data Management
-   3. Clinical Data Management
-      1. Metadata
-      2. DICOM Image
-      3. Sample Data Management
-3. Reviewer
-   1. Tutorial For Review
-      1. Guide
-      2. Review with Sample Data(3.3.3)
-   2. Review Clinical Data and AI Result
-      1. Evaluate with Original Clinical Image
-      2. Store Evaluation Time
-      3. Evaluate with ML Result
-      4. Check Ground Truth After Session Review
-      5. Check Quota
-      6. Pause/Restart Review
 
 *CRUD : Create, Read, Update, Delete
 # Usage
