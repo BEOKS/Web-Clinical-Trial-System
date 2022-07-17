@@ -14,7 +14,7 @@ const BI_RADS_OPTIONS: BI_RADS_INFO[] = [
     {title: "Benign", value: "2"},
     {title: "Probably Benign", value: "3"},
     {title: "Low Suspicion for Malignancy", value: "4a"},
-    {title: "Moderate Suspicion for Malignancy", value: "4"},
+    {title: "Moderate Suspicion for Malignancy", value: "4b"},
     {title: "High Suspicion for Malignancy", value: "4c"},
     {title: "Highly Suggestive of Malignancy", value: "5"},
 ]
