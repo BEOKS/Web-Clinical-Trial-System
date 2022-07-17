@@ -11,6 +11,8 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.7.10'
 }
 apply plugin: "kotlin-noarg"
+apply plugin: 'application'
+mainClassName = 'ClinicalTrialSystemApplication'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -39,18 +41,24 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.0'
 }
+bootJar {
+    enabled = false
+}
 
+jar {
+    enabled = true
+}
 tasks.named('test') {
     useJUnitPlatform()
 }
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 

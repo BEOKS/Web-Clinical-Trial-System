@@ -1,0 +1,25 @@
+# For static server and gateway, we will use nginx
+# If authentiaction need for MAS we will change it to webflux or oauth-proxy
+
+# Get necessary server file for deployment
+FROM openjdk:11-jdk-buster as build
+WORKDIR /app
+COPY clinical-trial-system .
+RUN rm -rf build/dependency
+RUN chmod +x ./gradlew
+RUN ./gradlew build -x test
+RUN mkdir -p build/dependency
+WORKDIR /app/build/dependency
+RUN jar_path="$(ls ../libs/*-SNAPSHOT.jar 2> /dev/null)" && jar xf $jar_path
+
+FROM openjdk:11-jre-slim as was
+
+ARG DEPENDENCY=/app/build/dependency
+COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
+COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
+ARG PROFILE
+ENV PROFILE $PROFILE
+RUN echo -Dspring.profiles.active=$PROFILE
+ENTRYPOINT java -cp app:app/lib/* com.beamworks.clinicaltrialsystem.ClinicalTrialSystemApplication --spring.profiles.active=$PROFILE
+

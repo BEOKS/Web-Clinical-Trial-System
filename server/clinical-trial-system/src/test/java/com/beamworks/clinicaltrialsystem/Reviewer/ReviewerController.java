@@ -21,16 +21,16 @@ public class ReviewerController {
     @Autowired
     MockMvc mockMvc;
 
-    @Test
-    public void createNewReviewer() throws Exception {
+    // @Test
+    // public void createNewReviewer() throws Exception {
 
-        when(reviewerService.createNewReviewer(any())).thenReturn(123);
-        mockMvc.perform(post("/api/reviewer").content("{\n" +
-                        "\t\"experienceYear\": \"ZERO_TO_FIVE\",\n" +
-                        "\t\"isTrainedOrDedicated\": true,\n" +
-                        "\t\"speciality\": \"BREAST_RADIOLOGY\"\n" +
-                        "}").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string("123"));
-    }
+    //     when(reviewerService.createNewReviewer(any())).thenReturn(123);
+    //     mockMvc.perform(post("/api/reviewer").content("{\n" +
+    //                     "\t\"experienceYear\": \"ZERO_TO_FIVE\",\n" +
+    //                     "\t\"isTrainedOrDedicated\": true,\n" +
+    //                     "\t\"speciality\": \"BREAST_RADIOLOGY\"\n" +
+    //                     "}").contentType(MediaType.APPLICATION_JSON))
+    //             .andExpect(status().isOk())
+    //             .andExpect(content().string("123"));
+    // }
 }

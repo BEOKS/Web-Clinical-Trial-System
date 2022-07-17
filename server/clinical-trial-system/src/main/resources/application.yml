@@ -15,7 +15,7 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
+hostLocation : localhost:3000
 ---
 spring:
   datasource:
@@ -23,6 +23,10 @@ spring:
   config:
     activate:
       on-profile: dev
+  security:
+    user:
+      name: beam-cts
+      password: beam-cts418!
 ---
 spring:
   datasource:
