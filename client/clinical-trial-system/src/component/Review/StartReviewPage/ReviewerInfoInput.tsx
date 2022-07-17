@@ -14,6 +14,7 @@ interface REVIEWER_INFO {
     value: string,
     label: string,
 }
+
 const SPECIALITY_OPTIONS: REVIEWER_INFO[] = [
     {value: SPECIALITY.BREAST_RADIOLOGY, label: 'Breast Radiology'},
     {value: SPECIALITY.GENERAL_RADIOLOGY, label: 'General Radiology'},
@@ -110,7 +111,7 @@ const ReviewerInfoInput = () => {
     };
 
     return (
-        <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
+        <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1} width="100%">
             <Divider>
                 <Chip label="Reviewer Info" color="success"/>
             </Divider>

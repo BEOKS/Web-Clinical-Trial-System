@@ -1,8 +1,9 @@
-import {Box, Typography, Slider} from "@mui/material";
+import {Box, Typography, Slider, useMediaQuery} from "@mui/material";
 import {REVIEW_STEP, ReviewerAction} from "../../ReviewerReducer";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../store";
+import theme from "../../../../theme/theme";
 
 const marksPOM = [
     {value: 0, label: '0',},
@@ -15,6 +16,7 @@ const marksPOM = [
 
 const PomInput = () => {
     const dispatch = useDispatch();
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
     const reviewStep = useSelector((state: RootState) => state.ReviewerReducer.reviewStep);
 
     const handleChange = (event: Event, newValue: number | number[]) => {
@@ -22,7 +24,7 @@ const PomInput = () => {
     };
 
     return (
-        <Box sx={{height: 270}}>
+        <Box sx={matches ? {width: '100%'} : {height: 270}}>
             <Typography id="pom-slider" gutterBottom color="text.secondary">
                 POM
             </Typography>
@@ -33,7 +35,7 @@ const PomInput = () => {
                 step={1}
                 valueLabelDisplay="auto"
                 marks={marksPOM}
-                orientation="vertical"
+                orientation={matches ? "horizontal" : "vertical"}
                 sx={{mt: 1}}
                 onChange={handleChange}
             />

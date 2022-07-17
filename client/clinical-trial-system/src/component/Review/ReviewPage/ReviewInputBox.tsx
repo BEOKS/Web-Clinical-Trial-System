@@ -54,7 +54,7 @@ const ReviewInputBox = () => {
 
     return (
         <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
-            <Stack direction="row" spacing={3}>
+            <Stack direction={{xs: 'column', md: 'row'}} spacing={3}>
                 <BiRadsInput/>
                 <PomInput/>
             </Stack>

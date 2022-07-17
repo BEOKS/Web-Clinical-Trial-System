@@ -1,8 +1,9 @@
 import {REVIEW_STEP, ReviewerAction} from "../../ReviewerReducer";
-import {Tooltip, FormLabel, FormControlLabel, FormControl, RadioGroup, Radio} from "@mui/material";
+import {Tooltip, FormLabel, FormControlLabel, FormControl, RadioGroup, Radio, useMediaQuery} from "@mui/material";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../store";
+import theme from "../../../../theme/theme";
 
 interface BI_RADS_INFO {
     title: string,
@@ -29,6 +30,7 @@ function RadioLabel(props: { reviewStep: number, info: BI_RADS_INFO }) {
 
 const BiRadsInput = () => {
     const dispatch = useDispatch();
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
     const reviewStep = useSelector((state: RootState) => state.ReviewerReducer.reviewStep);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,13 +39,14 @@ const BiRadsInput = () => {
 
     return (
         <FormControl>
-            <FormLabel id="bi-rads-label"
+            <FormLabel id="bi-rads-label" sx={{whiteSpace: 'nowrap'}}
                        disabled={reviewStep === REVIEW_STEP.CONFIDENCE}>BI-RADS</FormLabel>
             <RadioGroup
                 aria-labelledby="bi-rads-label"
                 defaultValue="1"
                 name="bi-rads-group"
                 onChange={handleChange}
+                row={matches}
             >
                 {BI_RADS_OPTIONS.map(info => RadioLabel({reviewStep: reviewStep, info: info}))}
             </RadioGroup>

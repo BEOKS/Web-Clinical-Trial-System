@@ -53,8 +53,8 @@ const ReviewPage = () => {
         <Main open={drawerOpen}>
             <Container maxWidth="xl">
                 <DrawerHeader/>
-                <Grid container spacing={3} sx={{my: 2}}>
-                    <Grid item container direction="column" xs spacing={3}>
+                <Grid container direction={{xs: 'column', md: 'row'}} spacing={3} sx={{my: 2}}>
+                    <Grid item container direction="column" xs md spacing={3}>
                         <Grid item>
                             <ReviewInfoBox/>
                         </Grid>
@@ -64,7 +64,7 @@ const ReviewPage = () => {
                                                 key={imageOption.type}/>)}
                         </Grid>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs md={2}>
                         <ReviewInputBox/>
                     </Grid>
                 </Grid>

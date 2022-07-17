@@ -74,11 +74,11 @@ const StartReviewPage = () => {
             <Container maxWidth="lg">
                 <DrawerHeader/>
                 <StartReviewTitle/>
-                <Grid container sx={{mt: 3}} columnSpacing={3}>
-                    <Grid item xs sx={{display: 'flex'}}>
+                <Grid container sx={{mt: 3}} direction={{xs: 'column', md: 'row'}} columnSpacing={3}>
+                    <Grid item xs md sx={{display: 'flex'}}>
                         <StartReviewInfoAlert/>
                     </Grid>
-                    <Grid item xs={4} sx={{display: 'flex'}}>
+                    <Grid item xs md={4} sx={{display: 'flex', mt: {xs: 3, md: 0}}}>
                         <ReviewerInfoInput/>
                     </Grid>
                 </Grid>
