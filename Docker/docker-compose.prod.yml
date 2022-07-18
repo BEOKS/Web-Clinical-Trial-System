@@ -1,10 +1,10 @@
-version: '3.9'
+version: '3.3'
 services:
   client-with-proxy:
     image: lee01042000/client-with-proxy:0.1
     build:
       context: ../client
-      dockerfile: ./Dockerfile.local
+      dockerfile: ./Dockerfile.prod
     container_name: proxy
     ports:
       - 80:80
@@ -20,13 +20,13 @@ services:
     build: 
       context: ../server
       args:
-        - local
-      dockerfile: ./Dockerfile.local
+        - prod
+      dockerfile: ./Dockerfile.prod
     container_name: middleware
     volumes:
       - ./Storage:/root/Storage
-    ports:
-      - 8080:8080
+    # ports:
+    #   - 8080:8080
     depends_on:
       - mysql
     networks:
@@ -42,9 +42,9 @@ services:
       - MYSQL_ROOT_PASSWORD=0000
     volumes:
       - ./mysql:/var/lib/mysql
-    ports:
-      - 3306:3306
-      - 33060:33060
+    # ports:
+    #   - 3306:3306
+    #   - 33060:33060
     networks:
       innerNetwork:
         aliases:

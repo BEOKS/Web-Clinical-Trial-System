@@ -5,7 +5,7 @@ if [ $# -ne 1 ]
     exit -1
 fi
 
-if [[ "$1" == "local" ]];
+if [[ "$1" -eq "local" ]];
 then
     docker-compose -f ./Docker/docker-compose.$1.yml up --force-recreate
 else

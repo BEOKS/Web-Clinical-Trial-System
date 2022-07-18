@@ -1,11 +1,10 @@
-import {Stack, Typography, TextField, Button, Link, Box} from '@mui/material';
-import {Link as RouterLink} from 'react-router-dom';
-import {useNavigate} from "react-router-dom";
+import {Box, Button, Link, Stack, TextField, Typography} from '@mui/material';
+import {Link as RouterLink, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {LoginAction} from "./LoginReducer";
-import {DrawerAction} from "../Drawer/DrawerReducer";
 import {ChangeEvent} from "react";
+import {sendUserInfoForAuthenticate} from "../../api/SendUserInfoForAuthenticate";
 
 function EmailInputTextField(props: {
     onChange: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void,
@@ -59,10 +58,12 @@ export default function LoginWithEmail() {
     };
 
     const handleEmailLogin = () => {
-        if (isEmailValidate(email)) {
-            dispatch(DrawerAction.displayMenuButton());
-            navigate('/select-role');
-        }
+        // 간편 인증을 위해 이메일 형식 확인 기능을 비활성화합니다.
+        // if (isEmailValidate(email)) {
+        //     dispatch(DrawerAction.displayMenuButton());
+        //     navigate('/select-role');
+        // }
+        sendUserInfoForAuthenticate(email,password)
     };
 
     return (

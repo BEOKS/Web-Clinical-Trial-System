@@ -15,7 +15,7 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
+hostLocation : localhost:3000
 ---
 spring:
   datasource:
@@ -23,3 +23,11 @@ spring:
   config:
     activate:
       on-profile: dev
+spring:
+  datasource:
+    url: jdbc:mysql://BEOKS:lee001409!@aa4hc4z4bbrpe.cdmqavurw4bt.ap-northeast-2.rds.amazonaws.com:3306/BEAM-CTS?createDatabaseIfNotExist=true
+  config:
+    activate:
+      on-profile: prod
+server:
+  port: 5000 #for aws elastic beanstack
