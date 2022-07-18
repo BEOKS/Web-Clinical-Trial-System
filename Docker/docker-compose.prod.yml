@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.3'
 services:
   client-with-proxy:
     image: lee01042000/client-with-proxy:0.1
