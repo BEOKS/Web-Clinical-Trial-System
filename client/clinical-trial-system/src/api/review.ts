@@ -4,7 +4,7 @@ import axios from "axios";
 const assignReviewerNumber = (experienceYear: "ZERO_TO_FIVE" | "MORE_THAN_FIVE",
                               speciality: 'BREAST_RADIOLOGY' | 'GENERAL_RADIOLOGY' | 'BREAST_SURGERY' | 'OB_OR_GYM' | 'RADIOLOGY_RESIDENT' | 'OTHERS',
                               isTrainedOrDedicated: boolean,
-                              onSuccess: (reviewerCount: number) => void) => {
+                              callback: (reviewerCount: number) => void) => {
     const url = '/api/reviewer';
     const data = {
         experienceYear: experienceYear,
@@ -14,27 +14,29 @@ const assignReviewerNumber = (experienceYear: "ZERO_TO_FIVE" | "MORE_THAN_FIVE",
 
     axios.post(url, data)
         .then(response => {
-            onSuccess(response.data);
+            callback(response.data);
         }).catch(error => {
-        console.log(error);
+        alert(error);
+        callback(0);
     });
 };
 
 // 리뷰 이미지 번호 리스트 GET
-const getImageNumberList = (onSuccess: (imageNumberList: number[]) => void) => {
+const getImageNumberList = (callback: (imageNumberList: number[]) => void) => {
     const url = '/api/review/data/idList';
 
     axios.get(url)
         .then(response => {
-            onSuccess(response.data);
+            callback(response.data);
         }).catch(error => {
-        console.log(error);
+        alert(error);
+        callback([]);
     });
 };
 
 // 원본 이미지 리뷰 결과 저장
 const saveOriginalReviewResult = (biRads: string, dataId: number, pom: number, reviewerId: number, verifyTime: number,
-                                  onSuccess: () => void) => {
+                                  callback: () => void) => {
     const url = '/api/review/result/original';
     const data = {
         bi_rads: biRads,
@@ -46,14 +48,16 @@ const saveOriginalReviewResult = (biRads: string, dataId: number, pom: number, r
 
     axios.post(url, data)
         .then(response => {
-            console.log(response);
-            onSuccess();
-        }).catch(error => console.log(error));
+            callback();
+        }).catch(error => {
+        alert(error);
+        callback();
+    });
 };
 
 // ML 이미지 리뷰 결과 저장
 const saveMLReviewResult = (biRads: string, confidenceLevel: number, dataId: number, pom: number,
-                            reviewerId: number, verifyTime: number, onSuccess: () => void) => {
+                            reviewerId: number, verifyTime: number, callback: () => void) => {
     const url = '/api/review/result/ml';
     const data = {
         bi_rads: biRads,
@@ -66,9 +70,11 @@ const saveMLReviewResult = (biRads: string, confidenceLevel: number, dataId: num
 
     axios.post(url, data)
         .then(response => {
-            console.log(response);
-            onSuccess();
-        }).catch(error => console.log(error));
+            callback();
+        }).catch(error => {
+            alert(error);
+            callback();
+    });
 }
 
 export {assignReviewerNumber, getImageNumberList, saveOriginalReviewResult, saveMLReviewResult};

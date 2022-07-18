@@ -21,20 +21,18 @@ const ReviewInfoBox = () => {
         <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
             <Stack direction="row" spacing={4}>
                 <Stack direction="row" spacing={1}>
-                    <Chip label="Image Number" icon={<ImageIcon/>} color="primary"
-                          variant="outlined"/>
+                    <Chip label="Image Number" icon={<ImageIcon/>} color="primary" variant="outlined"/>
                     <Chip label={`${currentImageNumber} of ${imageNumberList.length}`} color="info"/>
                 </Stack>
                 <Divider orientation="vertical" flexItem></Divider>
                 <Stack direction="row" spacing={1}>
-                    <Chip label="Reviewer Number" icon={<FaceIcon/>} color="success"
-                          variant="outlined"/>
+                    <Chip label="Reviewer Number" icon={<FaceIcon/>} color="success" variant="outlined"/>
                     <Chip label={reviewerCount} color="info"/>
                 </Stack>
                 <Box flexGrow={2}/>
                 <Button variant="outlined" color="info" onClick={handleClickExit}>EXIT</Button>
             </Stack>
-            <ExitReviewDialog />
+            <ExitReviewDialog/>
         </Box>
     )
 };

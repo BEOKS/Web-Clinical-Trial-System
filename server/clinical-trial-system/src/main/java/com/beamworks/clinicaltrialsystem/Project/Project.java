@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServlet;
 import java.util.List;
 
 @Entity

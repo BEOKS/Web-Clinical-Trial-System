@@ -1,10 +1,44 @@
-import { Stack, Typography, TextField, Button, Link, Box } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import {Box, Button, Link, Stack, TextField, Typography} from '@mui/material';
+import {Link as RouterLink, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {LoginAction} from "./LoginReducer";
-import {DrawerAction} from "../Drawer/DrawerReducer";
+import {ChangeEvent} from "react";
+import {sendUserInfoForAuthenticate} from "../../api/SendUserInfoForAuthenticate";
+
+function EmailInputTextField(props: {
+    onChange: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void,
+    value: string, emailValidation: boolean
+}) {
+    return <TextField
+        id="email"
+        label="Email"
+        variant="outlined"
+        autoComplete="off"
+        type="email"
+        size="small"
+        onChange={props.onChange}
+        value={props.value}
+        error={(!props.emailValidation && true)}
+        helperText={(!props.emailValidation && "Not a valid email format.")}
+    />;
+}
+
+function PasswordInputTextField(props: {
+    onChange: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void,
+    value: string
+}) {
+    return <TextField
+        id="password"
+        label="Password"
+        variant="outlined"
+        autoComplete="off"
+        type="password"
+        size="small"
+        onChange={props.onChange}
+        value={props.value}
+    />;
+}
 
 export default function LoginWithEmail() {
     const dispatch = useDispatch();
@@ -15,7 +49,7 @@ export default function LoginWithEmail() {
     const emailValidation = useSelector((state: RootState) => state.LoginReducer.emailValidation);
 
     // 이메일 유효성 검사
-    const checkEmail = (email:string) => {
+    const isEmailValidate = (email: string) => {
         const emailRegex =
             /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
         const result = emailRegex.test(email);
@@ -24,10 +58,12 @@ export default function LoginWithEmail() {
     };
 
     const handleEmailLogin = () => {
-        if (checkEmail(email)) {
-            dispatch(DrawerAction.displayMenuButton());
-            navigate('/select-role');
-        }
+        // 간편 인증을 위해 이메일 형식 확인 기능을 비활성화합니다.
+        // if (isEmailValidate(email)) {
+        //     dispatch(DrawerAction.displayMenuButton());
+        //     navigate('/select-role');
+        // }
+        sendUserInfoForAuthenticate(email,password)
     };
 
     return (
@@ -36,34 +72,16 @@ export default function LoginWithEmail() {
                 Log In
             </Typography>
             <Stack spacing={1.5} mt={3}>
-                <TextField
-                    id="email"
-                    label="Email"
-                    variant="outlined"
-                    autoComplete="off"
-                    type="email"
-                    size="small"
-                    onChange={e => { dispatch(LoginAction.setEmail(e.target.value)) }}
-                    value={email}
-                    error={(!emailValidation && true)}
-                    helperText={(!emailValidation && "Not a valid email format.")}
-                />
-                <TextField
-                    id="password"
-                    label="Password"
-                    variant="outlined"
-                    autoComplete="off"
-                    type="password"
-                    size="small"
-                    onChange={e => { dispatch(LoginAction.setPassword(e.target.value))}}
-                    value={password}
-                />
+                <EmailInputTextField onChange={e => dispatch(LoginAction.setEmail(e.target.value))}
+                                     value={email} emailValidation={emailValidation}/>
+                <PasswordInputTextField onChange={e => dispatch(LoginAction.setPassword(e.target.value))}
+                                        value={password}/>
                 <Button variant="contained" size="large" onClick={() => handleEmailLogin()}>
                     Log In
                 </Button>
             </Stack>
             <Typography align="center" mt={3}>
-                <Link href="#" underline="hover">Forgot Password?</Link><br />
+                <Link href="#" underline="hover">Forgot Password?</Link><br/>
                 No Account? <Link component={RouterLink} to="/signup" underline="hover">Create One.</Link>
             </Typography>
         </Box>

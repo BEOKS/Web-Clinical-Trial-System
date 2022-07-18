@@ -21,10 +21,7 @@ export default function Login() {
         <Main>
             <Container maxWidth="sm">
                 <DrawerHeader/>
-                <Box
-                    my={7}
-                    p={8}
-                    sx={{border: 1, borderRadius: 1, borderColor: 'primary.main'}}>
+                <Box my={7} p={8} sx={{border: 1, borderRadius: 1, borderColor: 'primary.main'}}>
                     <LoginWithEmail/>
                     <LoginWithSNS/>
                 </Box>
