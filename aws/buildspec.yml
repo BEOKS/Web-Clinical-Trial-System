@@ -48,5 +48,6 @@ phases:
     commands:
       # Take these images and push them to Docker hub
       - echo Pushing the Docker images...
+      - docker images 
       - docker push lee01042000/middleware:0.1
       - docker push lee01042000/client-with-proxy:0.1
