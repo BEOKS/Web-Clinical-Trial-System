@@ -15,21 +15,9 @@ interface REVIEWER_INFO {
     label: string,
 }
 
-const SPECIALITY_OPTIONS: REVIEWER_INFO[] = [
-    {value: SPECIALITY.BREAST_RADIOLOGY, label: 'Breast Radiology'},
-    {value: SPECIALITY.GENERAL_RADIOLOGY, label: 'General Radiology'},
-    {value: SPECIALITY.BREAST_SURGERY, label: 'Breast Surgery'},
-    {value: SPECIALITY.OB_OR_GYM, label: 'OB/GYN'},
-    {value: SPECIALITY.RADIOLOGY_RESIDENT, label: 'Radiology Resident'},
-    {value: SPECIALITY.OTHERS, label: 'Others'},
-];
 const TRAINED_OR_DEDICATED_OPTIONS: REVIEWER_INFO[] = [
     {value: 'yes', label: 'Yes'},
     {value: 'no', label: 'No'},
-];
-const EXPERIENCE_YEAR_OPTIONS: REVIEWER_INFO[] = [
-    {value: EXPERIENCE_YEAR.ZERO_TO_FIVE, label: '0~5 years'},
-    {value: EXPERIENCE_YEAR.MORE_THAN_FIVE, label: 'more than 5 years'},
 ];
 
 function SpecialitySelect(props: { speciality: any, onChange: (e: SelectChangeEvent) => void }) {
@@ -43,8 +31,8 @@ function SpecialitySelect(props: { speciality: any, onChange: (e: SelectChangeEv
                 label="Speciality"
                 onChange={props.onChange}
             >
-                {SPECIALITY_OPTIONS.map(speciality =>
-                    <MenuItem key={speciality.value} value={speciality.value}>{speciality.label}</MenuItem>)}
+                {Object.values(SPECIALITY).map(speciality =>
+                    <MenuItem key={speciality} value={speciality}>{speciality}</MenuItem>)}
             </Select>
         </FormControl>
     )
@@ -79,9 +67,9 @@ function ExperienceYearSelect(props: { experienceYear: any, onChange: (e: Select
                 label="Years of Experience"
                 onChange={props.onChange}
             >
-                {EXPERIENCE_YEAR_OPTIONS.map(experienceYear =>
-                    <MenuItem key={experienceYear.value}
-                              value={experienceYear.value}>{experienceYear.label}</MenuItem>)}
+                {Object.values(EXPERIENCE_YEAR).map(experienceYear =>
+                    <MenuItem key={experienceYear}
+                              value={experienceYear}>{experienceYear}</MenuItem>)}
             </Select>
         </FormControl>
     )
