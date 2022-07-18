@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import DrawerHeader from "../../Drawer/DrawerHeader";
 import {Alert, AlertTitle, Box, Button, Container, Grid, Typography} from "@mui/material";
@@ -54,7 +55,10 @@ const StartReviewInfoAlert = () => {
         </Alert>
     )
 };
-
+/**
+ * 
+ * @returns 
+ */
 const StartReviewPage = () => {
     const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
