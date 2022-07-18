@@ -20,7 +20,7 @@ services:
     build: 
       context: ../server
       args:
-        - local
+        - prod
       dockerfile: ./Dockerfile.prod
     container_name: middleware
     volumes:

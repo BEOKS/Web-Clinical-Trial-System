@@ -24,9 +24,9 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    // implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.7.0'
+    // implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.7.0'
     implementation 'org.projectlombok:lombok:1.18.24'
     implementation "mysql:mysql-connector-java:8.0.29"
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
@@ -40,13 +40,6 @@ dependencies {
     testAnnotationProcessor('org.projectlombok:lombok')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.0'
-}
-bootJar {
-    enabled = false
-}
-
-jar {
-    enabled = true
 }
 tasks.named('test') {
     useJUnitPlatform()
