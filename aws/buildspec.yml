@@ -37,7 +37,7 @@ phases:
       # - ./snyk monitor --docker lukondefmwila/nodejs-test:latest --file=./backend/Dockerfile.dev
       # Build the Docker images
       - echo Building the production Docker image...
-      sh build.sh local
+      - sh build.sh local
       # - docker build -t lukondefmwila/dkr-multicontainer-app-client ./client
       # - docker build -t lukondefmwila/dkr-multicontainer-app-backend ./backend
       # - docker build -t lukondefmwila/dkr-multicontainer-app-nginx ./nginx
