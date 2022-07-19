@@ -10,13 +10,12 @@ import {getProjectList} from "../../../api/project";
 
 /**
  * 프로젝트 선택 컴포넌트입니다.
- * 'displaySelectProject' state를 true로 설정할 때 화면에 보여집니다.
- * 선택된 프로젝트 이름은 'currentProject' state에 저장됩니다.
- * @constructor
+ * [displaySelectProject]{@link RootState.ProjectReducer.displaySelectProject}를 true로 설정할 때 화면에 보여집니다.
+ * 선택된 프로젝트 이름은 [currentProject]{@link RootState.ProjectReducer.displaySelectProject}에 저장됩니다.
  * @author 김도희 <doheedev@gmail.com>
  */
 const SelectProject = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const currentProject = useSelector((state: RootState) => state.ProjectReducer.currentProject);
     const displaySelectProject = useSelector((state: RootState) => state.ProjectReducer.displaySelectProject);
     const projectList = useSelector((state: RootState) => state.ProjectReducer.projectList);
