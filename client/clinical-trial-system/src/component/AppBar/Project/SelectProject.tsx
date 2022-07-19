@@ -8,6 +8,13 @@ import {RootState} from "../../../store";
 import {useEffect} from "react";
 import {getProjectList} from "../../../api/project";
 
+/**
+ * 프로젝트 선택 컴포넌트입니다.
+ * 'displaySelectProject' state를 true로 설정할 때 화면에 보여집니다.
+ * 선택된 프로젝트 이름은 'currentProject' state에 저장됩니다.
+ * @constructor
+ * @author 김도희 <doheedev@gmail.com>
+ */
 const SelectProject = () => {
     const dispatch = useDispatch();
     const currentProject = useSelector((state: RootState) => state.ProjectReducer.currentProject);
