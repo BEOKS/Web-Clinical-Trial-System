@@ -1,3 +1,8 @@
+/**
+ * @file 리뷰 시작 페이지에 대한 코드를 작성합니다.
+ * @author 김도희 <doheedev@gmail.com>
+ */
+
 import * as React from "react";
 import DrawerHeader from "../../Drawer/DrawerHeader";
 import {Alert, AlertTitle, Box, Button, Container, Grid, Typography} from "@mui/material";
@@ -30,6 +35,10 @@ const SECOND_INFO_CONTENT_MESSAGE =
         Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the
         word in classical literature, discovered the undoubtable source.</>;
 
+/**
+ * 리뷰 시작 페이지의 제목 컴포넌트입니다.
+ * 제목과 부제목으로 구성되며 리뷰 시작 페이지 본문의 최상단에 위치합니다.
+ */
 const StartReviewTitle = () => {
     return (
         <Box sx={{backgroundColor: 'secondary.light', p: 3, mt: 4}}
@@ -44,6 +53,10 @@ const StartReviewTitle = () => {
     )
 };
 
+/**
+ * 리뷰 시작 페이지의 주의사항 문구를 출력하는 Alert 컴포넌트입니다.
+ * 주의사항 제목 및 내용을 원하는 만큼 추가, 삭제할 수 있습니다.
+ */
 const StartReviewInfoAlert = () => {
     return (
         <Alert variant="outlined" severity="info">
@@ -55,6 +68,11 @@ const StartReviewInfoAlert = () => {
     )
 };
 
+/**
+ * 리뷰 시작 페이지입니다. 제목, 주의사항 문구, 리뷰어 정보 입력 컴포넌트, 리뷰 시작 버튼으로 구성되며
+ * 리뷰 동의 체크박스를 클릭하면 리뷰 시작 버튼이 활성화됩니다.
+ * 리뷰 시작 버튼 클릭 시 리뷰 시작 여부를 묻는 다이얼로그가 나타납니다.
+ */
 const StartReviewPage = () => {
     const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);

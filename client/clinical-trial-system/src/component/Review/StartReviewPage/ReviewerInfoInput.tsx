@@ -1,3 +1,8 @@
+/**
+ * @file 리뷰어 정보 입력과 관련된 코드를 작성합니다.
+ * @author 김도희 <doheedev@gmail.com>
+ */
+
 import {Box, Checkbox, Chip, Divider, FormControl, FormControlLabel, InputLabel, MenuItem, Select} from "@mui/material";
 import {EXPERIENCE_YEAR, ReviewerAction, SPECIALITY} from "../ReviewerReducer";
 import * as React from "react";
@@ -20,6 +25,10 @@ const TRAINED_OR_DEDICATED_OPTIONS: REVIEWER_INFO[] = [
     {value: 'no', label: 'No'},
 ];
 
+/**
+ * Speciality 선택 컴포넌트입니다.
+ * {@link SPECIALITY} 중 한 가지 아이템을 선택할 수 있습니다.
+ */
 function SpecialitySelect(props: { speciality: any, onChange: (e: SelectChangeEvent) => void }) {
     return (
         <FormControl fullWidth size="small" sx={{mt: 4}}>
@@ -38,6 +47,10 @@ function SpecialitySelect(props: { speciality: any, onChange: (e: SelectChangeEv
     )
 }
 
+/**
+ * Trained for Breast Imaging 선택 컴포넌트입니다.
+ * {@link TRAINED_OR_DEDICATED_OPTIONS} 중 한 가지 아이템을 선택할 수 있습니다.
+ */
 function TrainedOrDedicatedSelect(props: { trainedOrDedicated: any, onChange: (e: SelectChangeEvent) => void }) {
     return (
         <FormControl fullWidth size="small" sx={{mt: 3}}>
@@ -56,6 +69,10 @@ function TrainedOrDedicatedSelect(props: { trainedOrDedicated: any, onChange: (e
     )
 }
 
+/**
+ * Year of Experience 선택 컴포넌트입니다.
+ * {@link EXPERIENCE_YEAR} 중 한 가지 아이템을 선택할 수 있습니다.
+ */
 function ExperienceYearSelect(props: { experienceYear: any, onChange: (e: SelectChangeEvent) => void }) {
     return (
         <FormControl fullWidth size="small" sx={{mt: 3}}>
@@ -75,6 +92,11 @@ function ExperienceYearSelect(props: { experienceYear: any, onChange: (e: Select
     )
 }
 
+/**
+ * 리뷰어 정보를 입력받는 컴포넌트입니다.
+ * Speciality, Trained for Breast Imaging, Year of Experience 정보를 Select 컴포넌트로 입력받을 수 있습니다.
+ * 리뷰 결과 활용 동의 문구 또는 체크박스를 선택하면 리뷰 시작 페이지의 리뷰 시작 버튼이 활성화됩니다.
+ */
 const ReviewerInfoInput = () => {
     const dispatch = useDispatch();
     const speciality = useSelector((state: RootState) => state.ReviewerReducer.speciality);
