@@ -10,7 +10,6 @@ import * as React from "react";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {DrawerAction} from "../Drawer/DrawerReducer";
-import "./RoleSelection.css";
 import {useNavigate} from "react-router-dom";
 import {ProjectAction} from "../AppBar/Project/ProjectReducer";
 
