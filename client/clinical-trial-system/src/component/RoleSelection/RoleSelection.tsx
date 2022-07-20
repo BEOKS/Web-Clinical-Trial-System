@@ -1,3 +1,7 @@
+/**
+ * @author 김도희 <doheedev@gmail.com>
+ */
+
 import {Alert, AlertTitle, Box, Button, Container, Grid, Stack, Typography} from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {Main} from "../Main/Main";
@@ -10,6 +14,9 @@ import "./RoleSelection.css";
 import {useNavigate} from "react-router-dom";
 import {ProjectAction} from "../AppBar/Project/ProjectReducer";
 
+/**
+ * 역할 선택 안내 문구를 띄울 Alert 컴포넌트입니다.
+ */
 const RoleSelectionAlert = () => {
     return (
         <Alert variant="outlined" severity="info">
@@ -19,6 +26,11 @@ const RoleSelectionAlert = () => {
     )
 }
 
+/**
+ * 아이콘과 역할 텍스트로 구성된 역할 선택 버튼입니다.
+ * @param props.onClick - 버튼 클릭 시 실행되는 화살표 함수입니다.
+ * @param props.message - 버튼에 보여지는 역할 텍스트입니다.
+ */
 const RoleButton = (props: { onClick: () => void, message: string }) => {
     return (
         <Button variant="contained"
@@ -33,6 +45,11 @@ const RoleButton = (props: { onClick: () => void, message: string }) => {
     )
 }
 
+/**
+ * 최초 로그인 시에만 보여지는 역할 선택 페이지입니다.
+ * 간단한 안내 문구와 역할 선택 버튼으로 구성됩니다.
+ * 버튼을 클릭하면 역할에 따라 적절한 페이지로 이동합니다.
+ */
 const RoleSelection = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
