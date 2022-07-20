@@ -23,6 +23,11 @@ const PI_DESCRIPTION_MESSAGE = <>Lorem ipsum dolor sit amet, consectetur adipisc
 
 const PI_TITLE_MESSAGE = <>This is PI page.</>;
 
+/**
+ * 임시 PI 페이지입니다. 제목과 페이지 설명으로 구성되어 있습니다.
+ * @todo 요구사항 명세에 알맞게 페이지의 전체적인 구성을 변경해야 합니다. 제목과 설명 또한 다른 컴포넌트로 대체할 수 있습니다.
+ * @author 김도희 <doheedev@gmail.com>
+ */
 const PIPage = () => {
     const dispatch = useDispatch();
     const drawerOpen = useSelector((state: RootState) => state.DrawerReducer.drawerOpen);
