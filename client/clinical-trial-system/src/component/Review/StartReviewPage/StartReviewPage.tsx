@@ -72,6 +72,10 @@ const StartReviewInfoAlert = () => {
  * 리뷰 시작 페이지입니다. 제목, 주의사항 문구, 리뷰어 정보 입력 컴포넌트, 리뷰 시작 버튼으로 구성되며
  * 리뷰 동의 체크박스를 클릭하면 리뷰 시작 버튼이 활성화됩니다.
  * 리뷰 시작 버튼 클릭 시 리뷰 시작 여부를 묻는 다이얼로그가 나타납니다.
+ * [MUI breakpoints]{@link https://mui.com/material-ui/customization/breakpoints/#main-content} 중
+ * md(900px)를 기준으로 리뷰어 정보 입력 컴포넌트의 배치가 변경됩니다.
+ * 화면 너비가 md 이상인 경우 리뷰어 정보 입력 컴포넌트가 주의사항 문구의 우측에 위치하고,
+ * md 미만인 경우 주의사항 문구의 하단에 위치합니다.
  */
 const StartReviewPage = () => {
     const dispatch = useDispatch();

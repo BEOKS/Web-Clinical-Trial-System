@@ -10,6 +10,12 @@ const marksConfidence = [
     {value: 10, label: '10',},
 ];
 
+/**
+ * 0부터 10까지의 값 중 1 단위로 Confidence Level을 선택할 수 있는 Slider 컴포넌트입니다.
+ * [reviewStep]{@link RootState.ReviewerReducer.reviewStep}이
+ * {@link REVIEW_STEP.ML_RESULT}일 때 비활성화된 상태로 display되며, {@link REVIEW_STEP.CONFIDENCE}일 때 활성화됩니다.
+ * @author 김도희 <doheedev@gmail.com>
+ */
 const ConfidenceInput = () => {
     const dispatch = useDispatch();
     const reviewStep = useSelector((state: RootState) => state.ReviewerReducer.reviewStep);
