@@ -1,8 +1,11 @@
 import axios from "axios";
+import {EXPERIENCE_YEAR, SPECIALITY} from "../component/Review/ReviewerReducer";
 
 // 리뷰어 정보 저장 및 리뷰어 번호 할당
-const assignReviewerNumber = (experienceYear: "ZERO_TO_FIVE" | "MORE_THAN_FIVE",
-                              speciality: 'BREAST_RADIOLOGY' | 'GENERAL_RADIOLOGY' | 'BREAST_SURGERY' | 'OB_OR_GYM' | 'RADIOLOGY_RESIDENT' | 'OTHERS',
+const assignReviewerNumber = (experienceYear: typeof EXPERIENCE_YEAR.ZERO_TO_FIVE | typeof EXPERIENCE_YEAR.MORE_THAN_FIVE,
+                              speciality: typeof SPECIALITY.BREAST_RADIOLOGY | typeof SPECIALITY.GENERAL_RADIOLOGY |
+                                  typeof SPECIALITY.BREAST_SURGERY | typeof SPECIALITY.OB_OR_GYM |
+                                  typeof SPECIALITY.RADIOLOGY_RESIDENT | typeof SPECIALITY.OTHERS,
                               isTrainedOrDedicated: boolean,
                               callback: (reviewerCount: number) => void) => {
     const url = '/api/reviewer';
