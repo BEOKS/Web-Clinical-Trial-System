@@ -1,5 +1,5 @@
-import {Button, Container, Paper, Stack, Typography} from "@mui/material";
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import {Alert, AlertTitle, Box, Button, Container, Grid, Stack, Typography} from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {Main} from "../Main/Main";
 import DrawerHeader from "../Drawer/DrawerHeader";
 import * as React from "react";
@@ -9,6 +9,29 @@ import {DrawerAction} from "../Drawer/DrawerReducer";
 import "./RoleSelection.css";
 import {useNavigate} from "react-router-dom";
 import {ProjectAction} from "../AppBar/Project/ProjectReducer";
+
+const RoleSelectionAlert = () => {
+    return (
+        <Alert variant="outlined" severity="info">
+            <AlertTitle>Select your role</AlertTitle>
+            Please select your role between PI or Reviewer.
+        </Alert>
+    )
+}
+
+const RoleButton = (props: { onClick: () => void, message: string }) => {
+    return (
+        <Button variant="contained"
+                sx={{width: '100%', py: 5}}
+                onClick={props.onClick}
+                disableElevation>
+            <Stack alignItems="center" spacing={3}>
+                <AccountCircleIcon sx={{fontSize: 150}}/>
+                <Typography variant="h4">{props.message}</Typography>
+            </Stack>
+        </Button>
+    )
+}
 
 const RoleSelection = () => {
     const dispatch = useDispatch();
@@ -29,30 +52,23 @@ const RoleSelection = () => {
 
     return (
         <Main>
-            <Container maxWidth="md">
+            <Container maxWidth="sm">
                 <DrawerHeader/>
-                <Paper variant="outlined" sx={{p: 5, my: 3, backgroundColor: 'secondary.main'}}>
-                    <Stack sx={{display: 'flex', alignItems: 'center'}}>
-                        <Typography variant="h4" color="text.primary" mb={1}>Select User Type</Typography>
-                        <div className="bar"/>
-                        <Stack direction="row" spacing={4} mt={4}>
-                            <Button data-testid={'pi-button'} variant="contained"
-                                    sx={{width: '300px', p: 5}} onClick={handleClickPIButton}>
-                                <Stack alignItems="center" spacing={3}>
-                                    <AccountBoxIcon sx={{fontSize: 200}}/>
-                                    <Typography variant="h4">PI</Typography>
-                                </Stack>
-                            </Button>
-                            <Button data-testid={'reviewer-button'} variant="contained"
-                                    sx={{width: '300px', p: 5}} onClick={handleClickReviwerButton}>
-                                <Stack alignItems="center" spacing={3}>
-                                    <AccountBoxIcon sx={{fontSize: 200}}/>
-                                    <Typography variant="h4">Reviewer</Typography>
-                                </Stack>
-                            </Button>
-                        </Stack>
-                    </Stack>
-                </Paper>
+                <Box sx={{p: 5, my: 4}} border={1} borderRadius={1} borderColor="secondary.dark">
+                    <Grid container direction="column" spacing={3}>
+                        <Grid item xs>
+                            <RoleSelectionAlert/>
+                        </Grid>
+                        <Grid item xs container spacing={3}>
+                            <Grid item xs>
+                                <RoleButton onClick={handleClickPIButton} message="PI"/>
+                            </Grid>
+                            <Grid item xs>
+                                <RoleButton onClick={handleClickReviwerButton} message="Reviewer"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Box>
             </Container>
         </Main>
     );
