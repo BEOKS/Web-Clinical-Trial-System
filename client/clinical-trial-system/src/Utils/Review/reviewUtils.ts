@@ -1,16 +1,20 @@
-const stringToSpecialityType = (input: string): 'BREAST_RADIOLOGY' | 'GENERAL_RADIOLOGY' | 'BREAST_SURGERY' | 'OB_OR_GYM' | 'RADIOLOGY_RESIDENT' | 'OTHERS' => {
-    if (input === 'BREAST_RADIOLOGY') {
-        return 'BREAST_RADIOLOGY';
-    } else if (input === 'GENERAL_RADIOLOGY') {
-        return 'GENERAL_RADIOLOGY';
-    } else if (input === 'BREAST_SURGERY') {
-        return 'BREAST_SURGERY';
-    } else if (input === 'OB_OR_GYM') {
-        return 'OB_OR_GYM';
-    } else if (input === 'RADIOLOGY_RESIDENT') {
-        return 'RADIOLOGY_RESIDENT';
-    } else if (input === 'OTHERS') {
-        return 'OTHERS';
+import {EXPERIENCE_YEAR, SPECIALITY} from "../../component/Review/ReviewerReducer";
+
+const stringToSpecialityType = (input: string): typeof SPECIALITY.BREAST_RADIOLOGY | typeof SPECIALITY.GENERAL_RADIOLOGY |
+    typeof SPECIALITY.BREAST_SURGERY | typeof SPECIALITY.OB_OR_GYM |
+    typeof SPECIALITY.RADIOLOGY_RESIDENT | typeof SPECIALITY.OTHERS => {
+    if (input === SPECIALITY.BREAST_RADIOLOGY) {
+        return SPECIALITY.BREAST_RADIOLOGY;
+    } else if (input === SPECIALITY.GENERAL_RADIOLOGY) {
+        return SPECIALITY.GENERAL_RADIOLOGY;
+    } else if (input === SPECIALITY.BREAST_SURGERY) {
+        return SPECIALITY.BREAST_SURGERY;
+    } else if (input === SPECIALITY.OB_OR_GYM) {
+        return SPECIALITY.OB_OR_GYM;
+    } else if (input === SPECIALITY.RADIOLOGY_RESIDENT) {
+        return SPECIALITY.RADIOLOGY_RESIDENT;
+    } else if (input === SPECIALITY.OTHERS) {
+        return SPECIALITY.OTHERS;
     } else {
         throw 'Invalid Input!';
     }
@@ -26,11 +30,11 @@ const stringToTrainedOrDedicatedType = (input: string): boolean => {
     }
 };
 
-const stringToExperienceYearType = (input: string): "ZERO_TO_FIVE" | "MORE_THAN_FIVE" => {
-    if (input === "ZERO_TO_FIVE") {
-        return "ZERO_TO_FIVE";
-    } else if (input === "MORE_THAN_FIVE") {
-        return "MORE_THAN_FIVE";
+const stringToExperienceYearType = (input: string): typeof EXPERIENCE_YEAR.ZERO_TO_FIVE | typeof EXPERIENCE_YEAR.MORE_THAN_FIVE => {
+    if (input === EXPERIENCE_YEAR.ZERO_TO_FIVE) {
+        return EXPERIENCE_YEAR.ZERO_TO_FIVE;
+    } else if (input === EXPERIENCE_YEAR.MORE_THAN_FIVE) {
+        return EXPERIENCE_YEAR.MORE_THAN_FIVE;
     } else {
         throw 'Invalid Input!';
     }

@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import axios from "axios";
 import RoleSelection from "./RoleSelection";
 import {PI_NAME,PI_DESCRIPTION,REVIEWER_DESCRIPTION,REVIEWER_NAME} from "./config";
-import roleSelection from "./RoleSelection";
 
 jest.mock('axios', () => jest.fn())
 

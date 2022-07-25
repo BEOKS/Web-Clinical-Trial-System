@@ -1,3 +1,8 @@
+/**
+ * @file 리뷰어 정보 입력과 관련된 코드를 작성합니다.
+ * @author 김도희 <doheedev@gmail.com>
+ */
+
 import {Box, Checkbox, Chip, Divider, FormControl, FormControlLabel, InputLabel, MenuItem, Select} from "@mui/material";
 import {EXPERIENCE_YEAR, ReviewerAction, SPECIALITY} from "../ReviewerReducer";
 import * as React from "react";
@@ -14,23 +19,16 @@ interface REVIEWER_INFO {
     value: string,
     label: string,
 }
-const SPECIALITY_OPTIONS: REVIEWER_INFO[] = [
-    {value: SPECIALITY.BREAST_RADIOLOGY, label: 'Breast Radiology'},
-    {value: SPECIALITY.GENERAL_RADIOLOGY, label: 'General Radiology'},
-    {value: SPECIALITY.BREAST_SURGERY, label: 'Breast Surgery'},
-    {value: SPECIALITY.OB_OR_GYM, label: 'OB/GYN'},
-    {value: SPECIALITY.RADIOLOGY_RESIDENT, label: 'Radiology Resident'},
-    {value: SPECIALITY.OTHERS, label: 'Others'},
-];
+
 const TRAINED_OR_DEDICATED_OPTIONS: REVIEWER_INFO[] = [
     {value: 'yes', label: 'Yes'},
     {value: 'no', label: 'No'},
 ];
-const EXPERIENCE_YEAR_OPTIONS: REVIEWER_INFO[] = [
-    {value: EXPERIENCE_YEAR.ZERO_TO_FIVE, label: '0~5 years'},
-    {value: EXPERIENCE_YEAR.MORE_THAN_FIVE, label: 'more than 5 years'},
-];
 
+/**
+ * Speciality 선택 컴포넌트입니다.
+ * {@link SPECIALITY} 중 한 가지 아이템을 선택할 수 있습니다.
+ */
 function SpecialitySelect(props: { speciality: any, onChange: (e: SelectChangeEvent) => void }) {
     return (
         <FormControl fullWidth size="small" sx={{mt: 4}}>
@@ -42,13 +40,17 @@ function SpecialitySelect(props: { speciality: any, onChange: (e: SelectChangeEv
                 label="Speciality"
                 onChange={props.onChange}
             >
-                {SPECIALITY_OPTIONS.map(speciality =>
-                    <MenuItem key={speciality.value} value={speciality.value}>{speciality.label}</MenuItem>)}
+                {Object.values(SPECIALITY).map(speciality =>
+                    <MenuItem key={speciality} value={speciality}>{speciality}</MenuItem>)}
             </Select>
         </FormControl>
     )
 }
 
+/**
+ * Trained for Breast Imaging 선택 컴포넌트입니다.
+ * {@link TRAINED_OR_DEDICATED_OPTIONS} 중 한 가지 아이템을 선택할 수 있습니다.
+ */
 function TrainedOrDedicatedSelect(props: { trainedOrDedicated: any, onChange: (e: SelectChangeEvent) => void }) {
     return (
         <FormControl fullWidth size="small" sx={{mt: 3}}>
@@ -67,6 +69,10 @@ function TrainedOrDedicatedSelect(props: { trainedOrDedicated: any, onChange: (e
     )
 }
 
+/**
+ * Year of Experience 선택 컴포넌트입니다.
+ * {@link EXPERIENCE_YEAR} 중 한 가지 아이템을 선택할 수 있습니다.
+ */
 function ExperienceYearSelect(props: { experienceYear: any, onChange: (e: SelectChangeEvent) => void }) {
     return (
         <FormControl fullWidth size="small" sx={{mt: 3}}>
@@ -78,14 +84,19 @@ function ExperienceYearSelect(props: { experienceYear: any, onChange: (e: Select
                 label="Years of Experience"
                 onChange={props.onChange}
             >
-                {EXPERIENCE_YEAR_OPTIONS.map(experienceYear =>
-                    <MenuItem key={experienceYear.value}
-                              value={experienceYear.value}>{experienceYear.label}</MenuItem>)}
+                {Object.values(EXPERIENCE_YEAR).map(experienceYear =>
+                    <MenuItem key={experienceYear}
+                              value={experienceYear}>{experienceYear}</MenuItem>)}
             </Select>
         </FormControl>
     )
 }
 
+/**
+ * 리뷰어 정보를 입력받는 컴포넌트입니다.
+ * Speciality, Trained for Breast Imaging, Year of Experience 정보를 Select 컴포넌트로 입력받을 수 있습니다.
+ * 리뷰 결과 활용 동의 문구 또는 체크박스를 선택하면 리뷰 시작 페이지의 리뷰 시작 버튼이 활성화됩니다.
+ */
 const ReviewerInfoInput = () => {
     const dispatch = useDispatch();
     const speciality = useSelector((state: RootState) => state.ReviewerReducer.speciality);
@@ -110,7 +121,7 @@ const ReviewerInfoInput = () => {
     };
 
     return (
-        <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
+        <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1} width="100%">
             <Divider>
                 <Chip label="Reviewer Info" color="success"/>
             </Divider>

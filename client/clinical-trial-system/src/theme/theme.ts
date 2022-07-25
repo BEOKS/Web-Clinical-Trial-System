@@ -1,3 +1,9 @@
+/**
+ * @file MUI 컴포넌트의 기본 색상을 변경하거나 새로운 색상을 추가하기 위해 관련 코드를 작성합니다.
+ * @author 김도희 <doheedev@gmail.com>
+ * @see {@link https://mui.com/material-ui/customization/palette/#adding-new-colors}
+ * @see {@link https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation}
+ */
 import { createTheme } from '@mui/material/styles';
 
 
