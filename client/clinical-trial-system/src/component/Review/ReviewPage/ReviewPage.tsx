@@ -10,7 +10,7 @@ import {ProjectAction} from "../../AppBar/Project/ProjectReducer";
 import ReviewInputBox from "./ReviewInputBox";
 import ReviewInfoBox from "./ReviewInfoBox";
 import {REVIEW_STEP} from "../ReviewerReducer";
-
+import './ReviewPage.css'
 interface IMAGE_INFO {
     type: string,
     label: string,

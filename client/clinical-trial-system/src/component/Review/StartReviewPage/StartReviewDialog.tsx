@@ -53,5 +53,5 @@ const StartReviewDialog = () => {
         </Dialog>
     );
 };
-
+// @ts-ignore
 export default StartReviewDialog;

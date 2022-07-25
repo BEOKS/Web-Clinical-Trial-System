@@ -2,12 +2,7 @@ package com.beamworks.clinicaltrialsystem.User.Reviewer
 
 import com.beamworks.clinicaltrialsystem.User.Reviewer.Dto.CreateReviewerDto
 import com.beamworks.clinicaltrialsystem.Utils.Controller.errorHandler
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiParam
-import io.swagger.annotations.ApiResponse
-import io.swagger.annotations.ApiResponses
-import io.swagger.v3.oas.annotations.tags.Tag
+import io.swagger.annotations.*
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PostMapping
@@ -19,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Api(tags = ["Control Reviewer Information"], description = "리뷰어 정보 생성/조회/삭제/수정 API")
 class ReviewerController
     (private val reviewerService: ReviewerService) {
-
     @PostMapping("")
     @ApiOperation(value = "새로운 Reviewer 생성")
     @ApiResponses(
