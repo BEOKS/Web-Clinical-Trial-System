@@ -2,7 +2,6 @@
  * @file 리뷰 시작 페이지에 대한 코드를 작성합니다.
  * @author 김도희 <doheedev@gmail.com>
  */
-
 import * as React from "react";
 import DrawerHeader from "../../Drawer/DrawerHeader";
 import {Alert, AlertTitle, Box, Button, Container, Grid, Typography} from "@mui/material";
@@ -67,7 +66,6 @@ const StartReviewInfoAlert = () => {
         </Alert>
     )
 };
-
 
 /**
  * 리뷰 시작 페이지입니다. 제목, 주의사항 문구, 리뷰어 정보 입력 컴포넌트, 리뷰 시작 버튼으로 구성되며
