@@ -33,6 +33,7 @@ services:
     container_name: backend
     volumes:
       - ./Storage:/root/Storage
+<<<<<<< HEAD
     ports:
       - 8080:8080
     depends_on:
@@ -41,6 +42,16 @@ services:
       innerNetwork:
         aliases:
           - middleware
+=======
+    # ports:
+    #   - 8080:8080
+    # depends_on:
+    #   - mysql
+    # networks:
+    #   innerNetwork:
+    #     aliases:
+    #       - middleware
+>>>>>>> 6efdcfe (Feat : nginx proxy)
   mysql:
     image: mysql:8.0-oracle 
     container_name: mysql
@@ -50,6 +61,7 @@ services:
       - MYSQL_ROOT_PASSWORD=0000
     volumes:
       - ./mysql:/var/lib/mysql
+<<<<<<< HEAD
     ports:
       - 3306:3306
       - 33060:33060
@@ -59,6 +71,17 @@ services:
           - mysql
 networks:
   innerNetwork:
+=======
+    # ports:
+    #   - 3306:3306
+    #   - 33060:33060
+#     networks:
+#       innerNetwork:
+#         aliases:
+#           - mysql
+# networks:
+#   innerNetwork: 
+>>>>>>> 6efdcfe (Feat : nginx proxy)
 
 
 

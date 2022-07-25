@@ -1,36 +1,32 @@
 {
-    "AWSEBDockerrunVersion": 2,
-    "containerDefinitions": [
-      {
-        "name": "nginx",
-        "image": "lee01042000/nginx:0.1",
-        "essential": true,
-        "memory": 300,
-        "portMappings": [
-            {
-              "hostPort": 80,
-              "containerPort": 80
-            }
-        ],
-        "links":["backend","client"]
-      },
-      {
-        "name": "client",
-        "image": "lee01042000/client:0.1",
-        "essential": true,
-        "memory": 300
-      },
-      {
-        "name": "backend",
-        "image": "lee01042000/backend:0.1",
-        "essential": true,
-        "memory": 300
-      },
-      {
-        "name": "mysql",
-        "image": "mysql:",
-        "essential": true,
-        "memory": 300
-      }
-    ]
-  }
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [{
+			"name": "mysql",
+			"image": "mysql:8.0-oracle",
+			"essential": true,
+			"memory": 128
+		},
+		{
+			"name": "middleware",
+			"image": "lee01042000/middleware:0.1",
+			"essential": true,
+			"memory": 128,
+			"links": [
+				"mysql"
+			]
+		},
+		{
+			"name": "client-proxy",
+			"image": "lee01042000/client-with-proxy:0.1",
+			"essential": true,
+			"memory": 128,
+			"links": [
+				"middleware"
+			],
+			"portMappings": [{
+				"hostPort": 80,
+				"containerPort": 80
+			}]
+		}
+	]
+}
