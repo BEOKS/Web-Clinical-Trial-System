@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.9'
 services:
   nginx:
     image: lee01042000/nginx:0.1
@@ -7,29 +7,18 @@ services:
       - client
       - backend
     restart: always # because it is routing traffic to our entire app
-    build:
-      dockerfile: Dockerfile
-      context: ../nginx
     ports:
       - '80:80'
   client:
     image: lee01042000/client:0.1
-    build:
-      context: ../client
-      dockerfile: ./Dockerfile.prod
     container_name: client
-    # ports:
-    #   - 80:80
+    ports:
+      - 3000:3000
     volumes:
       - /app/node_modules
     restart: on-failure
   backend:
     image: lee01042000/backend:0.1
-    build: 
-      context: ../server
-      args:
-        - prod
-      dockerfile: ./Dockerfile.prod
     container_name: backend
     volumes:
       - ./Storage:/root/Storage
@@ -37,12 +26,8 @@ services:
       - 8080:8080
     depends_on:
       - mysql
-    networks:
-      innerNetwork:
-        aliases:
-          - middleware
   mysql:
-    image: mysql:8.0-oracle 
+    image: mysql:8.0-oracle
     container_name: mysql
     restart : always
     command: --default-authentication-plugin=mysql_native_password
@@ -53,12 +38,3 @@ services:
     ports:
       - 3306:3306
       - 33060:33060
-    networks:
-      innerNetwork:
-        aliases:
-          - mysql
-networks:
-  innerNetwork:
-
-
-
