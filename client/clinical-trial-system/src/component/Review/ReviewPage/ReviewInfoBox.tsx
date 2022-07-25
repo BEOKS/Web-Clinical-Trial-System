@@ -7,6 +7,11 @@ import {RootState} from "../../../store";
 import {ReviewerAction} from "../ReviewerReducer";
 import ExitReviewDialog from "./ExitReviewDialog";
 
+/**
+ * 전체 중 현재 이미지 번호(문제 번호), 리뷰어 번호, 나가기 버튼으로 구성된 리뷰 정보 컴포넌트입니다.
+ * 나가기 버튼 클릭 시 리뷰 종료 의사를 묻는 다이얼로그를 띄웁니다.
+ * @author 김도희 <doheedev@gmail.com>
+ */
 const ReviewInfoBox = () => {
     const dispatch = useDispatch();
     const reviewerCount = useSelector((state: RootState) => state.ReviewerReducer.reviewerCount);

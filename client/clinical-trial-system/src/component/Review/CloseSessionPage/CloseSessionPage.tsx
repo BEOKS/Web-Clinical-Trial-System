@@ -16,6 +16,13 @@ const closeSessionAlertContentMessageWith = (currentImageNumber: number) =>
     <>You reviewed a total of <strong>{currentImageNumber} images.</strong> Thank you!<br/>
         Click the Finish Review button below to return to the Start Review page.</>;
 
+/**
+ * 세션 종료 페이지입니다.
+ * 'THANK YOU!' 문구와 함께 Alert 컴포넌트에서 리뷰한 이미지 개수를 알려주는 메세지를 출력합니다.
+ * 리뷰 종료 버튼 클릭 시 리뷰 시작 페이지로 이동합니다.
+ * (새로운 리뷰어의 리뷰 동의를 구하기 위해 [agreeReview]{@link RootState.ReviewerReducer.agreeReview}는 false로 초기화합니다.)
+ * @author 김도희 <doheedev@gmail.com>
+ */
 const CloseSessionPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();

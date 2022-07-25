@@ -1,21 +1,28 @@
 import {defineConfig} from 'vite'
 import react from '@vitejs/plugin-react'
-
-// https://vitejs.dev/config/
-export default defineConfig({
+let HOST_LOCATION
+const config={
     plugins: [react()],
-    server: {
+    define:{
+        'process.env':{}
+    }
+}
+
+if(process.env.VITE_API_HOST){
+    config['server']={
         host: true,
         port: 3000,
         proxy: {
             '/api': {
-                target: 'http://localhost:8080',
+                target: `http://${HOST_LOCATION}`,
                 changeOrigin: true
             },
             '/oauth2': {
-                target: 'http://localhost:8080',
+                target: `http://${HOST_LOCATION}`,
                 changeOrigin: true
             },
         },
-    },
-})
+    }
+}
+// https://vitejs.dev/config/
+export default defineConfig(config)

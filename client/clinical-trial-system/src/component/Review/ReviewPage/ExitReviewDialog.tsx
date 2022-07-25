@@ -5,6 +5,14 @@ import {ReviewerAction} from "../ReviewerReducer";
 import {RootState} from "../../../store";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * 리뷰 종료 의사를 묻는 다이얼로그입니다.
+ * 확인 버튼 클릭 시 세션 종료 페이지로 이동합니다.
+ * 또한, N번째 문제에서 나가기 버튼으로 리뷰를 종료했다면 N-1개의 문제를 푼 것이므로
+ * 세션 종료 페이지에서 푼 문제의 개수를 올바르게 출력하기 위해
+ * [currentImageNumber]{@link RootState.ReviewerReducer.currentImageNumber}를 1만큼 감소시킵니다.
+ * @author 김도희 <doheedev@gmail.com>
+ */
 const ExitReviewDialog = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();

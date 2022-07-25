@@ -1,28 +1,36 @@
 version: '3.3'
 services:
-  client-with-proxy:
-    image: lee01042000/client-with-proxy:0.1
+  nginx:
+    image: lee01042000/nginx:0.1
+    container_name: nginx
+    depends_on:
+      - client
+      - backend
+    restart: always # because it is routing traffic to our entire app
+    build:
+      dockerfile: Dockerfile
+      context: ../nginx
+    ports:
+      - '80:80'
+  client:
+    image: lee01042000/client:0.1
     build:
       context: ../client
-      dockerfile: ./Dockerfile.local
-    container_name: proxy
-    ports:
-      - 80:80
-    depends_on:
-      - middleware
-      - mysql
-    networks:
-      innerNetwork:
-        aliases:
-          - nginx
-  middleware:
-    image: lee01042000/middleware:0.1
+      dockerfile: ./Dockerfile.prod
+    container_name: client
+    # ports:
+    #   - 80:80
+    volumes:
+      - /app/node_modules
+    restart: on-failure
+  backend:
+    image: lee01042000/backend:0.1
     build: 
       context: ../server
       args:
-        - local
-      dockerfile: ./Dockerfile.local
-    container_name: middleware
+        - prod
+      dockerfile: ./Dockerfile.prod
+    container_name: backend
     volumes:
       - ./Storage:/root/Storage
     ports:
@@ -50,7 +58,5 @@ services:
         aliases:
           - mysql
 networks:
-  innerNetwork: 
-
-
+  innerNetwork:
 

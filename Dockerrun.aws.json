@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+      {
+        "name": "nginx",
+        "image": "lee01042000/nginx:0.1",
+        "essential": true,
+        "memory": 300,
+        "portMappings": [
+            {
+              "hostPort": 80,
+              "containerPort": 80
+            }
+        ],
+        "links":["backend","client"]
+      },
+      {
+        "name": "client",
+        "image": "lee01042000/client:0.1",
+        "essential": true,
+        "memory": 300
+      },
+      {
+        "name": "backend",
+        "image": "lee01042000/backend:0.1",
+        "essential": true,
+        "memory": 300
+      },
+      {
+        "name": "mysql",
+        "image": "mysql:",
+        "essential": true,
+        "memory": 300
+      }
+    ]
+  }

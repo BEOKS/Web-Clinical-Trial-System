@@ -13,6 +13,11 @@ import {DrawerAction} from "./DrawerReducer";
 
 export const drawerWidth = 240;
 
+/**
+ * AppBar에서 메뉴 아이콘 버튼 클릭 시 열리는 Drawer입니다.
+ * @todo Reviewer, Session, Log out 등 Drawer의 메뉴 아이템 UI는 'feature/BC-45-프로젝트-삭제' 브랜치에 개발해두었으니 확인 후 병합해주세요. (리팩토링은 하지 않은 단계입니다.)
+ * @author 김도희 <doheedev@gmail.com>
+ */
 const Drawer = () => {
     const dispatch = useDispatch();
     const theme = useTheme();

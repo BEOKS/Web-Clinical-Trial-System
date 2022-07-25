@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  nginx:
+    image: lee01042000/nginx:0.1
+    container_name: nginx
+    depends_on:
+      - client
+      - backend
+    restart: always # because it is routing traffic to our entire app
+    ports:
+      - '80:80'
+  client:
+    image: lee01042000/client:0.1
+    container_name: client
+    ports:
+      - 3000:3000
+    volumes:
+      - /app/node_modules
+    restart: on-failure
+  backend:
+    image: lee01042000/backend:0.1
+    container_name: backend
+    volumes:
+      - ./Storage:/root/Storage
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8.0-oracle
+    container_name: mysql
+    restart : always
+    command: --default-authentication-plugin=mysql_native_password
+    environment: # TODO change DB configuration with docker secret
+      - MYSQL_ROOT_PASSWORD=0000
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+      - 33060:33060

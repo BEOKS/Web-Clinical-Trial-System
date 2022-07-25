@@ -20,6 +20,11 @@ const BI_RADS_OPTIONS: BI_RADS_INFO[] = [
     {title: "Highly Suggestive of Malignancy", value: "5"},
 ]
 
+/**
+ * BI-RADS 값을 라벨로 하는 Radio 버튼입니다.
+ * 마우스 오버 시 Tooltip으로 카테고리명이 제공됩니다.
+ * {@link BI_RADS_OPTIONS} 중 한 가지 아이템을 선택할 수 있습니다.
+ */
 function RadioLabel(props: { reviewStep: number, info: BI_RADS_INFO }) {
     return (
         <Tooltip key={props.info.title} title={props.info.title} placement="left" arrow>
@@ -28,6 +33,14 @@ function RadioLabel(props: { reviewStep: number, info: BI_RADS_INFO }) {
         </Tooltip>);
 }
 
+/**
+ * Radio 버튼으로 이루어진 BI-RADS 입력 컴포넌트입니다.
+ * [reviewStep]{@link RootState.ReviewerReducer.reviewStep}이
+ * {@link REVIEW_STEP.ORIGINAL} 또는 {@link REVIEW_STEP.ML_RESULT}일 때 활성화됩니다.
+ * [MUI breakpoints]{@link https://mui.com/material-ui/customization/breakpoints/#main-content}가
+ * md 이상일 때는 라디오 버튼들이 세로로 배치되고, md 미만일 때는 가로로 배치됩니다.
+ * @see {@link https://mui.com/material-ui/react-use-media-query/}
+ */
 const BiRadsInput = () => {
     const dispatch = useDispatch();
     const matches = useMediaQuery(theme.breakpoints.down('md'));

@@ -15,6 +15,13 @@ if [ $# -ne 1 ]
     echo "For detail about options, please check README.md"
     exit -1
 fi
+if [[ "$1" -eq "prod" ]];
+then
+  echo "Build client with proxy and backend docker images"
+  docker-compose -f ./Docker/docker-compose.$1.yml build --no-cache
+  docker image prune -f
+  exit 0
+fi  
 # 1. build front resource bundle
 echo "----------1. build front resource bundle--------------"
 echo "If building process failed in this stage, Please check client code or configuration"
