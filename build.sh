@@ -19,7 +19,7 @@ if [[ "$1" = prod ]]
   then
     echo '이 옵션을 이용하면 도커만 설치되어 있는 환경에서 이미지를 빌드 할 수 있습니다, 빌드용 이미지 내부에서 빌드를 진행하기 때문에 local 옵션보다 느릴 수 있습니다.'
     docker-compose -f ./Docker/docker-compose.prod.yml build --no-cache
-    exit -1
+    exit 0
 fi
 if [[ "$1" = local ]]
   then
