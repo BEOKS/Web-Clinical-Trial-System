@@ -3,6 +3,24 @@ import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentTe
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../store";
 import {ProjectAction} from "./ProjectReducer";
+import {ChangeEvent} from "react";
+
+const ADD_PROJECT_DIALOG_TITLE_MESSAGE = <>Add Project</>;
+const ADD_PROJECT_DIALOG_CONTENT_MESSAGE = <>Please enter a project name to create a new project. The project name must
+    be less than ** characters.</>
+
+function ProjectNameInputTextField(props: { onChange: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void }) {
+    return <TextField
+        autoFocus
+        margin="dense"
+        id="projectName"
+        label="Project Name"
+        type="text"
+        fullWidth
+        variant="standard"
+        onChange={props.onChange}
+    />
+}
 
 export default function AddProjectDialog() {
     const dispatch = useDispatch();
@@ -22,24 +40,11 @@ export default function AddProjectDialog() {
 
     return (
         <Dialog open={projectAddDialogOpen} onClose={handleClose}>
-            <DialogTitle>Add Project</DialogTitle>
+            <DialogTitle>{ADD_PROJECT_DIALOG_TITLE_MESSAGE}</DialogTitle>
             <DialogContent>
-                <DialogContentText>
-                    Please enter a project name to create a new project. The project name must be less than **
-                    characters.
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="projectName"
-                    label="Project Name"
-                    type="text"
-                    fullWidth
-                    variant="standard"
-                    onChange={(e) => {
-                        dispatch(ProjectAction.setNewProjectName(String(e.target.value)));
-                    }}
-                />
+                <DialogContentText>{ADD_PROJECT_DIALOG_CONTENT_MESSAGE}</DialogContentText>
+                <ProjectNameInputTextField
+                    onChange={e => dispatch(ProjectAction.setNewProjectName(String(e.target.value)))}/>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>Cancel</Button>

@@ -82,17 +82,17 @@ export const REVIEW_STEP = {
 }
 
 export const EXPERIENCE_YEAR = {
-    ZERO_TO_FIVE: 'ZERO_TO_FIVE',
-    MORE_THAN_FIVE: 'MORE_THAN_FIVE',
+    ZERO_TO_FIVE: '0~5 years',
+    MORE_THAN_FIVE: 'more than 5 years',
 } as const
 
 export const SPECIALITY = {
-    BREAST_RADIOLOGY: 'BREAST_RADIOLOGY',
-    GENERAL_RADIOLOGY: 'GENERAL_RADIOLOGY',
-    BREAST_SURGERY: 'BREAST_SURGERY',
-    OB_OR_GYM: 'OB_OR_GYM',
-    RADIOLOGY_RESIDENT: 'RADIOLOGY_RESIDENT',
-    OTHERS: 'OTHERS',
+    BREAST_RADIOLOGY: 'Breast Radiology',
+    GENERAL_RADIOLOGY: 'General Radiology',
+    BREAST_SURGERY: 'Breast Surgery',
+    OB_OR_GYM: 'OB/GYN',
+    RADIOLOGY_RESIDENT: 'Radiology Resident',
+    OTHERS: 'Others',
 } as const
 
 export type ReviewerState = {

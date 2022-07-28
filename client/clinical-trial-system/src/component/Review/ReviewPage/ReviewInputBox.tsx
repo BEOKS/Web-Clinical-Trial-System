@@ -22,7 +22,7 @@ const ReviewInputBox = () => {
     const confidenceLevel = useSelector((state: RootState) => state.ReviewerReducer.confidenceLevel);
     const mlVerifyTime = useSelector((state: RootState) => state.ReviewerReducer.mlVerifyTime);
 
-    const checkLastImage = (): boolean => {
+    const isLastImage = (): boolean => {
         return imageNumberList.length > 0 && currentImageNumber === imageNumberList[imageNumberList.length - 1];
     };
 
@@ -44,7 +44,7 @@ const ReviewInputBox = () => {
         saveMLReviewResult(biRads, confidenceLevel, currentImageNumber, pom, reviewerId, mlVerifyTime,
             () => dispatch(ReviewerAction.setStartTime(performance.now())));
 
-        if (checkLastImage()) {
+        if (isLastImage()) {
             navigate('/close-session');
         } else {
             dispatch(ReviewerAction.setCurrentImageNumber(currentImageNumber + 1));
@@ -54,7 +54,7 @@ const ReviewInputBox = () => {
 
     return (
         <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
-            <Stack direction="row" spacing={3}>
+            <Stack direction={{xs: 'column', md: 'row'}} spacing={3}>
                 <BiRadsInput/>
                 <PomInput/>
             </Stack>

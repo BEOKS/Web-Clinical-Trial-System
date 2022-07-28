@@ -4,7 +4,7 @@ services:
     image: lee01042000/client-with-proxy:0.1
     build:
       context: ../client
-      dockerfile: ./Dockerfile.local
+      dockerfile: ./Dockerfile.prod
     container_name: proxy
     ports:
       - 80:80
@@ -21,7 +21,7 @@ services:
       context: ../server
       args:
         - local
-      dockerfile: ./Dockerfile.local
+      dockerfile: ./Dockerfile.prod
     container_name: middleware
     volumes:
       - ./Storage:/root/Storage

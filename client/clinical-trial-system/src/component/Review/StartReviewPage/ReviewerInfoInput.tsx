@@ -10,6 +10,71 @@ import {
     stringToTrainedOrDedicatedType
 } from "../../../Utils/Review/reviewUtils";
 
+interface REVIEWER_INFO {
+    value: string,
+    label: string,
+}
+
+const TRAINED_OR_DEDICATED_OPTIONS: REVIEWER_INFO[] = [
+    {value: 'yes', label: 'Yes'},
+    {value: 'no', label: 'No'},
+];
+
+function SpecialitySelect(props: { speciality: any, onChange: (e: SelectChangeEvent) => void }) {
+    return (
+        <FormControl fullWidth size="small" sx={{mt: 4}}>
+            <InputLabel id="speciality-select-label">Speciality</InputLabel>
+            <Select
+                labelId="speciality-select-label"
+                id="speciality-select"
+                value={props.speciality}
+                label="Speciality"
+                onChange={props.onChange}
+            >
+                {Object.values(SPECIALITY).map(speciality =>
+                    <MenuItem key={speciality} value={speciality}>{speciality}</MenuItem>)}
+            </Select>
+        </FormControl>
+    )
+}
+
+function TrainedOrDedicatedSelect(props: { trainedOrDedicated: any, onChange: (e: SelectChangeEvent) => void }) {
+    return (
+        <FormControl fullWidth size="small" sx={{mt: 3}}>
+            <InputLabel id="trained-or-dedicated-select-label">Trained for Breast Imaging</InputLabel>
+            <Select
+                labelId="trained-or-dedicated-select-label"
+                id="trained-or-dedicated-select"
+                value={props.trainedOrDedicated ? 'yes' : 'no'}
+                label="Trained for Breast Imaging"
+                onChange={props.onChange}
+            >
+                {TRAINED_OR_DEDICATED_OPTIONS.map(option =>
+                    <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>)}
+            </Select>
+        </FormControl>
+    )
+}
+
+function ExperienceYearSelect(props: { experienceYear: any, onChange: (e: SelectChangeEvent) => void }) {
+    return (
+        <FormControl fullWidth size="small" sx={{mt: 3}}>
+            <InputLabel id="experience-year-select-label">Years of Experience</InputLabel>
+            <Select
+                labelId="experience-year-select-label"
+                id="experience-year-select"
+                value={props.experienceYear}
+                label="Years of Experience"
+                onChange={props.onChange}
+            >
+                {Object.values(EXPERIENCE_YEAR).map(experienceYear =>
+                    <MenuItem key={experienceYear}
+                              value={experienceYear}>{experienceYear}</MenuItem>)}
+            </Select>
+        </FormControl>
+    )
+}
+
 const ReviewerInfoInput = () => {
     const dispatch = useDispatch();
     const speciality = useSelector((state: RootState) => state.ReviewerReducer.speciality);
@@ -34,55 +99,15 @@ const ReviewerInfoInput = () => {
     };
 
     return (
-        <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1}>
+        <Box sx={{backgroundColor: '#eee', p: 3}} borderRadius={1} width="100%">
             <Divider>
                 <Chip label="Reviewer Info" color="success"/>
             </Divider>
-            <FormControl fullWidth size="small" sx={{mt: 4}}>
-                <InputLabel id="speciality-select-label">Speciality</InputLabel>
-                <Select
-                    labelId="speciality-select-label"
-                    id="speciality-select"
-                    value={speciality}
-                    label="Speciality"
-                    onChange={handleSpecialityChange}
-                >
-                    <MenuItem value={SPECIALITY.BREAST_RADIOLOGY}>Breast Radiology</MenuItem>
-                    <MenuItem value={SPECIALITY.GENERAL_RADIOLOGY}>General Radiology</MenuItem>
-                    <MenuItem value={SPECIALITY.BREAST_SURGERY}>Breast Surgery</MenuItem>
-                    <MenuItem value={SPECIALITY.OB_OR_GYM}>OB/GYN</MenuItem>
-                    <MenuItem value={SPECIALITY.RADIOLOGY_RESIDENT}>Radiology Resident</MenuItem>
-                    <MenuItem value={SPECIALITY.OTHERS}>Others</MenuItem>
-                </Select>
-            </FormControl>
-            <FormControl fullWidth size="small" sx={{mt: 3}}>
-                <InputLabel id="trained-or-dedicated-select-label">Trained for Breast Imaging</InputLabel>
-                <Select
-                    labelId="trained-or-dedicated-select-label"
-                    id="trained-or-dedicated-select"
-                    value={trainedOrDedicated ? 'yes' : 'no'}
-                    label="Trained for Breast Imaging"
-                    onChange={handleTrainedOrDedicatedChange}
-                >
-                    <MenuItem value="yes">Yes</MenuItem>
-                    <MenuItem value="no">No</MenuItem>
-                </Select>
-            </FormControl>
-            <FormControl fullWidth size="small" sx={{mt: 3}}>
-                <InputLabel id="experience-year-select-label">Years of Experience</InputLabel>
-                <Select
-                    labelId="experience-year-select-label"
-                    id="experience-year-select"
-                    value={experienceYear}
-                    label="Years of Experience"
-                    onChange={handleExperienceYearChange}
-                >
-                    <MenuItem value={EXPERIENCE_YEAR.ZERO_TO_FIVE}>0~5 years</MenuItem>
-                    <MenuItem value={EXPERIENCE_YEAR.MORE_THAN_FIVE}>more than 5 years</MenuItem>
-                </Select>
-            </FormControl>
-            <FormControlLabel control={<Checkbox checked={agreeReview}
-                                                 onChange={handleAgreeReviewChange}/>}
+            <SpecialitySelect speciality={speciality} onChange={handleSpecialityChange}/>
+            <TrainedOrDedicatedSelect trainedOrDedicated={trainedOrDedicated}
+                                      onChange={handleTrainedOrDedicatedChange}/>
+            <ExperienceYearSelect experienceYear={experienceYear} onChange={handleExperienceYearChange}/>
+            <FormControlLabel control={<Checkbox checked={agreeReview} onChange={handleAgreeReviewChange}/>}
                               label="I agree to utilize the review results."
                               sx={{mt: 3}}/>
         </Box>
