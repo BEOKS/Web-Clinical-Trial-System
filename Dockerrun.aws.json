@@ -13,7 +13,7 @@
                 }
             ],
             "links":["middleware"],
-            "memory": 300
+            "memory": 1000
         },
         {
             "essential": true,
@@ -33,7 +33,7 @@
                 }
             ],
             "links":["mysql"],
-            "memory": 300
+            "memory": 3000
         },
         {
             "command": [
@@ -65,7 +65,7 @@
                     "hostPort": 33060
                 }
             ],
-            "memory": 300
+            "memory": 30000
         }
     ],
     "family": "",
