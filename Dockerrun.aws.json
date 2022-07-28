@@ -12,6 +12,7 @@
                     "hostPort": 80
                 }
             ],
+            "links":["middleware"],
             "memory": 300
         },
         {
@@ -31,6 +32,7 @@
                     "hostPort": 8080
                 }
             ],
+            "links":["mysql"],
             "memory": 300
         },
         {
