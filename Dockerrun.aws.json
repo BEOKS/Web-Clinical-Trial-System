@@ -5,6 +5,7 @@
             "essential": true,
             "image": "lee01042000/client-with-proxy:0.1",
             "name": "client-with-proxy",
+            "hostname": "client-with-proxy",
             "portMappings": [
                 {
                     "containerPort": 80,
@@ -16,6 +17,7 @@
         {
             "essential": true,
             "image": "lee01042000/middleware:0.1",
+            "hostname":"middleware",
             "mountPoints": [
                 {
                     "containerPath": "/root/Storage",
@@ -50,6 +52,7 @@
                 }
             ],
             "name": "mysql",
+            "hostname":"mysql",
             "portMappings": [
                 {
                     "containerPort": 3306,
