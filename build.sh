@@ -15,6 +15,16 @@ if [ $# -ne 1 ]
     echo "For detail about options, please check README.md"
     exit -1
 fi
+if [[ "$1" = prod ]]
+  then
+    echo '이 옵션을 이용하면 도커만 설치되어 있는 환경에서 이미지를 빌드 할 수 있습니다, 빌드용 이미지 내부에서 빌드를 진행하기 때문에 local 옵션보다 느릴 수 있습니다.'
+    docker-compose -f ./Docker/docker-compose.prod.yml build --no-cache
+    exit -1
+fi
+if [[ "$1" = local ]]
+  then
+    echo '이 옵션은 호스트에서 클라이언트, 벡엔드 파일 빌드를 수행한 후에 도커 이미지를 생성합니다. 따라서 README.m에 맞춰 nodeJS, yarn, JDK가 설치되어 있어야 합니다.'
+fi
 # 1. build front resource bundle
 echo "----------1. build front resource bundle--------------"
 echo "If building process failed in this stage, Please check client code or configuration"
