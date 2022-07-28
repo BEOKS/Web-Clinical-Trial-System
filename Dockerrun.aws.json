@@ -22,7 +22,7 @@
             "mountPoints": [
                 {
                     "containerPath": "/root/Storage",
-                    "sourceVolume": "_Storage"
+                    "sourceVolume": "storage"
                 }
             ],
             "name": "middleware",
@@ -50,7 +50,7 @@
             "mountPoints": [
                 {
                     "containerPath": "/var/lib/mysql",
-                    "sourceVolume": "_Mysql"
+                    "sourceVolume": "mysql"
                 }
             ],
             "name": "mysql",
@@ -72,15 +72,15 @@
     "volumes": [
         {
             "host": {
-                "sourcePath": "./Storage"
+                "sourcePath": "/var/app/current/Storage"
             },
-            "name": "_Storage"
+            "name": "storage"
         },
         {
             "host": {
-                "sourcePath": "./mysql"
+                "sourcePath": "/var/app/current/mysql"
             },
-            "name": "_Mysql"
+            "name": "mysql"
         }
     ]
 }
