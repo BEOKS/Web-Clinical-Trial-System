@@ -1,0 +1,81 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "essential": true,
+            "image": "lee01042000/client-with-proxy:0.1",
+            "name": "client-with-proxy",
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 80
+                }
+            ],
+            "memory": 300
+        },
+        {
+            "essential": true,
+            "image": "lee01042000/middleware:0.1",
+            "mountPoints": [
+                {
+                    "containerPath": "/root/Storage",
+                    "sourceVolume": "_Storage"
+                }
+            ],
+            "name": "middleware",
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 8080
+                }
+            ],
+            "memory": 300
+        },
+        {
+            "command": [
+                "--default-authentication-plugin=mysql_native_password"
+            ],
+            "environment": [
+                {
+                    "name": "MYSQL_ROOT_PASSWORD",
+                    "value": "0000"
+                }
+            ],
+            "essential": true,
+            "image": "mysql:8.0-oracle",
+            "mountPoints": [
+                {
+                    "containerPath": "/var/lib/mysql",
+                    "sourceVolume": "_Mysql"
+                }
+            ],
+            "name": "mysql",
+            "portMappings": [
+                {
+                    "containerPort": 3306,
+                    "hostPort": 3306
+                },
+                {
+                    "containerPort": 33060,
+                    "hostPort": 33060
+                }
+            ],
+            "memory": 300
+        }
+    ],
+    "family": "",
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "./Storage"
+            },
+            "name": "_Storage"
+        },
+        {
+            "host": {
+                "sourcePath": "./mysql"
+            },
+            "name": "_Mysql"
+        }
+    ]
+}
